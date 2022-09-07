@@ -1,0 +1,36 @@
+? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/work/diagnostic_daily/script/HBVmountain_ERA-Interim_Wark_2000_2003.nc
+: ancestors:
+  - /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc
+  - /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc
+  - /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_2000-2003.nc
+  - /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/preproc/diagnostic_daily/rsds/OBS6_ERA-Interim_reanaly_1_day_rsds_2000-2003.nc
+  - /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/preproc/diagnostic_daily/rsdt/OBS6_ERA-Interim_reanaly_1_CFday_rsdt_2000-2003.nc
+  authors:
+  - kalverla_peter
+  - camphuijsen_jaro
+  - alidoost_sarah
+  caption: Forcings for the Marrmot hydrological model.
+  domains:
+  - global
+  projects:
+  - ewatercycle
+  references:
+  - acknow_project
+? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/work/diagnostic_daily/script/HBVmountain_ERA5_Wark_2000_2003.nc
+: ancestors:
+  - /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc
+  - /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc
+  - /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/preproc/diagnostic_daily/psl/OBS6_ERA5_reanaly_1_day_psl_2000-2003.nc
+  - /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/preproc/diagnostic_daily/rsds/OBS6_ERA5_reanaly_1_day_rsds_2000-2003.nc
+  - /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/preproc/diagnostic_daily/rsdt/OBS6_ERA5_reanaly_1_CFday_rsdt_2000-2003.nc
+  authors:
+  - kalverla_peter
+  - camphuijsen_jaro
+  - alidoost_sarah
+  caption: Forcings for the Marrmot hydrological model.
+  domains:
+  - global
+  projects:
+  - ewatercycle
+  references:
+  - acknow_project

@@ -1,0 +1,44 @@
+? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_083631/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc
+: alias: ERA-Interim
+  dataset: ERA-Interim
+  diagnostic: diagnostic_daily
+  end_year: 2003
+  filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_083631/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc
+  frequency: day
+  long_name: Near-Surface Air Temperature
+  mip: day
+  modeling_realm:
+  - atmos
+  preprocessor: daily
+  project: OBS6
+  recipe_dataset_index: 0
+  short_name: tas
+  standard_name: air_temperature
+  start_year: 2000
+  tier: 3
+  type: reanaly
+  units: K
+  variable_group: tas
+  version: 1
+? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_083631/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc
+: alias: ERA5
+  dataset: ERA5
+  diagnostic: diagnostic_daily
+  end_year: 2003
+  filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_083631/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc
+  frequency: day
+  long_name: Near-Surface Air Temperature
+  mip: day
+  modeling_realm:
+  - atmos
+  preprocessor: daily
+  project: OBS6
+  recipe_dataset_index: 1
+  short_name: tas
+  standard_name: air_temperature
+  start_year: 2000
+  tier: 3
+  type: reanaly
+  units: K
+  variable_group: tas
+  version: 1

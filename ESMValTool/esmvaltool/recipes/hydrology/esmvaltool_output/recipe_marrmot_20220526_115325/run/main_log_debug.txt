@@ -1,0 +1,178 @@
+2022-05-26 11:53:27,223 UTC [1079981] INFO    esmvalcore._main:453 
+______________________________________________________________________
+          _____ ____  __  ____     __    _ _____           _
+         | ____/ ___||  \/  \ \   / /_ _| |_   _|__   ___ | |
+         |  _| \___ \| |\/| |\ \ / / _` | | | |/ _ \ / _ \| |
+         | |___ ___) | |  | | \ V / (_| | | | | (_) | (_) | |
+         |_____|____/|_|  |_|  \_/ \__,_|_| |_|\___/ \___/|_|
+______________________________________________________________________
+
+ESMValTool - Earth System Model Evaluation Tool.
+
+http://www.esmvaltool.org
+
+CORE DEVELOPMENT TEAM AND CONTACTS:
+  Birgit Hassler (Co-PI; DLR, Germany - birgit.hassler@dlr.de)
+  Alistair Sellar (Co-PI; Met Office, UK - alistair.sellar@metoffice.gov.uk)
+  Bouwe Andela (Netherlands eScience Center, The Netherlands - b.andela@esciencecenter.nl)
+  Lee de Mora (PML, UK - ledm@pml.ac.uk)
+  Niels Drost (Netherlands eScience Center, The Netherlands - n.drost@esciencecenter.nl)
+  Veronika Eyring (DLR, Germany - veronika.eyring@dlr.de)
+  Bettina Gier (UBremen, Germany - gier@uni-bremen.de)
+  Remi Kazeroni (DLR, Germany - remi.kazeroni@dlr.de)
+  Nikolay Koldunov (AWI, Germany - nikolay.koldunov@awi.de)
+  Axel Lauer (DLR, Germany - axel.lauer@dlr.de)
+  Saskia Loosveldt-Tomas (BSC, Spain - saskia.loosveldt@bsc.es)
+  Ruth Lorenz (ETH Zurich, Switzerland - ruth.lorenz@env.ethz.ch)
+  Benjamin Mueller (LMU, Germany - b.mueller@iggf.geo.uni-muenchen.de)
+  Valeriu Predoi (URead, UK - valeriu.predoi@ncas.ac.uk)
+  Mattia Righi (DLR, Germany - mattia.righi@dlr.de)
+  Manuel Schlund (DLR, Germany - manuel.schlund@dlr.de)
+  Breixo Solino Fernandez (DLR, Germany - breixo.solinofernandez@dlr.de)
+  Javier Vegas-Regidor (BSC, Spain - javier.vegas@bsc.es)
+  Klaus Zimmermann (SMHI, Sweden - klaus.zimmermann@smhi.se)
+
+For further help, please read the documentation at
+http://docs.esmvaltool.org. Have fun!
+
+2022-05-26 11:53:27,223 UTC [1079981] INFO    esmvalcore._main:454 Package versions
+2022-05-26 11:53:27,223 UTC [1079981] INFO    esmvalcore._main:455 ----------------
+2022-05-26 11:53:27,223 UTC [1079981] INFO    esmvalcore._main:456 ESMValCore: 2.4.0
+2022-05-26 11:53:27,224 UTC [1079981] INFO    esmvalcore._main:458 ESMValTool: 2.4.0
+2022-05-26 11:53:27,224 UTC [1079981] INFO    esmvalcore._main:459 ----------------
+2022-05-26 11:53:27,224 UTC [1079981] INFO    esmvalcore._main:460 Using config file /home/vhoogeland/.esmvaltool/config-user.yml
+2022-05-26 11:53:27,224 UTC [1079981] INFO    esmvalcore._main:461 Writing program log files to:
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/run/main_log.txt
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/run/main_log_debug.txt
+2022-05-26 11:53:27,224 UTC [1079981] INFO    esmvalcore._main:86 Starting the Earth System Model Evaluation Tool at time: 2022-05-26 11:53:27 UTC
+2022-05-26 11:53:27,224 UTC [1079981] INFO    esmvalcore._main:90 ----------------------------------------------------------------------
+2022-05-26 11:53:27,224 UTC [1079981] INFO    esmvalcore._main:91 RECIPE   = /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/recipe_marrmot.yml
+2022-05-26 11:53:27,224 UTC [1079981] INFO    esmvalcore._main:92 RUNDIR     = /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/run
+2022-05-26 11:53:27,224 UTC [1079981] INFO    esmvalcore._main:93 WORKDIR    = /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/work
+2022-05-26 11:53:27,224 UTC [1079981] INFO    esmvalcore._main:94 PREPROCDIR = /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/preproc
+2022-05-26 11:53:27,224 UTC [1079981] INFO    esmvalcore._main:95 PLOTDIR    = /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/plots
+2022-05-26 11:53:27,224 UTC [1079981] INFO    esmvalcore._main:96 ----------------------------------------------------------------------
+2022-05-26 11:53:27,225 UTC [1079981] INFO    esmvalcore._main:100 Running tasks using at most 2 processes
+2022-05-26 11:53:27,225 UTC [1079981] INFO    esmvalcore._main:102 If your system hangs during execution, it may not have enough memory for keeping this number of tasks in memory.
+2022-05-26 11:53:27,225 UTC [1079981] INFO    esmvalcore._main:105 If you experience memory problems, try reducing 'max_parallel_tasks' in your user configuration file.
+2022-05-26 11:53:27,225 UTC [1079981] DEBUG   esmvalcore._recipe_checks:45 Checking recipe against schema /opt/conda/envs/ewatercycle/lib/python3.9/site-packages/esmvalcore/recipe_schema.yml
+2022-05-26 11:53:27,237 UTC [1079981] DEBUG   esmvalcore._recipe:1101 Retrieving diagnostics from recipe
+2022-05-26 11:53:27,237 UTC [1079981] DEBUG   esmvalcore._recipe:1234 Populating list of variables for diagnostic diagnostic_daily
+2022-05-26 11:53:27,238 UTC [1079981] DEBUG   esmvalcore._recipe:1364 Setting script for diagnostic diagnostic_daily
+2022-05-26 11:53:27,239 UTC [1079981] INFO    esmvalcore._recipe:1469 Creating tasks from recipe
+2022-05-26 11:53:27,239 UTC [1079981] INFO    esmvalcore._recipe:1475 Creating tasks for diagnostic diagnostic_daily
+2022-05-26 11:53:27,239 UTC [1079981] INFO    esmvalcore._recipe:1451 Creating preprocessor task diagnostic_daily/tas
+2022-05-26 11:53:27,239 UTC [1079981] INFO    esmvalcore._recipe:974 Creating preprocessor 'daily' task for variable 'tas'
+2022-05-26 11:53:27,418 UTC [1079981] DEBUG   esmvalcore._data_finder:18 Looking for files matching ['OBS6_ERA-Interim_reanaly_1_day_tas[_.]*nc'] in ['/mnt/data/climate-data/obs6/Tier3/ERA-Interim']
+2022-05-26 11:53:27,785 UTC [1079981] DEBUG   esmvalcore._recipe:598 Using input files for variable tas of dataset ERA-Interim:
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_199001-199012.nc
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_199101-199112.nc
+2022-05-26 11:53:27,785 UTC [1079981] INFO    esmvalcore._recipe:607 Found input files for ERA-Interim
+2022-05-26 11:53:28,114 UTC [1079981] DEBUG   esmvalcore._data_finder:18 Looking for files matching ['OBS6_ERA5_reanaly_1_day_tas[_.]*nc'] in ['/mnt/data/climate-data/obs6/Tier3/ERA5']
+2022-05-26 11:53:28,251 UTC [1079981] DEBUG   esmvalcore._recipe:598 Using input files for variable tas of dataset ERA5:
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_1990-1990.nc
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_19900101-19901231.nc
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_1991-1991.nc
+2022-05-26 11:53:28,251 UTC [1079981] INFO    esmvalcore._recipe:607 Found input files for ERA5
+2022-05-26 11:53:28,691 UTC [1079981] INFO    esmvalcore._recipe:880 PreprocessingTask diagnostic_daily/tas created.
+2022-05-26 11:53:28,692 UTC [1079981] DEBUG   esmvalcore._recipe:881 PreprocessingTask diagnostic_daily/tas will create the files:
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_1990-1991.nc
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_1990-1991.nc
+2022-05-26 11:53:28,692 UTC [1079981] INFO    esmvalcore._recipe:1451 Creating preprocessor task diagnostic_daily/pr
+2022-05-26 11:53:28,692 UTC [1079981] INFO    esmvalcore._recipe:974 Creating preprocessor 'daily' task for variable 'pr'
+2022-05-26 11:53:28,692 UTC [1079981] DEBUG   esmvalcore._data_finder:18 Looking for files matching ['OBS6_ERA-Interim_reanaly_1_day_pr[_.]*nc'] in ['/mnt/data/climate-data/obs6/Tier3/ERA-Interim']
+2022-05-26 11:53:28,704 UTC [1079981] DEBUG   esmvalcore._recipe:598 Using input files for variable pr of dataset ERA-Interim:
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_199001-199012.nc
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_199101-199112.nc
+2022-05-26 11:53:28,704 UTC [1079981] INFO    esmvalcore._recipe:607 Found input files for ERA-Interim
+2022-05-26 11:53:28,913 UTC [1079981] DEBUG   esmvalcore._data_finder:18 Looking for files matching ['OBS6_ERA5_reanaly_1_day_pr[_.]*nc'] in ['/mnt/data/climate-data/obs6/Tier3/ERA5']
+2022-05-26 11:53:28,918 UTC [1079981] DEBUG   esmvalcore._recipe:598 Using input files for variable pr of dataset ERA5:
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_1990-1990.nc
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_1991-1991.nc
+2022-05-26 11:53:28,918 UTC [1079981] INFO    esmvalcore._recipe:607 Found input files for ERA5
+2022-05-26 11:53:29,038 UTC [1079981] INFO    esmvalcore._recipe:880 PreprocessingTask diagnostic_daily/pr created.
+2022-05-26 11:53:29,039 UTC [1079981] DEBUG   esmvalcore._recipe:881 PreprocessingTask diagnostic_daily/pr will create the files:
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_1990-1991.nc
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_1990-1991.nc
+2022-05-26 11:53:29,039 UTC [1079981] INFO    esmvalcore._recipe:1451 Creating preprocessor task diagnostic_daily/psl
+2022-05-26 11:53:29,039 UTC [1079981] INFO    esmvalcore._recipe:974 Creating preprocessor 'daily' task for variable 'psl'
+2022-05-26 11:53:29,039 UTC [1079981] DEBUG   esmvalcore._data_finder:18 Looking for files matching ['OBS6_ERA-Interim_reanaly_1_day_psl[_.]*nc'] in ['/mnt/data/climate-data/obs6/Tier3/ERA-Interim']
+2022-05-26 11:53:29,054 UTC [1079981] DEBUG   esmvalcore._recipe:598 Using input files for variable psl of dataset ERA-Interim:
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_psl_199001-199012.nc
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_psl_199101-199112.nc
+2022-05-26 11:53:29,055 UTC [1079981] INFO    esmvalcore._recipe:607 Found input files for ERA-Interim
+2022-05-26 11:53:29,359 UTC [1079981] DEBUG   esmvalcore._data_finder:18 Looking for files matching ['OBS6_ERA5_reanaly_1_day_psl[_.]*nc'] in ['/mnt/data/climate-data/obs6/Tier3/ERA5']
+2022-05-26 11:53:29,364 UTC [1079981] DEBUG   esmvalcore._recipe:598 Using input files for variable psl of dataset ERA5:
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_psl_1990-1990.nc
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_psl_1991-1991.nc
+2022-05-26 11:53:29,364 UTC [1079981] INFO    esmvalcore._recipe:607 Found input files for ERA5
+2022-05-26 11:53:29,582 UTC [1079981] INFO    esmvalcore._recipe:880 PreprocessingTask diagnostic_daily/psl created.
+2022-05-26 11:53:29,583 UTC [1079981] DEBUG   esmvalcore._recipe:881 PreprocessingTask diagnostic_daily/psl will create the files:
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_1990-1991.nc
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/preproc/diagnostic_daily/psl/OBS6_ERA5_reanaly_1_day_psl_1990-1991.nc
+2022-05-26 11:53:29,583 UTC [1079981] INFO    esmvalcore._recipe:1451 Creating preprocessor task diagnostic_daily/rsds
+2022-05-26 11:53:29,584 UTC [1079981] INFO    esmvalcore._recipe:974 Creating preprocessor 'daily' task for variable 'rsds'
+2022-05-26 11:53:29,585 UTC [1079981] DEBUG   esmvalcore._data_finder:18 Looking for files matching ['OBS6_ERA-Interim_reanaly_1_day_rsds[_.]*nc'] in ['/mnt/data/climate-data/obs6/Tier3/ERA-Interim']
+2022-05-26 11:53:29,598 UTC [1079981] DEBUG   esmvalcore._recipe:598 Using input files for variable rsds of dataset ERA-Interim:
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_rsds_199001-199012.nc
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_rsds_199101-199112.nc
+2022-05-26 11:53:29,599 UTC [1079981] INFO    esmvalcore._recipe:607 Found input files for ERA-Interim
+2022-05-26 11:53:29,738 UTC [1079981] DEBUG   esmvalcore._data_finder:18 Looking for files matching ['OBS6_ERA5_reanaly_1_day_rsds[_.]*nc'] in ['/mnt/data/climate-data/obs6/Tier3/ERA5']
+2022-05-26 11:53:29,742 UTC [1079981] DEBUG   esmvalcore._recipe:598 Using input files for variable rsds of dataset ERA5:
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_rsds_1990-1990.nc
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_rsds_1991-1991.nc
+2022-05-26 11:53:29,743 UTC [1079981] INFO    esmvalcore._recipe:607 Found input files for ERA5
+2022-05-26 11:53:29,945 UTC [1079981] INFO    esmvalcore._recipe:880 PreprocessingTask diagnostic_daily/rsds created.
+2022-05-26 11:53:29,946 UTC [1079981] DEBUG   esmvalcore._recipe:881 PreprocessingTask diagnostic_daily/rsds will create the files:
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/preproc/diagnostic_daily/rsds/OBS6_ERA5_reanaly_1_day_rsds_1990-1991.nc
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/preproc/diagnostic_daily/rsds/OBS6_ERA-Interim_reanaly_1_day_rsds_1990-1991.nc
+2022-05-26 11:53:29,946 UTC [1079981] INFO    esmvalcore._recipe:1451 Creating preprocessor task diagnostic_daily/rsdt
+2022-05-26 11:53:29,946 UTC [1079981] INFO    esmvalcore._recipe:974 Creating preprocessor 'daily' task for variable 'rsdt'
+2022-05-26 11:53:29,947 UTC [1079981] DEBUG   esmvalcore._data_finder:18 Looking for files matching ['OBS6_ERA-Interim_reanaly_1_CFday_rsdt[_.]*nc'] in ['/mnt/data/climate-data/obs6/Tier3/ERA-Interim']
+2022-05-26 11:53:29,961 UTC [1079981] DEBUG   esmvalcore._recipe:598 Using input files for variable rsdt of dataset ERA-Interim:
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_CFday_rsdt_199001-199012.nc
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_CFday_rsdt_199101-199112.nc
+2022-05-26 11:53:29,962 UTC [1079981] INFO    esmvalcore._recipe:607 Found input files for ERA-Interim
+2022-05-26 11:53:30,207 UTC [1079981] DEBUG   esmvalcore._data_finder:18 Looking for files matching ['OBS6_ERA5_reanaly_1_CFday_rsdt[_.]*nc'] in ['/mnt/data/climate-data/obs6/Tier3/ERA5']
+2022-05-26 11:53:30,211 UTC [1079981] DEBUG   esmvalcore._recipe:598 Using input files for variable rsdt of dataset ERA5:
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_CFday_rsdt_1990-1990.nc
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_CFday_rsdt_1991-1991.nc
+2022-05-26 11:53:30,211 UTC [1079981] INFO    esmvalcore._recipe:607 Found input files for ERA5
+2022-05-26 11:53:30,361 UTC [1079981] INFO    esmvalcore._recipe:880 PreprocessingTask diagnostic_daily/rsdt created.
+2022-05-26 11:53:30,364 UTC [1079981] DEBUG   esmvalcore._recipe:881 PreprocessingTask diagnostic_daily/rsdt will create the files:
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/preproc/diagnostic_daily/rsdt/OBS6_ERA-Interim_reanaly_1_CFday_rsdt_1990-1991.nc
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_marrmot_20220526_115325/preproc/diagnostic_daily/rsdt/OBS6_ERA5_reanaly_1_CFday_rsdt_1990-1991.nc
+2022-05-26 11:53:30,364 UTC [1079981] INFO    esmvalcore._recipe:1491 Creating diagnostic task diagnostic_daily/script
+2022-05-26 11:53:31,364 UTC [1079981] INFO    esmvalcore._task:127 Maximum memory used (estimate): 0.3 GB
+2022-05-26 11:53:31,365 UTC [1079981] INFO    esmvalcore._task:129 Sampled every second. It may be inaccurate if short but high spikes in memory consumption occur.
+2022-05-26 11:53:31,365 UTC [1079981] ERROR   esmvalcore._main:491 Program terminated abnormally, see stack trace below for more information:
+Traceback (most recent call last):
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/esmvalcore/_main.py", line 479, in run
+    fire.Fire(ESMValTool())
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/fire/core.py", line 141, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/fire/core.py", line 466, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/fire/core.py", line 681, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/esmvalcore/_main.py", line 423, in run
+    process_recipe(recipe_file=recipe, config_user=cfg)
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/esmvalcore/_main.py", line 121, in process_recipe
+    recipe = read_recipe_file(recipe_file, config_user)
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/esmvalcore/_recipe.py", line 65, in read_recipe_file
+    return Recipe(raw_recipe,
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/esmvalcore/_recipe.py", line 1042, in __init__
+    self.tasks = self.initialize_tasks() if initialize_tasks else None
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/esmvalcore/_recipe.py", line 1517, in initialize_tasks
+    tasks = self._create_tasks()
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/esmvalcore/_recipe.py", line 1492, in _create_tasks
+    task = DiagnosticTask(
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/esmvalcore/_task.py", line 334, in __init__
+    self.cmd = self._initialize_cmd()
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/esmvalcore/_task.py", line 347, in _initialize_cmd
+    raise DiagnosticError(f"{err_msg}: file does not exist.")
+esmvalcore._task.DiagnosticError: Cannot execute script '~/ESMvaltool/esmvaltool/diag_scripts/hydrology/marrmot.py' (/home/vhoogeland/ESMvaltool/esmvaltool/diag_scripts/hydrology/marrmot.py): file does not exist.
+2022-05-26 11:53:31,371 UTC [1079981] INFO    esmvalcore._main:495 
+If you have a question or need help, please start a new discussion on https://github.com/ESMValGroup/ESMValTool/discussions
+If you suspect this is a bug, please open an issue on https://github.com/ESMValGroup/ESMValTool/issues
+To make it easier to find out what the problem is, please consider attaching the files run/recipe_*.yml and run/main_log_debug.txt from the output directory.

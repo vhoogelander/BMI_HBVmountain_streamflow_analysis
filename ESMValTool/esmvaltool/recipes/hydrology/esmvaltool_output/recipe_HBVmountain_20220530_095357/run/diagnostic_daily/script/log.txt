@@ -1,0 +1,117 @@
+2022-05-30 09:54:05,994 [1272540] INFO     esmvaltool.diag_scripts.shared._base,511	Starting diagnostic script script with configuration:
+auxiliary_data_dir: /home/vhoogeland/auxiliary_data
+basin: Wark
+input_data:
+  ? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_095357/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc
+  : alias: ERA-Interim
+    dataset: ERA-Interim
+    diagnostic: diagnostic_daily
+    end_year: 2003
+    filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_095357/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc
+    frequency: day
+    long_name: Precipitation
+    mip: day
+    modeling_realm:
+    - atmos
+    preprocessor: daily
+    project: OBS6
+    recipe_dataset_index: 0
+    short_name: pr
+    standard_name: precipitation_flux
+    start_year: 2000
+    tier: 3
+    type: reanaly
+    units: kg m-2 s-1
+    variable_group: pr
+    version: 1
+  ? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_095357/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc
+  : alias: ERA5
+    dataset: ERA5
+    diagnostic: diagnostic_daily
+    end_year: 2003
+    filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_095357/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc
+    frequency: day
+    long_name: Precipitation
+    mip: day
+    modeling_realm:
+    - atmos
+    preprocessor: daily
+    project: OBS6
+    recipe_dataset_index: 1
+    short_name: pr
+    standard_name: precipitation_flux
+    start_year: 2000
+    tier: 3
+    type: reanaly
+    units: kg m-2 s-1
+    variable_group: pr
+    version: 1
+  ? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_095357/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc
+  : alias: ERA-Interim
+    dataset: ERA-Interim
+    diagnostic: diagnostic_daily
+    end_year: 2003
+    filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_095357/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc
+    frequency: day
+    long_name: Near-Surface Air Temperature
+    mip: day
+    modeling_realm:
+    - atmos
+    preprocessor: daily
+    project: OBS6
+    recipe_dataset_index: 0
+    short_name: tas
+    standard_name: air_temperature
+    start_year: 2000
+    tier: 3
+    type: reanaly
+    units: K
+    variable_group: tas
+    version: 1
+  ? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_095357/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc
+  : alias: ERA5
+    dataset: ERA5
+    diagnostic: diagnostic_daily
+    end_year: 2003
+    filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_095357/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc
+    frequency: day
+    long_name: Near-Surface Air Temperature
+    mip: day
+    modeling_realm:
+    - atmos
+    preprocessor: daily
+    project: OBS6
+    recipe_dataset_index: 1
+    short_name: tas
+    standard_name: air_temperature
+    start_year: 2000
+    tier: 3
+    type: reanaly
+    units: K
+    variable_group: tas
+    version: 1
+input_files:
+- /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_095357/preproc/diagnostic_daily/tas/metadata.yml
+- /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_095357/preproc/diagnostic_daily/pr/metadata.yml
+log_level: info
+output_file_type: png
+plot_dir: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_095357/plots/diagnostic_daily/script
+profile_diagnostic: false
+recipe: recipe_HBVmountain.yml
+run_dir: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_095357/run/diagnostic_daily/script
+script: script
+version: 2.4.0
+work_dir: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_095357/work/diagnostic_daily/script
+
+2022-05-30 09:54:05,994 [1272540] INFO     esmvaltool.diag_scripts.shared._base,550	Creating /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_095357/work/diagnostic_daily/script
+2022-05-30 09:54:05,994 [1272540] INFO     esmvaltool.diag_scripts.shared._base,550	Creating /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_095357/plots/diagnostic_daily/script
+2022-05-30 09:54:05,994 [1272540] INFO     HBVmountain.py,48	Loading variable tas
+2022-05-30 09:54:06,022 [1272540] INFO     HBVmountain.py,48	Loading variable pr
+2022-05-30 09:54:06,030 [1272540] INFO     HBVmountain.py,126	Processing variable tas
+2022-05-30 09:54:06,044 [1272540] INFO     HBVmountain.py,130	Processing variable pr
+Traceback (most recent call last):
+  File "/home/vhoogeland/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py", line 172, in <module>
+    main(config)
+  File "/home/vhoogeland/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py", line 161, in main
+    to_netcdf(path=output_name)
+NameError: name 'to_netcdf' is not defined

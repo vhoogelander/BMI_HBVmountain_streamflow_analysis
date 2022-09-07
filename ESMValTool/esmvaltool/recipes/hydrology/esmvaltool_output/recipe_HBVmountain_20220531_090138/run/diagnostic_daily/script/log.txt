@@ -1,0 +1,4 @@
+  File "/home/vhoogeland/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py", line 146
+    pet.convert_units('kg m-2 day-1')  # equivalent to mm/day
+    ^
+SyntaxError: invalid syntax

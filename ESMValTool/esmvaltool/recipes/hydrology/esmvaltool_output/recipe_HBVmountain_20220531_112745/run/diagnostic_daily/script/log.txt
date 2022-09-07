@@ -1,0 +1,270 @@
+2022-05-31 11:27:59,491 [1327660] INFO     esmvaltool.diag_scripts.shared._base,511	Starting diagnostic script script with configuration:
+auxiliary_data_dir: /home/vhoogeland/auxiliary_data
+basin: Wark
+input_data:
+  ? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc
+  : alias: ERA-Interim
+    dataset: ERA-Interim
+    diagnostic: diagnostic_daily
+    end_year: 2003
+    filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc
+    frequency: day
+    long_name: Precipitation
+    mip: day
+    modeling_realm:
+    - atmos
+    preprocessor: daily
+    project: OBS6
+    recipe_dataset_index: 0
+    short_name: pr
+    standard_name: precipitation_flux
+    start_year: 2000
+    tier: 3
+    type: reanaly
+    units: kg m-2 s-1
+    variable_group: pr
+    version: 1
+  ? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc
+  : alias: ERA5
+    dataset: ERA5
+    diagnostic: diagnostic_daily
+    end_year: 2003
+    filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc
+    frequency: day
+    long_name: Precipitation
+    mip: day
+    modeling_realm:
+    - atmos
+    preprocessor: daily
+    project: OBS6
+    recipe_dataset_index: 1
+    short_name: pr
+    standard_name: precipitation_flux
+    start_year: 2000
+    tier: 3
+    type: reanaly
+    units: kg m-2 s-1
+    variable_group: pr
+    version: 1
+  ? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_2000-2003.nc
+  : alias: ERA-Interim
+    dataset: ERA-Interim
+    diagnostic: diagnostic_daily
+    end_year: 2003
+    filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_2000-2003.nc
+    frequency: day
+    long_name: Sea Level Pressure
+    mip: day
+    modeling_realm:
+    - atmos
+    preprocessor: daily
+    project: OBS6
+    recipe_dataset_index: 0
+    short_name: psl
+    standard_name: air_pressure_at_mean_sea_level
+    start_year: 2000
+    tier: 3
+    type: reanaly
+    units: Pa
+    variable_group: psl
+    version: 1
+  ? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/psl/OBS6_ERA5_reanaly_1_day_psl_2000-2003.nc
+  : alias: ERA5
+    dataset: ERA5
+    diagnostic: diagnostic_daily
+    end_year: 2003
+    filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/psl/OBS6_ERA5_reanaly_1_day_psl_2000-2003.nc
+    frequency: day
+    long_name: Sea Level Pressure
+    mip: day
+    modeling_realm:
+    - atmos
+    preprocessor: daily
+    project: OBS6
+    recipe_dataset_index: 1
+    short_name: psl
+    standard_name: air_pressure_at_mean_sea_level
+    start_year: 2000
+    tier: 3
+    type: reanaly
+    units: Pa
+    variable_group: psl
+    version: 1
+  ? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/rsds/OBS6_ERA-Interim_reanaly_1_day_rsds_2000-2003.nc
+  : alias: ERA-Interim
+    dataset: ERA-Interim
+    diagnostic: diagnostic_daily
+    end_year: 2003
+    filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/rsds/OBS6_ERA-Interim_reanaly_1_day_rsds_2000-2003.nc
+    frequency: day
+    long_name: Surface Downwelling Shortwave Radiation
+    mip: day
+    modeling_realm:
+    - atmos
+    preprocessor: daily
+    project: OBS6
+    recipe_dataset_index: 0
+    short_name: rsds
+    standard_name: surface_downwelling_shortwave_flux_in_air
+    start_year: 2000
+    tier: 3
+    type: reanaly
+    units: W m-2
+    variable_group: rsds
+    version: 1
+  ? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/rsds/OBS6_ERA5_reanaly_1_day_rsds_2000-2003.nc
+  : alias: ERA5
+    dataset: ERA5
+    diagnostic: diagnostic_daily
+    end_year: 2003
+    filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/rsds/OBS6_ERA5_reanaly_1_day_rsds_2000-2003.nc
+    frequency: day
+    long_name: Surface Downwelling Shortwave Radiation
+    mip: day
+    modeling_realm:
+    - atmos
+    preprocessor: daily
+    project: OBS6
+    recipe_dataset_index: 1
+    short_name: rsds
+    standard_name: surface_downwelling_shortwave_flux_in_air
+    start_year: 2000
+    tier: 3
+    type: reanaly
+    units: W m-2
+    variable_group: rsds
+    version: 1
+  ? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/rsdt/OBS6_ERA-Interim_reanaly_1_CFday_rsdt_2000-2003.nc
+  : alias: ERA-Interim
+    dataset: ERA-Interim
+    diagnostic: diagnostic_daily
+    end_year: 2003
+    filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/rsdt/OBS6_ERA-Interim_reanaly_1_CFday_rsdt_2000-2003.nc
+    frequency: day
+    long_name: TOA Incident Shortwave Radiation
+    mip: CFday
+    modeling_realm:
+    - atmos
+    preprocessor: daily
+    project: OBS6
+    recipe_dataset_index: 0
+    short_name: rsdt
+    standard_name: toa_incoming_shortwave_flux
+    start_year: 2000
+    tier: 3
+    type: reanaly
+    units: W m-2
+    variable_group: rsdt
+    version: 1
+  ? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/rsdt/OBS6_ERA5_reanaly_1_CFday_rsdt_2000-2003.nc
+  : alias: ERA5
+    dataset: ERA5
+    diagnostic: diagnostic_daily
+    end_year: 2003
+    filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/rsdt/OBS6_ERA5_reanaly_1_CFday_rsdt_2000-2003.nc
+    frequency: day
+    long_name: TOA Incident Shortwave Radiation
+    mip: CFday
+    modeling_realm:
+    - atmos
+    preprocessor: daily
+    project: OBS6
+    recipe_dataset_index: 1
+    short_name: rsdt
+    standard_name: toa_incoming_shortwave_flux
+    start_year: 2000
+    tier: 3
+    type: reanaly
+    units: W m-2
+    variable_group: rsdt
+    version: 1
+  ? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc
+  : alias: ERA-Interim
+    dataset: ERA-Interim
+    diagnostic: diagnostic_daily
+    end_year: 2003
+    filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc
+    frequency: day
+    long_name: Near-Surface Air Temperature
+    mip: day
+    modeling_realm:
+    - atmos
+    preprocessor: daily
+    project: OBS6
+    recipe_dataset_index: 0
+    short_name: tas
+    standard_name: air_temperature
+    start_year: 2000
+    tier: 3
+    type: reanaly
+    units: K
+    variable_group: tas
+    version: 1
+  ? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc
+  : alias: ERA5
+    dataset: ERA5
+    diagnostic: diagnostic_daily
+    end_year: 2003
+    filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc
+    frequency: day
+    long_name: Near-Surface Air Temperature
+    mip: day
+    modeling_realm:
+    - atmos
+    preprocessor: daily
+    project: OBS6
+    recipe_dataset_index: 1
+    short_name: tas
+    standard_name: air_temperature
+    start_year: 2000
+    tier: 3
+    type: reanaly
+    units: K
+    variable_group: tas
+    version: 1
+input_files:
+- /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/tas/metadata.yml
+- /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/pr/metadata.yml
+- /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/psl/metadata.yml
+- /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/rsds/metadata.yml
+- /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/preproc/diagnostic_daily/rsdt/metadata.yml
+log_level: info
+output_file_type: png
+plot_dir: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/plots/diagnostic_daily/script
+profile_diagnostic: false
+recipe: recipe_HBVmountain.yml
+run_dir: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/run/diagnostic_daily/script
+script: script
+version: 2.4.0
+work_dir: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/work/diagnostic_daily/script
+
+2022-05-31 11:27:59,491 [1327660] INFO     esmvaltool.diag_scripts.shared._base,550	Creating /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/work/diagnostic_daily/script
+2022-05-31 11:27:59,491 [1327660] INFO     esmvaltool.diag_scripts.shared._base,550	Creating /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/plots/diagnostic_daily/script
+2022-05-31 11:27:59,492 [1327660] INFO     HBVmountain.py,48	Loading variable tas
+2022-05-31 11:27:59,520 [1327660] INFO     HBVmountain.py,48	Loading variable pr
+2022-05-31 11:27:59,529 [1327660] INFO     HBVmountain.py,48	Loading variable psl
+2022-05-31 11:27:59,538 [1327660] INFO     HBVmountain.py,48	Loading variable rsds
+2022-05-31 11:27:59,546 [1327660] INFO     HBVmountain.py,48	Loading variable rsdt
+2022-05-31 11:27:59,554 [1327660] INFO     HBVmountain.py,139	Processing variable PET
+2022-05-31 11:27:59,619 [1327660] INFO     HBVmountain.py,149	Processing variable tas
+2022-05-31 11:27:59,632 [1327660] INFO     HBVmountain.py,153	Processing variable pr
+2022-05-31 11:27:59,672 [1327660] WARNING  py.warnings,109	/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/dask/core.py:119: RuntimeWarning: overflow encountered in exp
+  return func(*(_execute_task(a, cache) for a in args))
+
+2022-05-31 11:27:59,673 [1327660] WARNING  py.warnings,109	/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/numpy/ma/core.py:6852: RuntimeWarning: overflow encountered in power
+  result = np.where(m, fa, umath.power(fa, fb)).view(basetype)
+
+2022-05-31 11:27:59,675 [1327660] WARNING  py.warnings,109	/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/dask/array/core.py:4524: RuntimeWarning: invalid value encountered in multiply
+  result = function(*args, **kwargs)
+
+2022-05-31 11:27:59,676 [1327660] INFO     HBVmountain.py,111	Saving cubes to file /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112745/work/diagnostic_daily/script/HBVmountain_test_Wark_2000_2003.nc
+Traceback (most recent call last):
+  File "/home/vhoogeland/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py", line 198, in <module>
+    main(config)
+  File "/home/vhoogeland/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py", line 187, in main
+    save(all_vars, output_data, provenance, cfg)
+  File "/home/vhoogeland/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py", line 112, in save
+    iris.save(cubes, output_file, fill_value=-9999)
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/iris/io/__init__.py", line 456, in save
+    raise ValueError("Cannot save; non Cube found in source")
+ValueError: Cannot save; non Cube found in source

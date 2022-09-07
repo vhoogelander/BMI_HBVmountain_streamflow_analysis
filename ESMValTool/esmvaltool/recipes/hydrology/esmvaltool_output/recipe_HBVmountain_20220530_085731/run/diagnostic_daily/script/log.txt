@@ -1,0 +1,4 @@
+  File "/home/vhoogeland/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py", line 123
+    )
+    ^
+SyntaxError: unmatched ')'

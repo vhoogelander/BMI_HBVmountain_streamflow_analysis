@@ -1,0 +1,4 @@
+  File "/home/vhoogeland/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py", line 149
+    temp = preproc.area_statistics(all_vars['tas'], operator='mean')
+    ^
+SyntaxError: invalid syntax

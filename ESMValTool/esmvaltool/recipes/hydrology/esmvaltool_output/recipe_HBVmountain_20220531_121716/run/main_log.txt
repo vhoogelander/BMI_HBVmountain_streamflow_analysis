@@ -1,0 +1,126 @@
+INFO    [1329721] 
+______________________________________________________________________
+          _____ ____  __  ____     __    _ _____           _
+         | ____/ ___||  \/  \ \   / /_ _| |_   _|__   ___ | |
+         |  _| \___ \| |\/| |\ \ / / _` | | | |/ _ \ / _ \| |
+         | |___ ___) | |  | | \ V / (_| | | | | (_) | (_) | |
+         |_____|____/|_|  |_|  \_/ \__,_|_| |_|\___/ \___/|_|
+______________________________________________________________________
+
+ESMValTool - Earth System Model Evaluation Tool.
+
+http://www.esmvaltool.org
+
+CORE DEVELOPMENT TEAM AND CONTACTS:
+  Birgit Hassler (Co-PI; DLR, Germany - birgit.hassler@dlr.de)
+  Alistair Sellar (Co-PI; Met Office, UK - alistair.sellar@metoffice.gov.uk)
+  Bouwe Andela (Netherlands eScience Center, The Netherlands - b.andela@esciencecenter.nl)
+  Lee de Mora (PML, UK - ledm@pml.ac.uk)
+  Niels Drost (Netherlands eScience Center, The Netherlands - n.drost@esciencecenter.nl)
+  Veronika Eyring (DLR, Germany - veronika.eyring@dlr.de)
+  Bettina Gier (UBremen, Germany - gier@uni-bremen.de)
+  Remi Kazeroni (DLR, Germany - remi.kazeroni@dlr.de)
+  Nikolay Koldunov (AWI, Germany - nikolay.koldunov@awi.de)
+  Axel Lauer (DLR, Germany - axel.lauer@dlr.de)
+  Saskia Loosveldt-Tomas (BSC, Spain - saskia.loosveldt@bsc.es)
+  Ruth Lorenz (ETH Zurich, Switzerland - ruth.lorenz@env.ethz.ch)
+  Benjamin Mueller (LMU, Germany - b.mueller@iggf.geo.uni-muenchen.de)
+  Valeriu Predoi (URead, UK - valeriu.predoi@ncas.ac.uk)
+  Mattia Righi (DLR, Germany - mattia.righi@dlr.de)
+  Manuel Schlund (DLR, Germany - manuel.schlund@dlr.de)
+  Breixo Solino Fernandez (DLR, Germany - breixo.solinofernandez@dlr.de)
+  Javier Vegas-Regidor (BSC, Spain - javier.vegas@bsc.es)
+  Klaus Zimmermann (SMHI, Sweden - klaus.zimmermann@smhi.se)
+
+For further help, please read the documentation at
+http://docs.esmvaltool.org. Have fun!
+
+INFO    [1329721] Package versions
+INFO    [1329721] ----------------
+INFO    [1329721] ESMValCore: 2.4.0
+INFO    [1329721] ESMValTool: 2.4.0
+INFO    [1329721] ----------------
+INFO    [1329721] Using config file /home/vhoogeland/.esmvaltool/config-user.yml
+INFO    [1329721] Writing program log files to:
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/run/main_log.txt
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/run/main_log_debug.txt
+INFO    [1329721] Starting the Earth System Model Evaluation Tool at time: 2022-05-31 12:17:18 UTC
+INFO    [1329721] ----------------------------------------------------------------------
+INFO    [1329721] RECIPE   = /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/recipe_HBVmountain.yml
+INFO    [1329721] RUNDIR     = /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/run
+INFO    [1329721] WORKDIR    = /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/work
+INFO    [1329721] PREPROCDIR = /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/preproc
+INFO    [1329721] PLOTDIR    = /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/plots
+INFO    [1329721] ----------------------------------------------------------------------
+INFO    [1329721] Running tasks using at most 2 processes
+INFO    [1329721] If your system hangs during execution, it may not have enough memory for keeping this number of tasks in memory.
+INFO    [1329721] If you experience memory problems, try reducing 'max_parallel_tasks' in your user configuration file.
+INFO    [1329721] Creating tasks from recipe
+INFO    [1329721] Creating tasks for diagnostic diagnostic_daily
+INFO    [1329721] Creating preprocessor task diagnostic_daily/tas
+INFO    [1329721] Creating preprocessor 'daily' task for variable 'tas'
+INFO    [1329721] Found input files for ERA-Interim
+INFO    [1329721] Found input files for ERA5
+INFO    [1329721] PreprocessingTask diagnostic_daily/tas created.
+INFO    [1329721] Creating preprocessor task diagnostic_daily/pr
+INFO    [1329721] Creating preprocessor 'daily' task for variable 'pr'
+INFO    [1329721] Found input files for ERA-Interim
+INFO    [1329721] Found input files for ERA5
+INFO    [1329721] PreprocessingTask diagnostic_daily/pr created.
+INFO    [1329721] Creating preprocessor task diagnostic_daily/psl
+INFO    [1329721] Creating preprocessor 'daily' task for variable 'psl'
+INFO    [1329721] Found input files for ERA-Interim
+INFO    [1329721] Found input files for ERA5
+INFO    [1329721] PreprocessingTask diagnostic_daily/psl created.
+INFO    [1329721] Creating preprocessor task diagnostic_daily/rsds
+INFO    [1329721] Creating preprocessor 'daily' task for variable 'rsds'
+INFO    [1329721] Found input files for ERA-Interim
+INFO    [1329721] Found input files for ERA5
+INFO    [1329721] PreprocessingTask diagnostic_daily/rsds created.
+INFO    [1329721] Creating preprocessor task diagnostic_daily/rsdt
+INFO    [1329721] Creating preprocessor 'daily' task for variable 'rsdt'
+INFO    [1329721] Found input files for ERA-Interim
+INFO    [1329721] Found input files for ERA5
+INFO    [1329721] PreprocessingTask diagnostic_daily/rsdt created.
+INFO    [1329721] Creating diagnostic task diagnostic_daily/script
+INFO    [1329721] These tasks will be executed: diagnostic_daily/rsds, diagnostic_daily/script, diagnostic_daily/psl, diagnostic_daily/tas, diagnostic_daily/pr, diagnostic_daily/rsdt
+INFO    [1329721] Running 6 tasks using 2 processes
+INFO    [1329726] Starting task diagnostic_daily/tas in process [1329726]
+INFO    [1329727] Starting task diagnostic_daily/pr in process [1329727]
+INFO    [1329721] Progress: 2 tasks running, 4 tasks waiting for ancestors, 0/6 done
+INFO    [1329727] Successfully completed task diagnostic_daily/pr (priority 1) in 0:00:02.916216
+INFO    [1329721] Progress: 1 tasks running, 4 tasks waiting for ancestors, 1/6 done
+INFO    [1329727] Starting task diagnostic_daily/psl in process [1329727]
+INFO    [1329726] Successfully completed task diagnostic_daily/tas (priority 0) in 0:00:03.152989
+INFO    [1329721] Progress: 2 tasks running, 3 tasks waiting for ancestors, 1/6 done
+INFO    [1329721] Progress: 1 tasks running, 3 tasks waiting for ancestors, 2/6 done
+INFO    [1329726] Starting task diagnostic_daily/rsds in process [1329726]
+INFO    [1329721] Progress: 2 tasks running, 2 tasks waiting for ancestors, 2/6 done
+INFO    [1329727] Successfully completed task diagnostic_daily/psl (priority 2) in 0:00:02.869246
+INFO    [1329721] Progress: 1 tasks running, 2 tasks waiting for ancestors, 3/6 done
+INFO    [1329727] Starting task diagnostic_daily/rsdt in process [1329727]
+INFO    [1329726] Successfully completed task diagnostic_daily/rsds (priority 3) in 0:00:02.806263
+INFO    [1329721] Progress: 2 tasks running, 1 tasks waiting for ancestors, 3/6 done
+INFO    [1329721] Progress: 1 tasks running, 1 tasks waiting for ancestors, 4/6 done
+INFO    [1329727] Successfully completed task diagnostic_daily/rsdt (priority 4) in 0:00:02.151405
+INFO    [1329721] Progress: 0 tasks running, 1 tasks waiting for ancestors, 5/6 done
+INFO    [1329726] Starting task diagnostic_daily/script in process [1329726]
+INFO    [1329726] Running command ['/opt/conda/envs/ewatercycle/bin/python', '/home/vhoogeland/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py', '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/run/diagnostic_daily/script/settings.yml']
+INFO    [1329726] Writing output to /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/work/diagnostic_daily/script
+INFO    [1329726] Writing plots to /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/plots/diagnostic_daily/script
+INFO    [1329726] Writing log to /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/run/diagnostic_daily/script/log.txt
+INFO    [1329726] To re-run this diagnostic script, run:
+cd /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/run/diagnostic_daily/script; MPLBACKEND="Agg" /opt/conda/envs/ewatercycle/bin/python /home/vhoogeland/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/run/diagnostic_daily/script/settings.yml
+INFO    [1329721] Progress: 1 tasks running, 0 tasks waiting for ancestors, 5/6 done
+INFO    [1329726] Maximum memory used (estimate): 0.3 GB
+INFO    [1329726] Sampled every second. It may be inaccurate if short but high spikes in memory consumption occur.
+INFO    [1329726] Successfully completed task diagnostic_daily/script (priority 5) in 0:00:03.097986
+INFO    [1329721] Progress: 0 tasks running, 0 tasks waiting for ancestors, 6/6 done
+INFO    [1329721] Successfully completed all tasks.
+INFO    [1329721] Wrote recipe output to:
+file:///home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_121716/index.html
+INFO    [1329721] Ending the Earth System Model Evaluation Tool at time: 2022-05-31 12:17:31 UTC
+INFO    [1329721] Time for running the recipe was: 0:00:13.395850
+INFO    [1329721] Maximum memory used (estimate): 1.1 GB
+INFO    [1329721] Sampled every second. It may be inaccurate if short but high spikes in memory consumption occur.
+INFO    [1329721] Run was successful

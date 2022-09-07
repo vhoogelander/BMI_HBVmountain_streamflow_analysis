@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<prov:document xmlns:task="https://www.esmvaltool.org/task" xmlns:file="https://www.esmvaltool.org/file" xmlns:project="https://www.esmvaltool.org/project" xmlns:recipe="https://www.esmvaltool.org/recipe" xmlns:software="https://www.esmvaltool.org/software" xmlns:attribute="https://www.esmvaltool.org/attribute" xmlns:author="https://www.esmvaltool.org/author" xmlns:preprocessor="https://www.esmvaltool.org/preprocessor" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <prov:wasAttributedTo>
+    <prov:entity prov:ref="recipe:recipe_HBVmountain.yml"/>
+    <prov:agent prov:ref="author:Camphuijsen, Jaro"/>
+  </prov:wasAttributedTo>
+  <prov:wasDerivedFrom>
+    <prov:generatedEntity prov:ref="file:/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_111848/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_2000-2003.nc"/>
+    <prov:usedEntity prov:ref="file:/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_psl_200301-200312.nc"/>
+    <prov:activity prov:ref="task:diagnostic_daily/psl"/>
+  </prov:wasDerivedFrom>
+  <prov:entity prov:id="file:/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_psl_200001-200012.nc">
+    <attribute:Conventions>CF-1.5</attribute:Conventions>
+    <attribute:comment>'Contains modified Copernicus Climate Change Service Information 2019'</attribute:comment>
+    <attribute:history>Created on 2019-10-30 15:50:51</attribute:history>
+    <attribute:host>tcn630</attribute:host>
+    <attribute:mip>day</attribute:mip>
+    <attribute:modeling_realm>reanaly</attribute:modeling_realm>
+    <attribute:project_id>OBS6</attribute:project_id>
+    <attribute:reference>Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.</attribute:reference>
+    <attribute:source>www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim</attribute:source>
+    <attribute:tier>3</attribute:tier>
+    <attribute:title>ERA-Interim data reformatted for ESMValTool v2.0.0b1</attribute:title>
+    <attribute:user>kalverla</attribute:user>
+    <attribute:version>1</attribute:version>
+  </prov:entity>
+  <prov:entity prov:id="recipe:recipe_HBVmountain.yml">
+    <attribute:description>Recipe pre-processes ERA-Interim and ERA-5 data
+for use in the MARRMoT hydrological model.
+
+MARRMoT is the Modular Assessment of Rainfall-Runnoff Models Toolbox ...
+https://www.geosci-model-dev.net/12/2463/2019/
+</attribute:description>
+    <attribute:references>['acknow_project']</attribute:references>
+  </prov:entity>
+  <prov:agent prov:id="project:eWaterCycle project"/>
+  <prov:wasAttributedTo>
+    <prov:entity prov:ref="recipe:recipe_HBVmountain.yml"/>
+    <prov:agent prov:ref="author:Alidoost, Sarah"/>
+  </prov:wasAttributedTo>
+  <prov:agent prov:id="author:Camphuijsen, Jaro">
+    <attribute:institute>NLeSC, Netherlands</attribute:institute>
+    <attribute:orcid>https://orcid.org/0000-0002-8928-7831</attribute:orcid>
+  </prov:agent>
+  <prov:wasDerivedFrom>
+    <prov:generatedEntity prov:ref="file:/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_111848/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_2000-2003.nc"/>
+    <prov:usedEntity prov:ref="file:/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_psl_200201-200212.nc"/>
+    <prov:activity prov:ref="task:diagnostic_daily/psl"/>
+  </prov:wasDerivedFrom>
+  <prov:wasStartedBy>
+    <prov:activity prov:ref="task:diagnostic_daily/psl"/>
+    <prov:trigger prov:ref="recipe:recipe_HBVmountain.yml"/>
+    <prov:starter prov:ref="software:esmvaltool==2.4.0"/>
+  </prov:wasStartedBy>
+  <prov:activity prov:id="task:diagnostic_daily/psl"/>
+  <prov:entity prov:id="file:/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_111848/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_2000-2003.nc">
+    <attribute:alias>ERA-Interim</attribute:alias>
+    <attribute:dataset>ERA-Interim</attribute:dataset>
+    <attribute:diagnostic>diagnostic_daily</attribute:diagnostic>
+    <attribute:end_year>2003</attribute:end_year>
+    <attribute:filename>/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_111848/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_2000-2003.nc</attribute:filename>
+    <attribute:frequency>day</attribute:frequency>
+    <attribute:long_name>Sea Level Pressure</attribute:long_name>
+    <attribute:mip>day</attribute:mip>
+    <attribute:modeling_realm>['atmos']</attribute:modeling_realm>
+    <attribute:original_short_name>psl</attribute:original_short_name>
+    <attribute:preprocessor>daily</attribute:preprocessor>
+    <attribute:project>OBS6</attribute:project>
+    <attribute:recipe_dataset_index>0</attribute:recipe_dataset_index>
+    <attribute:short_name>psl</attribute:short_name>
+    <attribute:standard_name>air_pressure_at_mean_sea_level</attribute:standard_name>
+    <attribute:start_year>2000</attribute:start_year>
+    <attribute:tier>3</attribute:tier>
+    <attribute:type>reanaly</attribute:type>
+    <attribute:units>Pa</attribute:units>
+    <attribute:variable_group>psl</attribute:variable_group>
+    <attribute:version>1</attribute:version>
+    <preprocessor:add_fx_variables>{'fx_variables': {}, 'check_level': &lt;CheckLevels.DEFAULT: 3&gt;}</preprocessor:add_fx_variables>
+    <preprocessor:cleanup>{'remove': ['/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_111848/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_2000-2003_fixed']}</preprocessor:cleanup>
+    <preprocessor:clip_start_end_year>{'start_year': 2000, 'end_year': 2003}</preprocessor:clip_start_end_year>
+    <preprocessor:cmor_check_data>{'cmor_table': 'OBS6', 'mip': 'day', 'short_name': 'psl', 'frequency': 'day', 'check_level': &lt;CheckLevels.DEFAULT: 3&gt;}</preprocessor:cmor_check_data>
+    <preprocessor:cmor_check_metadata>{'cmor_table': 'OBS6', 'mip': 'day', 'short_name': 'psl', 'frequency': 'day', 'check_level': &lt;CheckLevels.DEFAULT: 3&gt;}</preprocessor:cmor_check_metadata>
+    <preprocessor:concatenate>{}</preprocessor:concatenate>
+    <preprocessor:extract_shape>{'shapefile': '/home/vhoogeland/auxiliary_data/Wark/Wark.shp', 'method': 'contains', 'crop': True}</preprocessor:extract_shape>
+    <preprocessor:fix_data>{'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'psl', 'short_name': 'psl', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA-Interim', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 0, 'alias': 'ERA-Interim', 'original_short_name': 'psl', 'standard_name': 'air_pressure_at_mean_sea_level', 'long_name': 'Sea Level Pressure', 'units': 'Pa', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_111848/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_2000-2003.nc', 'check_level': &lt;CheckLevels.DEFAULT: 3&gt;}</preprocessor:fix_data>
+    <preprocessor:fix_file>{'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'psl', 'short_name': 'psl', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA-Interim', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 0, 'alias': 'ERA-Interim', 'original_short_name': 'psl', 'standard_name': 'air_pressure_at_mean_sea_level', 'long_name': 'Sea Level Pressure', 'units': 'Pa', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_111848/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_111848/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_2000-2003_fixed'}</preprocessor:fix_file>
+    <preprocessor:fix_metadata>{'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'psl', 'short_name': 'psl', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA-Interim', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 0, 'alias': 'ERA-Interim', 'original_short_name': 'psl', 'standard_name': 'air_pressure_at_mean_sea_level', 'long_name': 'Sea Level Pressure', 'units': 'Pa', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_111848/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_2000-2003.nc', 'check_level': &lt;CheckLevels.DEFAULT: 3&gt;}</preprocessor:fix_metadata>
+    <preprocessor:load>{'callback': &lt;function concatenate_callback at 0x7f625d45a280&gt;}</preprocessor:load>
+    <preprocessor:remove_fx_variables>{}</preprocessor:remove_fx_variables>
+    <preprocessor:save>{'compress': False, 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_111848/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_2000-2003.nc'}</preprocessor:save>
+  </prov:entity>
+  <prov:agent prov:id="author:Kalverla, Peter">
+    <attribute:institute>NLeSC, Netherlands</attribute:institute>
+    <attribute:orcid>https://orcid.org/0000-0002-5025-7862</attribute:orcid>
+  </prov:agent>
+  <prov:entity prov:id="file:/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_psl_200101-200112.nc">
+    <attribute:Conventions>CF-1.5</attribute:Conventions>
+    <attribute:comment>'Contains modified Copernicus Climate Change Service Information 2019'</attribute:comment>
+    <attribute:history>Created on 2019-10-30 15:51:22</attribute:history>
+    <attribute:host>tcn630</attribute:host>
+    <attribute:mip>day</attribute:mip>
+    <attribute:modeling_realm>reanaly</attribute:modeling_realm>
+    <attribute:project_id>OBS6</attribute:project_id>
+    <attribute:reference>Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.</attribute:reference>
+    <attribute:source>www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim</attribute:source>
+    <attribute:tier>3</attribute:tier>
+    <attribute:title>ERA-Interim data reformatted for ESMValTool v2.0.0b1</attribute:title>
+    <attribute:user>kalverla</attribute:user>
+    <attribute:version>1</attribute:version>
+  </prov:entity>
+  <prov:wasAttributedTo>
+    <prov:entity prov:ref="recipe:recipe_HBVmountain.yml"/>
+    <prov:agent prov:ref="author:Kalverla, Peter"/>
+  </prov:wasAttributedTo>
+  <prov:wasAttributedTo>
+    <prov:entity prov:ref="recipe:recipe_HBVmountain.yml"/>
+    <prov:agent prov:ref="project:eWaterCycle project"/>
+  </prov:wasAttributedTo>
+  <prov:wasDerivedFrom>
+    <prov:generatedEntity prov:ref="file:/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_111848/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_2000-2003.nc"/>
+    <prov:usedEntity prov:ref="file:/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_psl_200001-200012.nc"/>
+    <prov:activity prov:ref="task:diagnostic_daily/psl"/>
+  </prov:wasDerivedFrom>
+  <prov:entity prov:id="file:/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_psl_200301-200312.nc">
+    <attribute:Conventions>CF-1.5</attribute:Conventions>
+    <attribute:comment>'Contains modified Copernicus Climate Change Service Information 2019'</attribute:comment>
+    <attribute:history>Created on 2019-10-30 15:50:12</attribute:history>
+    <attribute:host>tcn630</attribute:host>
+    <attribute:mip>day</attribute:mip>
+    <attribute:modeling_realm>reanaly</attribute:modeling_realm>
+    <attribute:project_id>OBS6</attribute:project_id>
+    <attribute:reference>Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.</attribute:reference>
+    <attribute:source>www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim</attribute:source>
+    <attribute:tier>3</attribute:tier>
+    <attribute:title>ERA-Interim data reformatted for ESMValTool v2.0.0b1</attribute:title>
+    <attribute:user>kalverla</attribute:user>
+    <attribute:version>1</attribute:version>
+  </prov:entity>
+  <prov:agent prov:id="author:Alidoost, Sarah">
+    <attribute:institute>NLeSC, Netherlands</attribute:institute>
+    <attribute:orcid>https://orcid.org/0000-0001-8407-6472</attribute:orcid>
+  </prov:agent>
+  <prov:entity prov:id="file:/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_psl_200201-200212.nc">
+    <attribute:Conventions>CF-1.5</attribute:Conventions>
+    <attribute:comment>'Contains modified Copernicus Climate Change Service Information 2019'</attribute:comment>
+    <attribute:history>Created on 2019-10-30 15:51:27</attribute:history>
+    <attribute:host>tcn630</attribute:host>
+    <attribute:mip>day</attribute:mip>
+    <attribute:modeling_realm>reanaly</attribute:modeling_realm>
+    <attribute:project_id>OBS6</attribute:project_id>
+    <attribute:reference>Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.</attribute:reference>
+    <attribute:source>www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim</attribute:source>
+    <attribute:tier>3</attribute:tier>
+    <attribute:title>ERA-Interim data reformatted for ESMValTool v2.0.0b1</attribute:title>
+    <attribute:user>kalverla</attribute:user>
+    <attribute:version>1</attribute:version>
+  </prov:entity>
+  <prov:activity prov:id="software:esmvaltool==2.4.0"/>
+  <prov:wasDerivedFrom>
+    <prov:generatedEntity prov:ref="file:/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_111848/preproc/diagnostic_daily/psl/OBS6_ERA-Interim_reanaly_1_day_psl_2000-2003.nc"/>
+    <prov:usedEntity prov:ref="file:/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_psl_200101-200112.nc"/>
+    <prov:activity prov:ref="task:diagnostic_daily/psl"/>
+  </prov:wasDerivedFrom>
+</prov:document>

@@ -1,0 +1,17 @@
+auxiliary_data_dir: /home/vhoogeland/auxiliary_data
+basin: Wark
+input_files:
+- /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112240/preproc/diagnostic_daily/tas/metadata.yml
+- /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112240/preproc/diagnostic_daily/pr/metadata.yml
+- /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112240/preproc/diagnostic_daily/psl/metadata.yml
+- /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112240/preproc/diagnostic_daily/rsds/metadata.yml
+- /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112240/preproc/diagnostic_daily/rsdt/metadata.yml
+log_level: info
+output_file_type: png
+plot_dir: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112240/plots/diagnostic_daily/script
+profile_diagnostic: false
+recipe: recipe_HBVmountain.yml
+run_dir: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112240/run/diagnostic_daily/script
+script: script
+version: 2.4.0
+work_dir: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_112240/work/diagnostic_daily/script

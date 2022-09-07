@@ -1,0 +1,67 @@
+INFO    [1268975] 
+______________________________________________________________________
+          _____ ____  __  ____     __    _ _____           _
+         | ____/ ___||  \/  \ \   / /_ _| |_   _|__   ___ | |
+         |  _| \___ \| |\/| |\ \ / / _` | | | |/ _ \ / _ \| |
+         | |___ ___) | |  | | \ V / (_| | | | | (_) | (_) | |
+         |_____|____/|_|  |_|  \_/ \__,_|_| |_|\___/ \___/|_|
+______________________________________________________________________
+
+ESMValTool - Earth System Model Evaluation Tool.
+
+http://www.esmvaltool.org
+
+CORE DEVELOPMENT TEAM AND CONTACTS:
+  Birgit Hassler (Co-PI; DLR, Germany - birgit.hassler@dlr.de)
+  Alistair Sellar (Co-PI; Met Office, UK - alistair.sellar@metoffice.gov.uk)
+  Bouwe Andela (Netherlands eScience Center, The Netherlands - b.andela@esciencecenter.nl)
+  Lee de Mora (PML, UK - ledm@pml.ac.uk)
+  Niels Drost (Netherlands eScience Center, The Netherlands - n.drost@esciencecenter.nl)
+  Veronika Eyring (DLR, Germany - veronika.eyring@dlr.de)
+  Bettina Gier (UBremen, Germany - gier@uni-bremen.de)
+  Remi Kazeroni (DLR, Germany - remi.kazeroni@dlr.de)
+  Nikolay Koldunov (AWI, Germany - nikolay.koldunov@awi.de)
+  Axel Lauer (DLR, Germany - axel.lauer@dlr.de)
+  Saskia Loosveldt-Tomas (BSC, Spain - saskia.loosveldt@bsc.es)
+  Ruth Lorenz (ETH Zurich, Switzerland - ruth.lorenz@env.ethz.ch)
+  Benjamin Mueller (LMU, Germany - b.mueller@iggf.geo.uni-muenchen.de)
+  Valeriu Predoi (URead, UK - valeriu.predoi@ncas.ac.uk)
+  Mattia Righi (DLR, Germany - mattia.righi@dlr.de)
+  Manuel Schlund (DLR, Germany - manuel.schlund@dlr.de)
+  Breixo Solino Fernandez (DLR, Germany - breixo.solinofernandez@dlr.de)
+  Javier Vegas-Regidor (BSC, Spain - javier.vegas@bsc.es)
+  Klaus Zimmermann (SMHI, Sweden - klaus.zimmermann@smhi.se)
+
+For further help, please read the documentation at
+http://docs.esmvaltool.org. Have fun!
+
+INFO    [1268975] Package versions
+INFO    [1268975] ----------------
+INFO    [1268975] ESMValCore: 2.4.0
+INFO    [1268975] ESMValTool: 2.4.0
+INFO    [1268975] ----------------
+INFO    [1268975] Using config file /home/vhoogeland/.esmvaltool/config-user.yml
+INFO    [1268975] Writing program log files to:
+/home/vhoogeland/ESMValTool/esmvaltool/esmvaltool_output/recipe_HBVmountain_20220530_083456/run/main_log.txt
+/home/vhoogeland/ESMValTool/esmvaltool/esmvaltool_output/recipe_HBVmountain_20220530_083456/run/main_log_debug.txt
+INFO    [1268975] Maximum memory used (estimate): 0.0 GB
+INFO    [1268975] Sampled every second. It may be inaccurate if short but high spikes in memory consumption occur.
+ERROR   [1268975] Program terminated abnormally, see stack trace below for more information:
+Traceback (most recent call last):
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/esmvalcore/_main.py", line 479, in run
+    fire.Fire(ESMValTool())
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/fire/core.py", line 141, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/fire/core.py", line 466, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/fire/core.py", line 681, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/esmvalcore/_main.py", line 423, in run
+    process_recipe(recipe_file=recipe, config_user=cfg)
+  File "/opt/conda/envs/ewatercycle/lib/python3.9/site-packages/esmvalcore/_main.py", line 80, in process_recipe
+    raise OSError(errno.ENOENT, "Specified recipe file does not exist",
+FileNotFoundError: [Errno 2] Specified recipe file does not exist: PosixPath('/home/vhoogeland/ESMValTool/esmvaltool/recipe_HBVmountain.yml')
+INFO    [1268975] 
+If you have a question or need help, please start a new discussion on https://github.com/ESMValGroup/ESMValTool/discussions
+If you suspect this is a bug, please open an issue on https://github.com/ESMValGroup/ESMValTool/issues
+To make it easier to find out what the problem is, please consider attaching the files run/recipe_*.yml and run/main_log_debug.txt from the output directory.

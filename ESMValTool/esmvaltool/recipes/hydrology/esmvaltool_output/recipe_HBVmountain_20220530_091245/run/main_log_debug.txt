@@ -1,0 +1,1273 @@
+2022-05-30 09:12:47,280 UTC [1270994] INFO    esmvalcore._main:453 
+______________________________________________________________________
+          _____ ____  __  ____     __    _ _____           _
+         | ____/ ___||  \/  \ \   / /_ _| |_   _|__   ___ | |
+         |  _| \___ \| |\/| |\ \ / / _` | | | |/ _ \ / _ \| |
+         | |___ ___) | |  | | \ V / (_| | | | | (_) | (_) | |
+         |_____|____/|_|  |_|  \_/ \__,_|_| |_|\___/ \___/|_|
+______________________________________________________________________
+
+ESMValTool - Earth System Model Evaluation Tool.
+
+http://www.esmvaltool.org
+
+CORE DEVELOPMENT TEAM AND CONTACTS:
+  Birgit Hassler (Co-PI; DLR, Germany - birgit.hassler@dlr.de)
+  Alistair Sellar (Co-PI; Met Office, UK - alistair.sellar@metoffice.gov.uk)
+  Bouwe Andela (Netherlands eScience Center, The Netherlands - b.andela@esciencecenter.nl)
+  Lee de Mora (PML, UK - ledm@pml.ac.uk)
+  Niels Drost (Netherlands eScience Center, The Netherlands - n.drost@esciencecenter.nl)
+  Veronika Eyring (DLR, Germany - veronika.eyring@dlr.de)
+  Bettina Gier (UBremen, Germany - gier@uni-bremen.de)
+  Remi Kazeroni (DLR, Germany - remi.kazeroni@dlr.de)
+  Nikolay Koldunov (AWI, Germany - nikolay.koldunov@awi.de)
+  Axel Lauer (DLR, Germany - axel.lauer@dlr.de)
+  Saskia Loosveldt-Tomas (BSC, Spain - saskia.loosveldt@bsc.es)
+  Ruth Lorenz (ETH Zurich, Switzerland - ruth.lorenz@env.ethz.ch)
+  Benjamin Mueller (LMU, Germany - b.mueller@iggf.geo.uni-muenchen.de)
+  Valeriu Predoi (URead, UK - valeriu.predoi@ncas.ac.uk)
+  Mattia Righi (DLR, Germany - mattia.righi@dlr.de)
+  Manuel Schlund (DLR, Germany - manuel.schlund@dlr.de)
+  Breixo Solino Fernandez (DLR, Germany - breixo.solinofernandez@dlr.de)
+  Javier Vegas-Regidor (BSC, Spain - javier.vegas@bsc.es)
+  Klaus Zimmermann (SMHI, Sweden - klaus.zimmermann@smhi.se)
+
+For further help, please read the documentation at
+http://docs.esmvaltool.org. Have fun!
+
+2022-05-30 09:12:47,287 UTC [1270994] INFO    esmvalcore._main:454 Package versions
+2022-05-30 09:12:47,287 UTC [1270994] INFO    esmvalcore._main:455 ----------------
+2022-05-30 09:12:47,287 UTC [1270994] INFO    esmvalcore._main:456 ESMValCore: 2.4.0
+2022-05-30 09:12:47,287 UTC [1270994] INFO    esmvalcore._main:458 ESMValTool: 2.4.0
+2022-05-30 09:12:47,288 UTC [1270994] INFO    esmvalcore._main:459 ----------------
+2022-05-30 09:12:47,288 UTC [1270994] INFO    esmvalcore._main:460 Using config file /home/vhoogeland/.esmvaltool/config-user.yml
+2022-05-30 09:12:47,288 UTC [1270994] INFO    esmvalcore._main:461 Writing program log files to:
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/run/main_log.txt
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/run/main_log_debug.txt
+2022-05-30 09:12:47,288 UTC [1270994] INFO    esmvalcore._main:86 Starting the Earth System Model Evaluation Tool at time: 2022-05-30 09:12:47 UTC
+2022-05-30 09:12:47,289 UTC [1270994] INFO    esmvalcore._main:90 ----------------------------------------------------------------------
+2022-05-30 09:12:47,289 UTC [1270994] INFO    esmvalcore._main:91 RECIPE   = /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/recipe_HBVmountain.yml
+2022-05-30 09:12:47,289 UTC [1270994] INFO    esmvalcore._main:92 RUNDIR     = /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/run
+2022-05-30 09:12:47,289 UTC [1270994] INFO    esmvalcore._main:93 WORKDIR    = /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/work
+2022-05-30 09:12:47,290 UTC [1270994] INFO    esmvalcore._main:94 PREPROCDIR = /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc
+2022-05-30 09:12:47,290 UTC [1270994] INFO    esmvalcore._main:95 PLOTDIR    = /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/plots
+2022-05-30 09:12:47,290 UTC [1270994] INFO    esmvalcore._main:96 ----------------------------------------------------------------------
+2022-05-30 09:12:47,290 UTC [1270994] INFO    esmvalcore._main:100 Running tasks using at most 2 processes
+2022-05-30 09:12:47,290 UTC [1270994] INFO    esmvalcore._main:102 If your system hangs during execution, it may not have enough memory for keeping this number of tasks in memory.
+2022-05-30 09:12:47,290 UTC [1270994] INFO    esmvalcore._main:105 If you experience memory problems, try reducing 'max_parallel_tasks' in your user configuration file.
+2022-05-30 09:12:47,291 UTC [1270994] DEBUG   esmvalcore._recipe_checks:45 Checking recipe against schema /opt/conda/envs/ewatercycle/lib/python3.9/site-packages/esmvalcore/recipe_schema.yml
+2022-05-30 09:12:47,298 UTC [1270994] DEBUG   esmvalcore._recipe:1101 Retrieving diagnostics from recipe
+2022-05-30 09:12:47,298 UTC [1270994] DEBUG   esmvalcore._recipe:1234 Populating list of variables for diagnostic diagnostic_daily
+2022-05-30 09:12:47,299 UTC [1270994] DEBUG   esmvalcore._recipe:1364 Setting script for diagnostic diagnostic_daily
+2022-05-30 09:12:47,300 UTC [1270994] INFO    esmvalcore._recipe:1469 Creating tasks from recipe
+2022-05-30 09:12:47,300 UTC [1270994] INFO    esmvalcore._recipe:1475 Creating tasks for diagnostic diagnostic_daily
+2022-05-30 09:12:47,300 UTC [1270994] INFO    esmvalcore._recipe:1451 Creating preprocessor task diagnostic_daily/tas
+2022-05-30 09:12:47,300 UTC [1270994] INFO    esmvalcore._recipe:974 Creating preprocessor 'daily' task for variable 'tas'
+2022-05-30 09:12:47,359 UTC [1270994] DEBUG   esmvalcore._data_finder:18 Looking for files matching ['OBS6_ERA-Interim_reanaly_1_day_tas[_.]*nc'] in ['/mnt/data/climate-data/obs6/Tier3/ERA-Interim']
+2022-05-30 09:12:47,715 UTC [1270994] DEBUG   esmvalcore._recipe:598 Using input files for variable tas of dataset ERA-Interim:
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200001-200012.nc
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200101-200112.nc
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200201-200212.nc
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200301-200312.nc
+2022-05-30 09:12:47,716 UTC [1270994] INFO    esmvalcore._recipe:607 Found input files for ERA-Interim
+2022-05-30 09:12:47,735 UTC [1270994] DEBUG   esmvalcore._data_finder:18 Looking for files matching ['OBS6_ERA5_reanaly_1_day_tas[_.]*nc'] in ['/mnt/data/climate-data/obs6/Tier3/ERA5']
+2022-05-30 09:12:47,875 UTC [1270994] DEBUG   esmvalcore._recipe:598 Using input files for variable tas of dataset ERA5:
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2000-2000.nc
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2001-2001.nc
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2002-2002.nc
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2003-2003.nc
+2022-05-30 09:12:47,875 UTC [1270994] INFO    esmvalcore._recipe:607 Found input files for ERA5
+2022-05-30 09:12:47,893 UTC [1270994] INFO    esmvalcore._recipe:880 PreprocessingTask diagnostic_daily/tas created.
+2022-05-30 09:12:47,893 UTC [1270994] DEBUG   esmvalcore._recipe:881 PreprocessingTask diagnostic_daily/tas will create the files:
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc
+2022-05-30 09:12:47,893 UTC [1270994] INFO    esmvalcore._recipe:1451 Creating preprocessor task diagnostic_daily/pr
+2022-05-30 09:12:47,893 UTC [1270994] INFO    esmvalcore._recipe:974 Creating preprocessor 'daily' task for variable 'pr'
+2022-05-30 09:12:47,893 UTC [1270994] DEBUG   esmvalcore._data_finder:18 Looking for files matching ['OBS6_ERA-Interim_reanaly_1_day_pr[_.]*nc'] in ['/mnt/data/climate-data/obs6/Tier3/ERA-Interim']
+2022-05-30 09:12:47,907 UTC [1270994] DEBUG   esmvalcore._recipe:598 Using input files for variable pr of dataset ERA-Interim:
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200001-200012.nc
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200101-200112.nc
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200201-200212.nc
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200301-200312.nc
+2022-05-30 09:12:47,907 UTC [1270994] INFO    esmvalcore._recipe:607 Found input files for ERA-Interim
+2022-05-30 09:12:47,922 UTC [1270994] DEBUG   esmvalcore._data_finder:18 Looking for files matching ['OBS6_ERA5_reanaly_1_day_pr[_.]*nc'] in ['/mnt/data/climate-data/obs6/Tier3/ERA5']
+2022-05-30 09:12:47,927 UTC [1270994] DEBUG   esmvalcore._recipe:598 Using input files for variable pr of dataset ERA5:
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2000-2000.nc
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2001-2001.nc
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2002-2002.nc
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2003-2003.nc
+2022-05-30 09:12:47,927 UTC [1270994] INFO    esmvalcore._recipe:607 Found input files for ERA5
+2022-05-30 09:12:47,941 UTC [1270994] INFO    esmvalcore._recipe:880 PreprocessingTask diagnostic_daily/pr created.
+2022-05-30 09:12:47,941 UTC [1270994] DEBUG   esmvalcore._recipe:881 PreprocessingTask diagnostic_daily/pr will create the files:
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc
+/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc
+2022-05-30 09:12:47,941 UTC [1270994] INFO    esmvalcore._recipe:1491 Creating diagnostic task diagnostic_daily/script
+2022-05-30 09:12:47,942 UTC [1270994] DEBUG   esmvalcore._recipe:1410 Linking tasks for diagnostic diagnostic_daily script script
+2022-05-30 09:12:47,942 UTC [1270994] DEBUG   esmvalcore._recipe:1419 Pattern diagnostic_daily/tas matches ['diagnostic_daily/tas']
+2022-05-30 09:12:47,942 UTC [1270994] DEBUG   esmvalcore._recipe:1419 Pattern diagnostic_daily/pr matches ['diagnostic_daily/pr']
+2022-05-30 09:12:47,942 UTC [1270994] INFO    esmvalcore._recipe:1531 These tasks will be executed: diagnostic_daily/pr, diagnostic_daily/tas, diagnostic_daily/script
+2022-05-30 09:12:47,943 UTC [1270994] DEBUG   esmvalcore._main:122 Recipe summary:
+DiagnosticTask: diagnostic_daily/script
+script: ~/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py
+settings:
+{'auxiliary_data_dir': '/home/vhoogeland/auxiliary_data',
+ 'basin': 'Wark',
+ 'log_level': 'info',
+ 'output_file_type': 'png',
+ 'plot_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/plots/diagnostic_daily/script',
+ 'profile_diagnostic': False,
+ 'recipe': 'recipe_HBVmountain.yml',
+ 'run_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/run/diagnostic_daily/script',
+ 'script': 'script',
+ 'version': '2.4.0',
+ 'work_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/work/diagnostic_daily/script'}
+ancestors:
+  PreprocessingTask: diagnostic_daily/tas
+  order: ['fix_file', 'load', 'fix_metadata', 'concatenate', 'cmor_check_metadata', 'clip_start_end_year', 'fix_data', 'cmor_check_data', 'add_fx_variables', 'extract_shape', 'remove_fx_variables', 'save', 'cleanup']
+  PreprocessorFile: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc
+  {'add_fx_variables': {'check_level': <CheckLevels.DEFAULT: 3>,
+                        'fx_variables': {}},
+   'cleanup': {'remove': ['/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003_fixed']},
+   'clip_start_end_year': {'end_year': 2003, 'start_year': 2000},
+   'cmor_check_data': {'check_level': <CheckLevels.DEFAULT: 3>,
+                       'cmor_table': 'OBS6',
+                       'frequency': 'day',
+                       'mip': 'day',
+                       'short_name': 'tas'},
+   'cmor_check_metadata': {'check_level': <CheckLevels.DEFAULT: 3>,
+                           'cmor_table': 'OBS6',
+                           'frequency': 'day',
+                           'mip': 'day',
+                           'short_name': 'tas'},
+   'concatenate': {},
+   'extract_shape': {'crop': True,
+                     'method': 'contains',
+                     'shapefile': '/home/vhoogeland/auxiliary_data/Wark/Wark.shp'},
+   'fix_data': {'alias': 'ERA5',
+                'check_level': <CheckLevels.DEFAULT: 3>,
+                'dataset': 'ERA5',
+                'diagnostic': 'diagnostic_daily',
+                'end_year': 2003,
+                'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc',
+                'frequency': 'day',
+                'long_name': 'Near-Surface Air Temperature',
+                'mip': 'day',
+                'modeling_realm': ['atmos'],
+                'original_short_name': 'tas',
+                'preprocessor': 'daily',
+                'project': 'OBS6',
+                'recipe_dataset_index': 1,
+                'short_name': 'tas',
+                'standard_name': 'air_temperature',
+                'start_year': 2000,
+                'tier': 3,
+                'type': 'reanaly',
+                'units': 'K',
+                'variable_group': 'tas',
+                'version': 1},
+   'fix_file': {'alias': 'ERA5',
+                'dataset': 'ERA5',
+                'diagnostic': 'diagnostic_daily',
+                'end_year': 2003,
+                'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc',
+                'frequency': 'day',
+                'long_name': 'Near-Surface Air Temperature',
+                'mip': 'day',
+                'modeling_realm': ['atmos'],
+                'original_short_name': 'tas',
+                'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003_fixed',
+                'preprocessor': 'daily',
+                'project': 'OBS6',
+                'recipe_dataset_index': 1,
+                'short_name': 'tas',
+                'standard_name': 'air_temperature',
+                'start_year': 2000,
+                'tier': 3,
+                'type': 'reanaly',
+                'units': 'K',
+                'variable_group': 'tas',
+                'version': 1},
+   'fix_metadata': {'alias': 'ERA5',
+                    'check_level': <CheckLevels.DEFAULT: 3>,
+                    'dataset': 'ERA5',
+                    'diagnostic': 'diagnostic_daily',
+                    'end_year': 2003,
+                    'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc',
+                    'frequency': 'day',
+                    'long_name': 'Near-Surface Air Temperature',
+                    'mip': 'day',
+                    'modeling_realm': ['atmos'],
+                    'original_short_name': 'tas',
+                    'preprocessor': 'daily',
+                    'project': 'OBS6',
+                    'recipe_dataset_index': 1,
+                    'short_name': 'tas',
+                    'standard_name': 'air_temperature',
+                    'start_year': 2000,
+                    'tier': 3,
+                    'type': 'reanaly',
+                    'units': 'K',
+                    'variable_group': 'tas',
+                    'version': 1},
+   'load': {'callback': <function concatenate_callback at 0x7fa5a0eb9280>},
+   'remove_fx_variables': {},
+   'save': {'compress': False,
+            'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc'}}
+
+  PreprocessorFile: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc
+  {'add_fx_variables': {'check_level': <CheckLevels.DEFAULT: 3>,
+                        'fx_variables': {}},
+   'cleanup': {'remove': ['/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003_fixed']},
+   'clip_start_end_year': {'end_year': 2003, 'start_year': 2000},
+   'cmor_check_data': {'check_level': <CheckLevels.DEFAULT: 3>,
+                       'cmor_table': 'OBS6',
+                       'frequency': 'day',
+                       'mip': 'day',
+                       'short_name': 'tas'},
+   'cmor_check_metadata': {'check_level': <CheckLevels.DEFAULT: 3>,
+                           'cmor_table': 'OBS6',
+                           'frequency': 'day',
+                           'mip': 'day',
+                           'short_name': 'tas'},
+   'concatenate': {},
+   'extract_shape': {'crop': True,
+                     'method': 'contains',
+                     'shapefile': '/home/vhoogeland/auxiliary_data/Wark/Wark.shp'},
+   'fix_data': {'alias': 'ERA-Interim',
+                'check_level': <CheckLevels.DEFAULT: 3>,
+                'dataset': 'ERA-Interim',
+                'diagnostic': 'diagnostic_daily',
+                'end_year': 2003,
+                'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc',
+                'frequency': 'day',
+                'long_name': 'Near-Surface Air Temperature',
+                'mip': 'day',
+                'modeling_realm': ['atmos'],
+                'original_short_name': 'tas',
+                'preprocessor': 'daily',
+                'project': 'OBS6',
+                'recipe_dataset_index': 0,
+                'short_name': 'tas',
+                'standard_name': 'air_temperature',
+                'start_year': 2000,
+                'tier': 3,
+                'type': 'reanaly',
+                'units': 'K',
+                'variable_group': 'tas',
+                'version': 1},
+   'fix_file': {'alias': 'ERA-Interim',
+                'dataset': 'ERA-Interim',
+                'diagnostic': 'diagnostic_daily',
+                'end_year': 2003,
+                'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc',
+                'frequency': 'day',
+                'long_name': 'Near-Surface Air Temperature',
+                'mip': 'day',
+                'modeling_realm': ['atmos'],
+                'original_short_name': 'tas',
+                'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003_fixed',
+                'preprocessor': 'daily',
+                'project': 'OBS6',
+                'recipe_dataset_index': 0,
+                'short_name': 'tas',
+                'standard_name': 'air_temperature',
+                'start_year': 2000,
+                'tier': 3,
+                'type': 'reanaly',
+                'units': 'K',
+                'variable_group': 'tas',
+                'version': 1},
+   'fix_metadata': {'alias': 'ERA-Interim',
+                    'check_level': <CheckLevels.DEFAULT: 3>,
+                    'dataset': 'ERA-Interim',
+                    'diagnostic': 'diagnostic_daily',
+                    'end_year': 2003,
+                    'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc',
+                    'frequency': 'day',
+                    'long_name': 'Near-Surface Air Temperature',
+                    'mip': 'day',
+                    'modeling_realm': ['atmos'],
+                    'original_short_name': 'tas',
+                    'preprocessor': 'daily',
+                    'project': 'OBS6',
+                    'recipe_dataset_index': 0,
+                    'short_name': 'tas',
+                    'standard_name': 'air_temperature',
+                    'start_year': 2000,
+                    'tier': 3,
+                    'type': 'reanaly',
+                    'units': 'K',
+                    'variable_group': 'tas',
+                    'version': 1},
+   'load': {'callback': <function concatenate_callback at 0x7fa5a0eb9280>},
+   'remove_fx_variables': {},
+   'save': {'compress': False,
+            'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc'}}
+  ancestors:
+  None
+
+  PreprocessingTask: diagnostic_daily/pr
+  order: ['fix_file', 'load', 'fix_metadata', 'concatenate', 'cmor_check_metadata', 'clip_start_end_year', 'fix_data', 'cmor_check_data', 'add_fx_variables', 'extract_shape', 'remove_fx_variables', 'save', 'cleanup']
+  PreprocessorFile: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc
+  {'add_fx_variables': {'check_level': <CheckLevels.DEFAULT: 3>,
+                        'fx_variables': {}},
+   'cleanup': {'remove': ['/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003_fixed']},
+   'clip_start_end_year': {'end_year': 2003, 'start_year': 2000},
+   'cmor_check_data': {'check_level': <CheckLevels.DEFAULT: 3>,
+                       'cmor_table': 'OBS6',
+                       'frequency': 'day',
+                       'mip': 'day',
+                       'short_name': 'pr'},
+   'cmor_check_metadata': {'check_level': <CheckLevels.DEFAULT: 3>,
+                           'cmor_table': 'OBS6',
+                           'frequency': 'day',
+                           'mip': 'day',
+                           'short_name': 'pr'},
+   'concatenate': {},
+   'extract_shape': {'crop': True,
+                     'method': 'contains',
+                     'shapefile': '/home/vhoogeland/auxiliary_data/Wark/Wark.shp'},
+   'fix_data': {'alias': 'ERA5',
+                'check_level': <CheckLevels.DEFAULT: 3>,
+                'dataset': 'ERA5',
+                'diagnostic': 'diagnostic_daily',
+                'end_year': 2003,
+                'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc',
+                'frequency': 'day',
+                'long_name': 'Precipitation',
+                'mip': 'day',
+                'modeling_realm': ['atmos'],
+                'original_short_name': 'pr',
+                'preprocessor': 'daily',
+                'project': 'OBS6',
+                'recipe_dataset_index': 1,
+                'short_name': 'pr',
+                'standard_name': 'precipitation_flux',
+                'start_year': 2000,
+                'tier': 3,
+                'type': 'reanaly',
+                'units': 'kg m-2 s-1',
+                'variable_group': 'pr',
+                'version': 1},
+   'fix_file': {'alias': 'ERA5',
+                'dataset': 'ERA5',
+                'diagnostic': 'diagnostic_daily',
+                'end_year': 2003,
+                'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc',
+                'frequency': 'day',
+                'long_name': 'Precipitation',
+                'mip': 'day',
+                'modeling_realm': ['atmos'],
+                'original_short_name': 'pr',
+                'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003_fixed',
+                'preprocessor': 'daily',
+                'project': 'OBS6',
+                'recipe_dataset_index': 1,
+                'short_name': 'pr',
+                'standard_name': 'precipitation_flux',
+                'start_year': 2000,
+                'tier': 3,
+                'type': 'reanaly',
+                'units': 'kg m-2 s-1',
+                'variable_group': 'pr',
+                'version': 1},
+   'fix_metadata': {'alias': 'ERA5',
+                    'check_level': <CheckLevels.DEFAULT: 3>,
+                    'dataset': 'ERA5',
+                    'diagnostic': 'diagnostic_daily',
+                    'end_year': 2003,
+                    'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc',
+                    'frequency': 'day',
+                    'long_name': 'Precipitation',
+                    'mip': 'day',
+                    'modeling_realm': ['atmos'],
+                    'original_short_name': 'pr',
+                    'preprocessor': 'daily',
+                    'project': 'OBS6',
+                    'recipe_dataset_index': 1,
+                    'short_name': 'pr',
+                    'standard_name': 'precipitation_flux',
+                    'start_year': 2000,
+                    'tier': 3,
+                    'type': 'reanaly',
+                    'units': 'kg m-2 s-1',
+                    'variable_group': 'pr',
+                    'version': 1},
+   'load': {'callback': <function concatenate_callback at 0x7fa5a0eb9280>},
+   'remove_fx_variables': {},
+   'save': {'compress': False,
+            'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc'}}
+
+  PreprocessorFile: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc
+  {'add_fx_variables': {'check_level': <CheckLevels.DEFAULT: 3>,
+                        'fx_variables': {}},
+   'cleanup': {'remove': ['/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003_fixed']},
+   'clip_start_end_year': {'end_year': 2003, 'start_year': 2000},
+   'cmor_check_data': {'check_level': <CheckLevels.DEFAULT: 3>,
+                       'cmor_table': 'OBS6',
+                       'frequency': 'day',
+                       'mip': 'day',
+                       'short_name': 'pr'},
+   'cmor_check_metadata': {'check_level': <CheckLevels.DEFAULT: 3>,
+                           'cmor_table': 'OBS6',
+                           'frequency': 'day',
+                           'mip': 'day',
+                           'short_name': 'pr'},
+   'concatenate': {},
+   'extract_shape': {'crop': True,
+                     'method': 'contains',
+                     'shapefile': '/home/vhoogeland/auxiliary_data/Wark/Wark.shp'},
+   'fix_data': {'alias': 'ERA-Interim',
+                'check_level': <CheckLevels.DEFAULT: 3>,
+                'dataset': 'ERA-Interim',
+                'diagnostic': 'diagnostic_daily',
+                'end_year': 2003,
+                'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc',
+                'frequency': 'day',
+                'long_name': 'Precipitation',
+                'mip': 'day',
+                'modeling_realm': ['atmos'],
+                'original_short_name': 'pr',
+                'preprocessor': 'daily',
+                'project': 'OBS6',
+                'recipe_dataset_index': 0,
+                'short_name': 'pr',
+                'standard_name': 'precipitation_flux',
+                'start_year': 2000,
+                'tier': 3,
+                'type': 'reanaly',
+                'units': 'kg m-2 s-1',
+                'variable_group': 'pr',
+                'version': 1},
+   'fix_file': {'alias': 'ERA-Interim',
+                'dataset': 'ERA-Interim',
+                'diagnostic': 'diagnostic_daily',
+                'end_year': 2003,
+                'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc',
+                'frequency': 'day',
+                'long_name': 'Precipitation',
+                'mip': 'day',
+                'modeling_realm': ['atmos'],
+                'original_short_name': 'pr',
+                'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003_fixed',
+                'preprocessor': 'daily',
+                'project': 'OBS6',
+                'recipe_dataset_index': 0,
+                'short_name': 'pr',
+                'standard_name': 'precipitation_flux',
+                'start_year': 2000,
+                'tier': 3,
+                'type': 'reanaly',
+                'units': 'kg m-2 s-1',
+                'variable_group': 'pr',
+                'version': 1},
+   'fix_metadata': {'alias': 'ERA-Interim',
+                    'check_level': <CheckLevels.DEFAULT: 3>,
+                    'dataset': 'ERA-Interim',
+                    'diagnostic': 'diagnostic_daily',
+                    'end_year': 2003,
+                    'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc',
+                    'frequency': 'day',
+                    'long_name': 'Precipitation',
+                    'mip': 'day',
+                    'modeling_realm': ['atmos'],
+                    'original_short_name': 'pr',
+                    'preprocessor': 'daily',
+                    'project': 'OBS6',
+                    'recipe_dataset_index': 0,
+                    'short_name': 'pr',
+                    'standard_name': 'precipitation_flux',
+                    'start_year': 2000,
+                    'tier': 3,
+                    'type': 'reanaly',
+                    'units': 'kg m-2 s-1',
+                    'variable_group': 'pr',
+                    'version': 1},
+   'load': {'callback': <function concatenate_callback at 0x7fa5a0eb9280>},
+   'remove_fx_variables': {},
+   'save': {'compress': False,
+            'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc'}}
+  ancestors:
+  None
+
+2022-05-30 09:12:47,947 UTC [1270994] INFO    esmvalcore._task:731 Running 3 tasks using 2 processes
+2022-05-30 09:12:47,958 UTC [1271001] INFO    esmvalcore._task:250 Starting task diagnostic_daily/tas in process [1271001]
+2022-05-30 09:12:47,961 UTC [1271002] INFO    esmvalcore._task:250 Starting task diagnostic_daily/pr in process [1271002]
+2022-05-30 09:12:47,970 UTC [1271001] DEBUG   esmvalcore.preprocessor:479 Running block ['fix_metadata', 'concatenate', 'cmor_check_metadata', 'clip_start_end_year', 'fix_data', 'cmor_check_data', 'add_fx_variables', 'extract_shape', 'remove_fx_variables']
+2022-05-30 09:12:47,970 UTC [1271001] DEBUG   esmvalcore.preprocessor:486 Applying single-model steps to PreprocessorFile: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc
+2022-05-30 09:12:47,971 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step fix_file
+2022-05-30 09:12:47,971 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200001-200012.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'tas', 'short_name': 'tas', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA-Interim', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 0, 'alias': 'ERA-Interim', 'original_short_name': 'tas', 'standard_name': 'air_temperature', 'long_name': 'Near-Surface Air Temperature', 'units': 'K', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003_fixed'})
+2022-05-30 09:12:47,971 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200101-200112.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'tas', 'short_name': 'tas', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA-Interim', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 0, 'alias': 'ERA-Interim', 'original_short_name': 'tas', 'standard_name': 'air_temperature', 'long_name': 'Near-Surface Air Temperature', 'units': 'K', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003_fixed'})
+2022-05-30 09:12:47,972 UTC [1271002] DEBUG   esmvalcore.preprocessor:479 Running block ['fix_metadata', 'concatenate', 'cmor_check_metadata', 'clip_start_end_year', 'fix_data', 'cmor_check_data', 'add_fx_variables', 'extract_shape', 'remove_fx_variables']
+2022-05-30 09:12:47,972 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200201-200212.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'tas', 'short_name': 'tas', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA-Interim', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 0, 'alias': 'ERA-Interim', 'original_short_name': 'tas', 'standard_name': 'air_temperature', 'long_name': 'Near-Surface Air Temperature', 'units': 'K', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003_fixed'})
+2022-05-30 09:12:47,972 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200301-200312.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'tas', 'short_name': 'tas', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA-Interim', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 0, 'alias': 'ERA-Interim', 'original_short_name': 'tas', 'standard_name': 'air_temperature', 'long_name': 'Near-Surface Air Temperature', 'units': 'K', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003_fixed'})
+2022-05-30 09:12:47,972 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step load
+2022-05-30 09:12:47,972 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200001-200012.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:47,972 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200001-200012.nc
+2022-05-30 09:12:47,972 UTC [1271002] DEBUG   esmvalcore.preprocessor:486 Applying single-model steps to PreprocessorFile: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc
+2022-05-30 09:12:47,972 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step fix_file
+2022-05-30 09:12:47,972 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200001-200012.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'pr', 'short_name': 'pr', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA-Interim', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 0, 'alias': 'ERA-Interim', 'original_short_name': 'pr', 'standard_name': 'precipitation_flux', 'long_name': 'Precipitation', 'units': 'kg m-2 s-1', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003_fixed'})
+2022-05-30 09:12:47,973 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200101-200112.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'pr', 'short_name': 'pr', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA-Interim', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 0, 'alias': 'ERA-Interim', 'original_short_name': 'pr', 'standard_name': 'precipitation_flux', 'long_name': 'Precipitation', 'units': 'kg m-2 s-1', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003_fixed'})
+2022-05-30 09:12:47,973 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200201-200212.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'pr', 'short_name': 'pr', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA-Interim', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 0, 'alias': 'ERA-Interim', 'original_short_name': 'pr', 'standard_name': 'precipitation_flux', 'long_name': 'Precipitation', 'units': 'kg m-2 s-1', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003_fixed'})
+2022-05-30 09:12:47,973 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200301-200312.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'pr', 'short_name': 'pr', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA-Interim', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 0, 'alias': 'ERA-Interim', 'original_short_name': 'pr', 'standard_name': 'precipitation_flux', 'long_name': 'Precipitation', 'units': 'kg m-2 s-1', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003_fixed'})
+2022-05-30 09:12:47,973 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step load
+2022-05-30 09:12:47,973 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200001-200012.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:47,973 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200001-200012.nc
+2022-05-30 09:12:48,003 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200001-200012.nc
+2022-05-30 09:12:48,004 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200101-200112.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:48,004 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200101-200112.nc
+2022-05-30 09:12:48,026 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200101-200112.nc
+2022-05-30 09:12:48,026 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200201-200212.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:48,026 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200201-200212.nc
+2022-05-30 09:12:48,035 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200201-200212.nc
+2022-05-30 09:12:48,035 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200301-200312.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:48,035 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200301-200312.nc
+2022-05-30 09:12:48,038 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200001-200012.nc
+2022-05-30 09:12:48,038 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200101-200112.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:48,038 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200101-200112.nc
+2022-05-30 09:12:48,045 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_pr_200301-200312.nc
+2022-05-30 09:12:48,045 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step fix_metadata
+2022-05-30 09:12:48,051 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running fix_metadata([<iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 366; latitude: 241; longitude: 480)>, <iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 365; latitude: 241; longitude: 480)>, <iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 365; latitude: 241; longitude: 480)>, <iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 365; latitude: 241; longitude: 480)>], {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'pr', 'short_name': 'pr', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA-Interim', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 0, 'alias': 'ERA-Interim', 'original_short_name': 'pr', 'standard_name': 'precipitation_flux', 'long_name': 'Precipitation', 'units': 'kg m-2 s-1', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:48,052 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200101-200112.nc
+2022-05-30 09:12:48,052 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200201-200212.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:48,052 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200201-200212.nc
+2022-05-30 09:12:48,055 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step concatenate
+2022-05-30 09:12:48,056 UTC [1270994] INFO    esmvalcore._task:763 Progress: 2 tasks running, 1 tasks waiting for ancestors, 0/3 done
+2022-05-30 09:12:48,061 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running concatenate([<iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 366; latitude: 241; longitude: 480)>, <iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 365; latitude: 241; longitude: 480)>, <iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 365; latitude: 241; longitude: 480)>, <iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 365; latitude: 241; longitude: 480)>], {})
+2022-05-30 09:12:48,063 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200201-200212.nc
+2022-05-30 09:12:48,063 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200301-200312.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:48,063 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200301-200312.nc
+2022-05-30 09:12:48,068 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step cmor_check_metadata
+2022-05-30 09:12:48,070 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running cmor_check_metadata(precipitation_flux / (kg m-2 s-1)   (time: 1461; latitude: 241; longitude: 480)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Cell methods:
+        sum                         day_of_year, year
+    Attributes:
+        Conventions                 CF-1.5
+        host                        tcn630
+        mip                         day
+        modeling_realm              reanaly
+        project_id                  OBS6
+        reference                   Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.
+        source                      www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim
+        tier                        3
+        title                       ERA-Interim data reformatted for ESMValTool v2.0.0b1
+        user                        kalverla
+        version                     1, {'cmor_table': 'OBS6', 'mip': 'day', 'short_name': 'pr', 'frequency': 'day', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:48,073 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step clip_start_end_year
+2022-05-30 09:12:48,074 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running clip_start_end_year(precipitation_flux / (kg m-2 s-1)   (time: 1461; latitude: 241; longitude: 480)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Cell methods:
+        sum                         day_of_year, year
+    Attributes:
+        Conventions                 CF-1.5
+        host                        tcn630
+        mip                         day
+        modeling_realm              reanaly
+        project_id                  OBS6
+        reference                   Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.
+        source                      www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim
+        tier                        3
+        title                       ERA-Interim data reformatted for ESMValTool v2.0.0b1
+        user                        kalverla
+        version                     1, {'start_year': 2000, 'end_year': 2003})
+2022-05-30 09:12:48,077 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA-Interim/OBS6_ERA-Interim_reanaly_1_day_tas_200301-200312.nc
+2022-05-30 09:12:48,077 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step fix_metadata
+2022-05-30 09:12:48,110 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running fix_metadata([<iris 'Cube' of air_temperature / (K) (time: 366; latitude: 241; longitude: 480)>, <iris 'Cube' of air_temperature / (K) (time: 365; latitude: 241; longitude: 480)>, <iris 'Cube' of air_temperature / (K) (time: 365; latitude: 241; longitude: 480)>, <iris 'Cube' of air_temperature / (K) (time: 365; latitude: 241; longitude: 480)>], {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'tas', 'short_name': 'tas', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA-Interim', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 0, 'alias': 'ERA-Interim', 'original_short_name': 'tas', 'standard_name': 'air_temperature', 'long_name': 'Near-Surface Air Temperature', 'units': 'K', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:48,116 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step concatenate
+2022-05-30 09:12:48,123 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running concatenate([<iris 'Cube' of air_temperature / (K) (time: 366; latitude: 241; longitude: 480)>, <iris 'Cube' of air_temperature / (K) (time: 365; latitude: 241; longitude: 480)>, <iris 'Cube' of air_temperature / (K) (time: 365; latitude: 241; longitude: 480)>, <iris 'Cube' of air_temperature / (K) (time: 365; latitude: 241; longitude: 480)>], {})
+2022-05-30 09:12:48,133 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step cmor_check_metadata
+2022-05-30 09:12:48,135 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running cmor_check_metadata(air_temperature / (K)               (time: 1461; latitude: 241; longitude: 480)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Scalar coordinates:
+        height                      2.0 m
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.5
+        host                        tcn630
+        mip                         day
+        modeling_realm              reanaly
+        project_id                  OBS6
+        reference                   Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.
+        source                      www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim
+        tier                        3
+        title                       ERA-Interim data reformatted for ESMValTool v2.0.0b1
+        user                        kalverla
+        version                     1, {'cmor_table': 'OBS6', 'mip': 'day', 'short_name': 'tas', 'frequency': 'day', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:48,138 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step clip_start_end_year
+2022-05-30 09:12:48,141 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running clip_start_end_year(air_temperature / (K)               (time: 1461; latitude: 241; longitude: 480)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Scalar coordinates:
+        height                      2.0 m
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.5
+        host                        tcn630
+        mip                         day
+        modeling_realm              reanaly
+        project_id                  OBS6
+        reference                   Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.
+        source                      www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim
+        tier                        3
+        title                       ERA-Interim data reformatted for ESMValTool v2.0.0b1
+        user                        kalverla
+        version                     1, {'start_year': 2000, 'end_year': 2003})
+2022-05-30 09:12:48,491 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step fix_data
+2022-05-30 09:12:48,493 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running fix_data(precipitation_flux / (kg m-2 s-1)   (time: 1461; latitude: 241; longitude: 480)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Cell methods:
+        sum                         day_of_year, year
+    Attributes:
+        Conventions                 CF-1.5
+        host                        tcn630
+        mip                         day
+        modeling_realm              reanaly
+        project_id                  OBS6
+        reference                   Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.
+        source                      www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim
+        tier                        3
+        title                       ERA-Interim data reformatted for ESMValTool v2.0.0b1
+        user                        kalverla
+        version                     1, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'pr', 'short_name': 'pr', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA-Interim', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 0, 'alias': 'ERA-Interim', 'original_short_name': 'pr', 'standard_name': 'precipitation_flux', 'long_name': 'Precipitation', 'units': 'kg m-2 s-1', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:48,493 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step cmor_check_data
+2022-05-30 09:12:48,495 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running cmor_check_data(precipitation_flux / (kg m-2 s-1)   (time: 1461; latitude: 241; longitude: 480)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Cell methods:
+        sum                         day_of_year, year
+    Attributes:
+        Conventions                 CF-1.5
+        host                        tcn630
+        mip                         day
+        modeling_realm              reanaly
+        project_id                  OBS6
+        reference                   Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.
+        source                      www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim
+        tier                        3
+        title                       ERA-Interim data reformatted for ESMValTool v2.0.0b1
+        user                        kalverla
+        version                     1, {'cmor_table': 'OBS6', 'mip': 'day', 'short_name': 'pr', 'frequency': 'day', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:48,495 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step add_fx_variables
+2022-05-30 09:12:48,496 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running add_fx_variables(precipitation_flux / (kg m-2 s-1)   (time: 1461; latitude: 241; longitude: 480)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Cell methods:
+        sum                         day_of_year, year
+    Attributes:
+        Conventions                 CF-1.5
+        host                        tcn630
+        mip                         day
+        modeling_realm              reanaly
+        project_id                  OBS6
+        reference                   Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.
+        source                      www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim
+        tier                        3
+        title                       ERA-Interim data reformatted for ESMValTool v2.0.0b1
+        user                        kalverla
+        version                     1, {'fx_variables': {}, 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:48,496 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step extract_shape
+2022-05-30 09:12:48,498 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running extract_shape(precipitation_flux / (kg m-2 s-1)   (time: 1461; latitude: 241; longitude: 480)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Cell methods:
+        sum                         day_of_year, year
+    Attributes:
+        Conventions                 CF-1.5
+        host                        tcn630
+        mip                         day
+        modeling_realm              reanaly
+        project_id                  OBS6
+        reference                   Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.
+        source                      www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim
+        tier                        3
+        title                       ERA-Interim data reformatted for ESMValTool v2.0.0b1
+        user                        kalverla
+        version                     1, {'shapefile': '/home/vhoogeland/auxiliary_data/Wark/Wark.shp', 'method': 'contains', 'crop': True})
+2022-05-30 09:12:48,498 UTC [1271002] DEBUG   fiona.env:232 Entering env context: <fiona.env.Env object at 0x7fa5aa4595b0>
+2022-05-30 09:12:48,498 UTC [1271002] DEBUG   fiona.env:234 Starting outermost env
+2022-05-30 09:12:48,498 UTC [1271002] DEBUG   fiona.env:284 No GDAL environment exists
+2022-05-30 09:12:48,498 UTC [1271002] DEBUG   fiona.env:287 New GDAL environment <fiona._env.GDALEnv object at 0x7fa5aa4596d0> created
+2022-05-30 09:12:48,499 UTC [1271002] DEBUG   fiona._env:289 GDAL data files are available at built-in paths.
+2022-05-30 09:12:48,499 UTC [1271002] DEBUG   fiona._env:289 PROJ data files are available at built-in paths.
+2022-05-30 09:12:48,499 UTC [1271002] DEBUG   fiona._env:289 Started GDALEnv: self=<fiona._env.GDALEnv object at 0x7fa5aa4596d0>.
+2022-05-30 09:12:48,499 UTC [1271002] DEBUG   fiona.env:311 Updated existing <fiona._env.GDALEnv object at 0x7fa5aa4596d0> with options {}
+2022-05-30 09:12:48,499 UTC [1271002] DEBUG   fiona.env:257 Entered env context: <fiona.env.Env object at 0x7fa5aa4595b0>
+2022-05-30 09:12:48,499 UTC [1271002] DEBUG   fiona.env:297 Got a copy of environment <fiona._env.GDALEnv object at 0x7fa5aa4596d0> options
+2022-05-30 09:12:48,499 UTC [1271002] DEBUG   fiona.env:416 Credentialized: {'CHECK_WITH_INVERT_PROJ': True, 'GTIFF_IMPLICIT_JPEG_OVR': False, 'FIONA_ENV': True}
+2022-05-30 09:12:48,500 UTC [1271002] DEBUG   fiona.env:261 Exiting env context: <fiona.env.Env object at 0x7fa5aa4595b0>
+2022-05-30 09:12:48,500 UTC [1271002] DEBUG   fiona.env:324 Cleared existing <fiona._env.GDALEnv object at 0x7fa5aa4596d0> options
+2022-05-30 09:12:48,500 UTC [1271002] DEBUG   fiona._env:325 Stopping GDALEnv <fiona._env.GDALEnv object at 0x7fa5aa4596d0>.
+2022-05-30 09:12:48,500 UTC [1271002] DEBUG   fiona._env:325 Error handler popped.
+2022-05-30 09:12:48,500 UTC [1271002] DEBUG   fiona._env:325 Stopped GDALEnv <fiona._env.GDALEnv object at 0x7fa5aa4596d0>.
+2022-05-30 09:12:48,500 UTC [1271002] DEBUG   fiona.env:267 Exiting outermost env
+2022-05-30 09:12:48,500 UTC [1271002] DEBUG   fiona.env:276 Exited env context: <fiona.env.Env object at 0x7fa5aa4595b0>
+2022-05-30 09:12:48,500 UTC [1271002] DEBUG   fiona.env:232 Entering env context: <fiona.env.Env object at 0x7fa5aa3f2460>
+2022-05-30 09:12:48,500 UTC [1271002] DEBUG   fiona.env:234 Starting outermost env
+2022-05-30 09:12:48,500 UTC [1271002] DEBUG   fiona.env:284 No GDAL environment exists
+2022-05-30 09:12:48,500 UTC [1271002] DEBUG   fiona.env:287 New GDAL environment <fiona._env.GDALEnv object at 0x7fa5aa459fd0> created
+2022-05-30 09:12:48,500 UTC [1271002] DEBUG   fiona._env:289 GDAL data files are available at built-in paths.
+2022-05-30 09:12:48,500 UTC [1271002] DEBUG   fiona._env:289 PROJ data files are available at built-in paths.
+2022-05-30 09:12:48,500 UTC [1271002] DEBUG   fiona._env:289 Started GDALEnv: self=<fiona._env.GDALEnv object at 0x7fa5aa459fd0>.
+2022-05-30 09:12:48,500 UTC [1271002] DEBUG   fiona.env:311 Updated existing <fiona._env.GDALEnv object at 0x7fa5aa459fd0> with options {}
+2022-05-30 09:12:48,501 UTC [1271002] DEBUG   fiona.env:257 Entered env context: <fiona.env.Env object at 0x7fa5aa3f2460>
+2022-05-30 09:12:48,507 UTC [1271002] DEBUG   fiona.ogrext:262 OLC_FASTSETNEXTBYINDEX: 1
+2022-05-30 09:12:48,507 UTC [1271002] DEBUG   fiona.ogrext:262 OLC_FASTFEATURECOUNT: 1
+2022-05-30 09:12:48,507 UTC [1271002] DEBUG   fiona.ogrext:262 Next index: 0
+2022-05-30 09:12:48,507 UTC [1271002] DEBUG   fiona.ogrext:444 Next index: 1
+2022-05-30 09:12:48,515 UTC [1271002] DEBUG   esmvalcore.preprocessor._area:451 Shape "0" found
+2022-05-30 09:12:48,516 UTC [1271002] DEBUG   fiona.env:261 Exiting env context: <fiona.env.Env object at 0x7fa5aa3f2460>
+2022-05-30 09:12:48,516 UTC [1271002] DEBUG   fiona.env:324 Cleared existing <fiona._env.GDALEnv object at 0x7fa5aa459fd0> options
+2022-05-30 09:12:48,516 UTC [1271002] DEBUG   fiona._env:325 Stopping GDALEnv <fiona._env.GDALEnv object at 0x7fa5aa459fd0>.
+2022-05-30 09:12:48,516 UTC [1271002] DEBUG   fiona._env:325 Error handler popped.
+2022-05-30 09:12:48,516 UTC [1271002] DEBUG   fiona._env:325 Stopped GDALEnv <fiona._env.GDALEnv object at 0x7fa5aa459fd0>.
+2022-05-30 09:12:48,516 UTC [1271002] DEBUG   fiona.env:267 Exiting outermost env
+2022-05-30 09:12:48,516 UTC [1271002] DEBUG   fiona.env:276 Exited env context: <fiona.env.Env object at 0x7fa5aa3f2460>
+2022-05-30 09:12:48,516 UTC [1271002] DEBUG   fiona.collection:457 Flushed buffer
+2022-05-30 09:12:48,516 UTC [1271002] DEBUG   fiona.collection:459 Stopped session
+2022-05-30 09:12:48,523 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step remove_fx_variables
+2022-05-30 09:12:48,525 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running remove_fx_variables(precipitation_flux / (kg m-2 s-1)   (time: 1461; latitude: 2; longitude: 3)
+    Dimension coordinates:
+        time                             x               -             -
+        latitude                         -               x             -
+        longitude                        -               -             x
+    Scalar coordinates:
+        shape_id                    0
+    Cell methods:
+        sum                         day_of_year, year
+    Attributes:
+        Conventions                 CF-1.5
+        host                        tcn630
+        mip                         day
+        modeling_realm              reanaly
+        project_id                  OBS6
+        reference                   Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.
+        source                      www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim
+        tier                        3
+        title                       ERA-Interim data reformatted for ESMValTool v2.0.0b1
+        user                        kalverla
+        version                     1, {})
+2022-05-30 09:12:48,525 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step save
+2022-05-30 09:12:48,527 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running save([<iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 1461; latitude: 2; longitude: 3)>], {'compress': False, 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc'})
+2022-05-30 09:12:48,527 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:270 Saving cubes [<iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 1461; latitude: 2; longitude: 3)>] to /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc
+2022-05-30 09:12:48,596 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step fix_data
+2022-05-30 09:12:48,598 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running fix_data(air_temperature / (K)               (time: 1461; latitude: 241; longitude: 480)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Scalar coordinates:
+        height                      2.0 m
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.5
+        host                        tcn630
+        mip                         day
+        modeling_realm              reanaly
+        project_id                  OBS6
+        reference                   Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.
+        source                      www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim
+        tier                        3
+        title                       ERA-Interim data reformatted for ESMValTool v2.0.0b1
+        user                        kalverla
+        version                     1, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'tas', 'short_name': 'tas', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA-Interim', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 0, 'alias': 'ERA-Interim', 'original_short_name': 'tas', 'standard_name': 'air_temperature', 'long_name': 'Near-Surface Air Temperature', 'units': 'K', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:48,599 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step cmor_check_data
+2022-05-30 09:12:48,601 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running cmor_check_data(air_temperature / (K)               (time: 1461; latitude: 241; longitude: 480)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Scalar coordinates:
+        height                      2.0 m
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.5
+        host                        tcn630
+        mip                         day
+        modeling_realm              reanaly
+        project_id                  OBS6
+        reference                   Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.
+        source                      www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim
+        tier                        3
+        title                       ERA-Interim data reformatted for ESMValTool v2.0.0b1
+        user                        kalverla
+        version                     1, {'cmor_table': 'OBS6', 'mip': 'day', 'short_name': 'tas', 'frequency': 'day', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:48,601 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step add_fx_variables
+2022-05-30 09:12:48,611 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running add_fx_variables(air_temperature / (K)               (time: 1461; latitude: 241; longitude: 480)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Scalar coordinates:
+        height                      2.0 m
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.5
+        host                        tcn630
+        mip                         day
+        modeling_realm              reanaly
+        project_id                  OBS6
+        reference                   Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.
+        source                      www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim
+        tier                        3
+        title                       ERA-Interim data reformatted for ESMValTool v2.0.0b1
+        user                        kalverla
+        version                     1, {'fx_variables': {}, 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:48,611 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step extract_shape
+2022-05-30 09:12:48,613 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running extract_shape(air_temperature / (K)               (time: 1461; latitude: 241; longitude: 480)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Scalar coordinates:
+        height                      2.0 m
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.5
+        host                        tcn630
+        mip                         day
+        modeling_realm              reanaly
+        project_id                  OBS6
+        reference                   Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.
+        source                      www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim
+        tier                        3
+        title                       ERA-Interim data reformatted for ESMValTool v2.0.0b1
+        user                        kalverla
+        version                     1, {'shapefile': '/home/vhoogeland/auxiliary_data/Wark/Wark.shp', 'method': 'contains', 'crop': True})
+2022-05-30 09:12:48,613 UTC [1271001] DEBUG   fiona.env:232 Entering env context: <fiona.env.Env object at 0x7fa5aa3e2160>
+2022-05-30 09:12:48,614 UTC [1271001] DEBUG   fiona.env:234 Starting outermost env
+2022-05-30 09:12:48,614 UTC [1271001] DEBUG   fiona.env:284 No GDAL environment exists
+2022-05-30 09:12:48,614 UTC [1271001] DEBUG   fiona.env:287 New GDAL environment <fiona._env.GDALEnv object at 0x7fa5aa3e2490> created
+2022-05-30 09:12:48,615 UTC [1271001] DEBUG   fiona._env:289 GDAL data files are available at built-in paths.
+2022-05-30 09:12:48,615 UTC [1271001] DEBUG   fiona._env:289 PROJ data files are available at built-in paths.
+2022-05-30 09:12:48,615 UTC [1271001] DEBUG   fiona._env:289 Started GDALEnv: self=<fiona._env.GDALEnv object at 0x7fa5aa3e2490>.
+2022-05-30 09:12:48,615 UTC [1271001] DEBUG   fiona.env:311 Updated existing <fiona._env.GDALEnv object at 0x7fa5aa3e2490> with options {}
+2022-05-30 09:12:48,615 UTC [1271001] DEBUG   fiona.env:257 Entered env context: <fiona.env.Env object at 0x7fa5aa3e2160>
+2022-05-30 09:12:48,615 UTC [1271001] DEBUG   fiona.env:297 Got a copy of environment <fiona._env.GDALEnv object at 0x7fa5aa3e2490> options
+2022-05-30 09:12:48,615 UTC [1271001] DEBUG   fiona.env:416 Credentialized: {'CHECK_WITH_INVERT_PROJ': True, 'GTIFF_IMPLICIT_JPEG_OVR': False, 'FIONA_ENV': True}
+2022-05-30 09:12:48,615 UTC [1271001] DEBUG   fiona.env:261 Exiting env context: <fiona.env.Env object at 0x7fa5aa3e2160>
+2022-05-30 09:12:48,615 UTC [1271001] DEBUG   fiona.env:324 Cleared existing <fiona._env.GDALEnv object at 0x7fa5aa3e2490> options
+2022-05-30 09:12:48,615 UTC [1271001] DEBUG   fiona._env:325 Stopping GDALEnv <fiona._env.GDALEnv object at 0x7fa5aa3e2490>.
+2022-05-30 09:12:48,615 UTC [1271001] DEBUG   fiona._env:325 Error handler popped.
+2022-05-30 09:12:48,615 UTC [1271001] DEBUG   fiona._env:325 Stopped GDALEnv <fiona._env.GDALEnv object at 0x7fa5aa3e2490>.
+2022-05-30 09:12:48,615 UTC [1271001] DEBUG   fiona.env:267 Exiting outermost env
+2022-05-30 09:12:48,616 UTC [1271001] DEBUG   fiona.env:276 Exited env context: <fiona.env.Env object at 0x7fa5aa3e2160>
+2022-05-30 09:12:48,616 UTC [1271001] DEBUG   fiona.env:232 Entering env context: <fiona.env.Env object at 0x7fa5aa441610>
+2022-05-30 09:12:48,616 UTC [1271001] DEBUG   fiona.env:234 Starting outermost env
+2022-05-30 09:12:48,616 UTC [1271001] DEBUG   fiona.env:284 No GDAL environment exists
+2022-05-30 09:12:48,616 UTC [1271001] DEBUG   fiona.env:287 New GDAL environment <fiona._env.GDALEnv object at 0x7fa5aa3e2b50> created
+2022-05-30 09:12:48,616 UTC [1271001] DEBUG   fiona._env:289 GDAL data files are available at built-in paths.
+2022-05-30 09:12:48,616 UTC [1271001] DEBUG   fiona._env:289 PROJ data files are available at built-in paths.
+2022-05-30 09:12:48,616 UTC [1271001] DEBUG   fiona._env:289 Started GDALEnv: self=<fiona._env.GDALEnv object at 0x7fa5aa3e2b50>.
+2022-05-30 09:12:48,616 UTC [1271001] DEBUG   fiona.env:311 Updated existing <fiona._env.GDALEnv object at 0x7fa5aa3e2b50> with options {}
+2022-05-30 09:12:48,616 UTC [1271001] DEBUG   fiona.env:257 Entered env context: <fiona.env.Env object at 0x7fa5aa441610>
+2022-05-30 09:12:48,624 UTC [1271001] DEBUG   fiona.ogrext:262 OLC_FASTSETNEXTBYINDEX: 1
+2022-05-30 09:12:48,624 UTC [1271001] DEBUG   fiona.ogrext:262 OLC_FASTFEATURECOUNT: 1
+2022-05-30 09:12:48,625 UTC [1271001] DEBUG   fiona.ogrext:262 Next index: 0
+2022-05-30 09:12:48,625 UTC [1271001] DEBUG   fiona.ogrext:444 Next index: 1
+2022-05-30 09:12:48,635 UTC [1271001] DEBUG   esmvalcore.preprocessor._area:451 Shape "0" found
+2022-05-30 09:12:48,636 UTC [1271001] DEBUG   fiona.env:261 Exiting env context: <fiona.env.Env object at 0x7fa5aa441610>
+2022-05-30 09:12:48,636 UTC [1271001] DEBUG   fiona.env:324 Cleared existing <fiona._env.GDALEnv object at 0x7fa5aa3e2b50> options
+2022-05-30 09:12:48,636 UTC [1271001] DEBUG   fiona._env:325 Stopping GDALEnv <fiona._env.GDALEnv object at 0x7fa5aa3e2b50>.
+2022-05-30 09:12:48,636 UTC [1271001] DEBUG   fiona._env:325 Error handler popped.
+2022-05-30 09:12:48,636 UTC [1271001] DEBUG   fiona._env:325 Stopped GDALEnv <fiona._env.GDALEnv object at 0x7fa5aa3e2b50>.
+2022-05-30 09:12:48,636 UTC [1271001] DEBUG   fiona.env:267 Exiting outermost env
+2022-05-30 09:12:48,636 UTC [1271001] DEBUG   fiona.env:276 Exited env context: <fiona.env.Env object at 0x7fa5aa441610>
+2022-05-30 09:12:48,636 UTC [1271001] DEBUG   fiona.collection:457 Flushed buffer
+2022-05-30 09:12:48,636 UTC [1271001] DEBUG   fiona.collection:459 Stopped session
+2022-05-30 09:12:48,647 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step remove_fx_variables
+2022-05-30 09:12:48,656 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running remove_fx_variables(air_temperature / (K)               (time: 1461; latitude: 2; longitude: 3)
+    Dimension coordinates:
+        time                             x               -             -
+        latitude                         -               x             -
+        longitude                        -               -             x
+    Scalar coordinates:
+        height                      2.0 m
+        shape_id                    0
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.5
+        host                        tcn630
+        mip                         day
+        modeling_realm              reanaly
+        project_id                  OBS6
+        reference                   Dee et al., Q. J. Roy. Meteor. Soc., doi:10.1002/qj.828, 2011.
+        source                      www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era-interim
+        tier                        3
+        title                       ERA-Interim data reformatted for ESMValTool v2.0.0b1
+        user                        kalverla
+        version                     1, {})
+2022-05-30 09:12:48,656 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step save
+2022-05-30 09:12:48,660 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running save([<iris 'Cube' of air_temperature / (K) (time: 1461; latitude: 2; longitude: 3)>], {'compress': False, 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc'})
+2022-05-30 09:12:48,660 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:270 Saving cubes [<iris 'Cube' of air_temperature / (K) (time: 1461; latitude: 2; longitude: 3)>] to /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc
+2022-05-30 09:12:49,226 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step cleanup
+2022-05-30 09:12:49,226 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running cleanup(['/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003.nc'], {'remove': ['/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA-Interim_reanaly_1_day_pr_2000-2003_fixed']})
+2022-05-30 09:12:49,295 UTC [1271002] DEBUG   esmvalcore.preprocessor:486 Applying single-model steps to PreprocessorFile: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc
+2022-05-30 09:12:49,295 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step fix_file
+2022-05-30 09:12:49,295 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2000-2000.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'pr', 'short_name': 'pr', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA5', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 1, 'alias': 'ERA5', 'original_short_name': 'pr', 'standard_name': 'precipitation_flux', 'long_name': 'Precipitation', 'units': 'kg m-2 s-1', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003_fixed'})
+2022-05-30 09:12:49,295 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2001-2001.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'pr', 'short_name': 'pr', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA5', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 1, 'alias': 'ERA5', 'original_short_name': 'pr', 'standard_name': 'precipitation_flux', 'long_name': 'Precipitation', 'units': 'kg m-2 s-1', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003_fixed'})
+2022-05-30 09:12:49,295 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2002-2002.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'pr', 'short_name': 'pr', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA5', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 1, 'alias': 'ERA5', 'original_short_name': 'pr', 'standard_name': 'precipitation_flux', 'long_name': 'Precipitation', 'units': 'kg m-2 s-1', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003_fixed'})
+2022-05-30 09:12:49,295 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2003-2003.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'pr', 'short_name': 'pr', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA5', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 1, 'alias': 'ERA5', 'original_short_name': 'pr', 'standard_name': 'precipitation_flux', 'long_name': 'Precipitation', 'units': 'kg m-2 s-1', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003_fixed'})
+2022-05-30 09:12:49,295 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step load
+2022-05-30 09:12:49,295 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2000-2000.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:49,295 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2000-2000.nc
+2022-05-30 09:12:49,307 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2000-2000.nc
+2022-05-30 09:12:49,307 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2001-2001.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:49,307 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2001-2001.nc
+2022-05-30 09:12:49,318 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2001-2001.nc
+2022-05-30 09:12:49,318 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2002-2002.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:49,318 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2002-2002.nc
+2022-05-30 09:12:49,370 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2002-2002.nc
+2022-05-30 09:12:49,370 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2003-2003.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:49,370 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2003-2003.nc
+2022-05-30 09:12:49,386 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_pr_2003-2003.nc
+2022-05-30 09:12:49,386 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step fix_metadata
+2022-05-30 09:12:49,392 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running fix_metadata([<iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 366; latitude: 721; longitude: 1440)>, <iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 365; latitude: 721; longitude: 1440)>, <iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 365; latitude: 721; longitude: 1440)>, <iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 365; latitude: 721; longitude: 1440)>], {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'pr', 'short_name': 'pr', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA5', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 1, 'alias': 'ERA5', 'original_short_name': 'pr', 'standard_name': 'precipitation_flux', 'long_name': 'Precipitation', 'units': 'kg m-2 s-1', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:49,397 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step concatenate
+2022-05-30 09:12:49,402 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running concatenate([<iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 366; latitude: 721; longitude: 1440)>, <iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 365; latitude: 721; longitude: 1440)>, <iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 365; latitude: 721; longitude: 1440)>, <iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 365; latitude: 721; longitude: 1440)>], {})
+2022-05-30 09:12:49,409 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step cmor_check_metadata
+2022-05-30 09:12:49,410 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running cmor_check_metadata(precipitation_flux / (kg m-2 s-1)   (time: 1461; latitude: 721; longitude: 1440)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.7, {'cmor_table': 'OBS6', 'mip': 'day', 'short_name': 'pr', 'frequency': 'day', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:49,413 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step clip_start_end_year
+2022-05-30 09:12:49,415 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running clip_start_end_year(precipitation_flux / (kg m-2 s-1)   (time: 1461; latitude: 721; longitude: 1440)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.7, {'start_year': 2000, 'end_year': 2003})
+2022-05-30 09:12:49,660 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step cleanup
+2022-05-30 09:12:49,661 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running cleanup(['/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003.nc'], {'remove': ['/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA-Interim_reanaly_1_day_tas_2000-2003_fixed']})
+2022-05-30 09:12:49,728 UTC [1271001] DEBUG   esmvalcore.preprocessor:486 Applying single-model steps to PreprocessorFile: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc
+2022-05-30 09:12:49,728 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step fix_file
+2022-05-30 09:12:49,728 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2000-2000.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'tas', 'short_name': 'tas', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA5', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 1, 'alias': 'ERA5', 'original_short_name': 'tas', 'standard_name': 'air_temperature', 'long_name': 'Near-Surface Air Temperature', 'units': 'K', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003_fixed'})
+2022-05-30 09:12:49,729 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2001-2001.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'tas', 'short_name': 'tas', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA5', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 1, 'alias': 'ERA5', 'original_short_name': 'tas', 'standard_name': 'air_temperature', 'long_name': 'Near-Surface Air Temperature', 'units': 'K', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003_fixed'})
+2022-05-30 09:12:49,729 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2002-2002.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'tas', 'short_name': 'tas', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA5', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 1, 'alias': 'ERA5', 'original_short_name': 'tas', 'standard_name': 'air_temperature', 'long_name': 'Near-Surface Air Temperature', 'units': 'K', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003_fixed'})
+2022-05-30 09:12:49,729 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running fix_file(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2003-2003.nc, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'tas', 'short_name': 'tas', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA5', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 1, 'alias': 'ERA5', 'original_short_name': 'tas', 'standard_name': 'air_temperature', 'long_name': 'Near-Surface Air Temperature', 'units': 'K', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc', 'output_dir': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003_fixed'})
+2022-05-30 09:12:49,729 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step load
+2022-05-30 09:12:49,729 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2000-2000.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:49,729 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2000-2000.nc
+2022-05-30 09:12:49,739 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2000-2000.nc
+2022-05-30 09:12:49,739 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2001-2001.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:49,740 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2001-2001.nc
+2022-05-30 09:12:49,749 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2001-2001.nc
+2022-05-30 09:12:49,749 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2002-2002.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:49,749 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2002-2002.nc
+2022-05-30 09:12:49,759 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2002-2002.nc
+2022-05-30 09:12:49,759 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running load(/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2003-2003.nc, {'callback': <function concatenate_callback at 0x7fa5a0eb9280>})
+2022-05-30 09:12:49,759 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:115 Loading:
+/mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2003-2003.nc
+2022-05-30 09:12:49,776 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:130 Done with loading /mnt/data/climate-data/obs6/Tier3/ERA5/OBS6_ERA5_reanaly_1_day_tas_2003-2003.nc
+2022-05-30 09:12:49,776 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step fix_metadata
+2022-05-30 09:12:49,857 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step fix_data
+2022-05-30 09:12:49,859 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running fix_data(precipitation_flux / (kg m-2 s-1)   (time: 1461; latitude: 721; longitude: 1440)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.7, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'pr', 'short_name': 'pr', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA5', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 1, 'alias': 'ERA5', 'original_short_name': 'pr', 'standard_name': 'precipitation_flux', 'long_name': 'Precipitation', 'units': 'kg m-2 s-1', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:49,859 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step cmor_check_data
+2022-05-30 09:12:49,861 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running cmor_check_data(precipitation_flux / (kg m-2 s-1)   (time: 1461; latitude: 721; longitude: 1440)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.7, {'cmor_table': 'OBS6', 'mip': 'day', 'short_name': 'pr', 'frequency': 'day', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:49,861 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step add_fx_variables
+2022-05-30 09:12:49,862 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running add_fx_variables(precipitation_flux / (kg m-2 s-1)   (time: 1461; latitude: 721; longitude: 1440)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.7, {'fx_variables': {}, 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:49,862 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step extract_shape
+2022-05-30 09:12:49,864 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running extract_shape(precipitation_flux / (kg m-2 s-1)   (time: 1461; latitude: 721; longitude: 1440)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.7, {'shapefile': '/home/vhoogeland/auxiliary_data/Wark/Wark.shp', 'method': 'contains', 'crop': True})
+2022-05-30 09:12:49,864 UTC [1271002] DEBUG   fiona.env:232 Entering env context: <fiona.env.Env object at 0x7fa59a26d850>
+2022-05-30 09:12:49,864 UTC [1271002] DEBUG   fiona.env:234 Starting outermost env
+2022-05-30 09:12:49,864 UTC [1271002] DEBUG   fiona.env:284 No GDAL environment exists
+2022-05-30 09:12:49,864 UTC [1271002] DEBUG   fiona.env:287 New GDAL environment <fiona._env.GDALEnv object at 0x7fa59a26de20> created
+2022-05-30 09:12:49,864 UTC [1271002] DEBUG   fiona._env:289 GDAL data files are available at built-in paths.
+2022-05-30 09:12:49,864 UTC [1271002] DEBUG   fiona._env:289 PROJ data files are available at built-in paths.
+2022-05-30 09:12:49,864 UTC [1271002] DEBUG   fiona._env:289 Started GDALEnv: self=<fiona._env.GDALEnv object at 0x7fa59a26de20>.
+2022-05-30 09:12:49,864 UTC [1271002] DEBUG   fiona.env:311 Updated existing <fiona._env.GDALEnv object at 0x7fa59a26de20> with options {}
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona.env:257 Entered env context: <fiona.env.Env object at 0x7fa59a26d850>
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona.env:297 Got a copy of environment <fiona._env.GDALEnv object at 0x7fa59a26de20> options
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona.env:416 Credentialized: {'CHECK_WITH_INVERT_PROJ': True, 'GTIFF_IMPLICIT_JPEG_OVR': False, 'FIONA_ENV': True}
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona.env:261 Exiting env context: <fiona.env.Env object at 0x7fa59a26d850>
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona.env:324 Cleared existing <fiona._env.GDALEnv object at 0x7fa59a26de20> options
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona._env:325 Stopping GDALEnv <fiona._env.GDALEnv object at 0x7fa59a26de20>.
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona._env:325 Error handler popped.
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona._env:325 Stopped GDALEnv <fiona._env.GDALEnv object at 0x7fa59a26de20>.
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona.env:267 Exiting outermost env
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona.env:276 Exited env context: <fiona.env.Env object at 0x7fa59a26d850>
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona.env:232 Entering env context: <fiona.env.Env object at 0x7fa59a2a0c40>
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona.env:234 Starting outermost env
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona.env:284 No GDAL environment exists
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona.env:287 New GDAL environment <fiona._env.GDALEnv object at 0x7fa59a26d9a0> created
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona._env:289 GDAL data files are available at built-in paths.
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona._env:289 PROJ data files are available at built-in paths.
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona._env:289 Started GDALEnv: self=<fiona._env.GDALEnv object at 0x7fa59a26d9a0>.
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona.env:311 Updated existing <fiona._env.GDALEnv object at 0x7fa59a26d9a0> with options {}
+2022-05-30 09:12:49,865 UTC [1271002] DEBUG   fiona.env:257 Entered env context: <fiona.env.Env object at 0x7fa59a2a0c40>
+2022-05-30 09:12:49,909 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running fix_metadata([<iris 'Cube' of air_temperature / (K) (time: 366; latitude: 721; longitude: 1440)>, <iris 'Cube' of air_temperature / (K) (time: 365; latitude: 721; longitude: 1440)>, <iris 'Cube' of air_temperature / (K) (time: 365; latitude: 721; longitude: 1440)>, <iris 'Cube' of air_temperature / (K) (time: 365; latitude: 721; longitude: 1440)>], {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'tas', 'short_name': 'tas', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA5', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 1, 'alias': 'ERA5', 'original_short_name': 'tas', 'standard_name': 'air_temperature', 'long_name': 'Near-Surface Air Temperature', 'units': 'K', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:49,915 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step concatenate
+2022-05-30 09:12:49,922 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running concatenate([<iris 'Cube' of air_temperature / (K) (time: 366; latitude: 721; longitude: 1440)>, <iris 'Cube' of air_temperature / (K) (time: 365; latitude: 721; longitude: 1440)>, <iris 'Cube' of air_temperature / (K) (time: 365; latitude: 721; longitude: 1440)>, <iris 'Cube' of air_temperature / (K) (time: 365; latitude: 721; longitude: 1440)>], {})
+2022-05-30 09:12:49,931 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step cmor_check_metadata
+2022-05-30 09:12:49,933 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running cmor_check_metadata(air_temperature / (K)               (time: 1461; latitude: 721; longitude: 1440)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Scalar coordinates:
+        height                      2.0 m
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.7, {'cmor_table': 'OBS6', 'mip': 'day', 'short_name': 'tas', 'frequency': 'day', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:49,936 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step clip_start_end_year
+2022-05-30 09:12:49,939 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running clip_start_end_year(air_temperature / (K)               (time: 1461; latitude: 721; longitude: 1440)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Scalar coordinates:
+        height                      2.0 m
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.7, {'start_year': 2000, 'end_year': 2003})
+2022-05-30 09:12:49,973 UTC [1271002] DEBUG   fiona.ogrext:262 OLC_FASTSETNEXTBYINDEX: 1
+2022-05-30 09:12:49,973 UTC [1271002] DEBUG   fiona.ogrext:262 OLC_FASTFEATURECOUNT: 1
+2022-05-30 09:12:49,973 UTC [1271002] DEBUG   fiona.ogrext:262 Next index: 0
+2022-05-30 09:12:49,973 UTC [1271002] DEBUG   fiona.ogrext:444 Next index: 1
+2022-05-30 09:12:49,974 UTC [1271002] DEBUG   esmvalcore.preprocessor._area:451 Shape "0" found
+2022-05-30 09:12:49,974 UTC [1271002] DEBUG   fiona.env:261 Exiting env context: <fiona.env.Env object at 0x7fa59a2a0c40>
+2022-05-30 09:12:49,974 UTC [1271002] DEBUG   fiona.env:324 Cleared existing <fiona._env.GDALEnv object at 0x7fa59a26d9a0> options
+2022-05-30 09:12:49,974 UTC [1271002] DEBUG   fiona._env:325 Stopping GDALEnv <fiona._env.GDALEnv object at 0x7fa59a26d9a0>.
+2022-05-30 09:12:49,974 UTC [1271002] DEBUG   fiona._env:325 Error handler popped.
+2022-05-30 09:12:49,974 UTC [1271002] DEBUG   fiona._env:325 Stopped GDALEnv <fiona._env.GDALEnv object at 0x7fa59a26d9a0>.
+2022-05-30 09:12:49,974 UTC [1271002] DEBUG   fiona.env:267 Exiting outermost env
+2022-05-30 09:12:49,974 UTC [1271002] DEBUG   fiona.env:276 Exited env context: <fiona.env.Env object at 0x7fa59a2a0c40>
+2022-05-30 09:12:49,974 UTC [1271002] DEBUG   fiona.collection:457 Flushed buffer
+2022-05-30 09:12:49,974 UTC [1271002] DEBUG   fiona.collection:459 Stopped session
+2022-05-30 09:12:49,978 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step remove_fx_variables
+2022-05-30 09:12:49,980 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running remove_fx_variables(precipitation_flux / (kg m-2 s-1)   (time: 1461; latitude: 2; longitude: 3)
+    Dimension coordinates:
+        time                             x               -             -
+        latitude                         -               x             -
+        longitude                        -               -             x
+    Scalar coordinates:
+        shape_id                    0
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.7, {})
+2022-05-30 09:12:49,980 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step save
+2022-05-30 09:12:49,982 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running save([<iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 1461; latitude: 2; longitude: 3)>], {'compress': False, 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc'})
+2022-05-30 09:12:49,982 UTC [1271002] DEBUG   esmvalcore.preprocessor._io:270 Saving cubes [<iris 'Cube' of precipitation_flux / (kg m-2 s-1) (time: 1461; latitude: 2; longitude: 3)>] to /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc
+2022-05-30 09:12:50,404 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step fix_data
+2022-05-30 09:12:50,406 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running fix_data(air_temperature / (K)               (time: 1461; latitude: 721; longitude: 1440)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Scalar coordinates:
+        height                      2.0 m
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.7, {'mip': 'day', 'start_year': 2000, 'end_year': 2003, 'preprocessor': 'daily', 'variable_group': 'tas', 'short_name': 'tas', 'diagnostic': 'diagnostic_daily', 'dataset': 'ERA5', 'project': 'OBS6', 'tier': 3, 'type': 'reanaly', 'version': 1, 'recipe_dataset_index': 1, 'alias': 'ERA5', 'original_short_name': 'tas', 'standard_name': 'air_temperature', 'long_name': 'Near-Surface Air Temperature', 'units': 'K', 'modeling_realm': ['atmos'], 'frequency': 'day', 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:50,406 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step cmor_check_data
+2022-05-30 09:12:50,408 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running cmor_check_data(air_temperature / (K)               (time: 1461; latitude: 721; longitude: 1440)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Scalar coordinates:
+        height                      2.0 m
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.7, {'cmor_table': 'OBS6', 'mip': 'day', 'short_name': 'tas', 'frequency': 'day', 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:50,409 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step add_fx_variables
+2022-05-30 09:12:50,411 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running add_fx_variables(air_temperature / (K)               (time: 1461; latitude: 721; longitude: 1440)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Scalar coordinates:
+        height                      2.0 m
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.7, {'fx_variables': {}, 'check_level': <CheckLevels.DEFAULT: 3>})
+2022-05-30 09:12:50,411 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step extract_shape
+2022-05-30 09:12:50,412 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running extract_shape(air_temperature / (K)               (time: 1461; latitude: 721; longitude: 1440)
+    Dimension coordinates:
+        time                             x               -               -
+        latitude                         -               x               -
+        longitude                        -               -               x
+    Scalar coordinates:
+        height                      2.0 m
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.7, {'shapefile': '/home/vhoogeland/auxiliary_data/Wark/Wark.shp', 'method': 'contains', 'crop': True})
+2022-05-30 09:12:50,413 UTC [1271001] DEBUG   fiona.env:232 Entering env context: <fiona.env.Env object at 0x7fa59ac5eb20>
+2022-05-30 09:12:50,413 UTC [1271001] DEBUG   fiona.env:234 Starting outermost env
+2022-05-30 09:12:50,413 UTC [1271001] DEBUG   fiona.env:284 No GDAL environment exists
+2022-05-30 09:12:50,413 UTC [1271001] DEBUG   fiona.env:287 New GDAL environment <fiona._env.GDALEnv object at 0x7fa59ac5e940> created
+2022-05-30 09:12:50,413 UTC [1271001] DEBUG   fiona._env:289 GDAL data files are available at built-in paths.
+2022-05-30 09:12:50,413 UTC [1271001] DEBUG   fiona._env:289 PROJ data files are available at built-in paths.
+2022-05-30 09:12:50,413 UTC [1271001] DEBUG   fiona._env:289 Started GDALEnv: self=<fiona._env.GDALEnv object at 0x7fa59ac5e940>.
+2022-05-30 09:12:50,413 UTC [1271001] DEBUG   fiona.env:311 Updated existing <fiona._env.GDALEnv object at 0x7fa59ac5e940> with options {}
+2022-05-30 09:12:50,413 UTC [1271001] DEBUG   fiona.env:257 Entered env context: <fiona.env.Env object at 0x7fa59ac5eb20>
+2022-05-30 09:12:50,413 UTC [1271001] DEBUG   fiona.env:297 Got a copy of environment <fiona._env.GDALEnv object at 0x7fa59ac5e940> options
+2022-05-30 09:12:50,413 UTC [1271001] DEBUG   fiona.env:416 Credentialized: {'CHECK_WITH_INVERT_PROJ': True, 'GTIFF_IMPLICIT_JPEG_OVR': False, 'FIONA_ENV': True}
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona.env:261 Exiting env context: <fiona.env.Env object at 0x7fa59ac5eb20>
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona.env:324 Cleared existing <fiona._env.GDALEnv object at 0x7fa59ac5e940> options
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona._env:325 Stopping GDALEnv <fiona._env.GDALEnv object at 0x7fa59ac5e940>.
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona._env:325 Error handler popped.
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona._env:325 Stopped GDALEnv <fiona._env.GDALEnv object at 0x7fa59ac5e940>.
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona.env:267 Exiting outermost env
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona.env:276 Exited env context: <fiona.env.Env object at 0x7fa59ac5eb20>
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona.env:232 Entering env context: <fiona.env.Env object at 0x7fa59ac65d90>
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona.env:234 Starting outermost env
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona.env:284 No GDAL environment exists
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona.env:287 New GDAL environment <fiona._env.GDALEnv object at 0x7fa59a253490> created
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona._env:289 GDAL data files are available at built-in paths.
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona._env:289 PROJ data files are available at built-in paths.
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona._env:289 Started GDALEnv: self=<fiona._env.GDALEnv object at 0x7fa59a253490>.
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona.env:311 Updated existing <fiona._env.GDALEnv object at 0x7fa59a253490> with options {}
+2022-05-30 09:12:50,414 UTC [1271001] DEBUG   fiona.env:257 Entered env context: <fiona.env.Env object at 0x7fa59ac65d90>
+2022-05-30 09:12:50,423 UTC [1271001] DEBUG   fiona.ogrext:262 OLC_FASTSETNEXTBYINDEX: 1
+2022-05-30 09:12:50,423 UTC [1271001] DEBUG   fiona.ogrext:262 OLC_FASTFEATURECOUNT: 1
+2022-05-30 09:12:50,423 UTC [1271001] DEBUG   fiona.ogrext:262 Next index: 0
+2022-05-30 09:12:50,423 UTC [1271001] DEBUG   fiona.ogrext:444 Next index: 1
+2022-05-30 09:12:50,423 UTC [1271001] DEBUG   esmvalcore.preprocessor._area:451 Shape "0" found
+2022-05-30 09:12:50,423 UTC [1271001] DEBUG   fiona.env:261 Exiting env context: <fiona.env.Env object at 0x7fa59ac65d90>
+2022-05-30 09:12:50,423 UTC [1271001] DEBUG   fiona.env:324 Cleared existing <fiona._env.GDALEnv object at 0x7fa59a253490> options
+2022-05-30 09:12:50,423 UTC [1271001] DEBUG   fiona._env:325 Stopping GDALEnv <fiona._env.GDALEnv object at 0x7fa59a253490>.
+2022-05-30 09:12:50,423 UTC [1271001] DEBUG   fiona._env:325 Error handler popped.
+2022-05-30 09:12:50,424 UTC [1271001] DEBUG   fiona._env:325 Stopped GDALEnv <fiona._env.GDALEnv object at 0x7fa59a253490>.
+2022-05-30 09:12:50,424 UTC [1271001] DEBUG   fiona.env:267 Exiting outermost env
+2022-05-30 09:12:50,424 UTC [1271001] DEBUG   fiona.env:276 Exited env context: <fiona.env.Env object at 0x7fa59ac65d90>
+2022-05-30 09:12:50,424 UTC [1271001] DEBUG   fiona.collection:457 Flushed buffer
+2022-05-30 09:12:50,424 UTC [1271001] DEBUG   fiona.collection:459 Stopped session
+2022-05-30 09:12:50,428 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step remove_fx_variables
+2022-05-30 09:12:50,431 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running remove_fx_variables(air_temperature / (K)               (time: 1461; latitude: 2; longitude: 3)
+    Dimension coordinates:
+        time                             x               -             -
+        latitude                         -               x             -
+        longitude                        -               -             x
+    Scalar coordinates:
+        height                      2.0 m
+        shape_id                    0
+    Cell methods:
+        mean                        day_of_year, year
+    Attributes:
+        Conventions                 CF-1.7, {})
+2022-05-30 09:12:50,431 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step save
+2022-05-30 09:12:50,433 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running save([<iris 'Cube' of air_temperature / (K) (time: 1461; latitude: 2; longitude: 3)>], {'compress': False, 'filename': '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc'})
+2022-05-30 09:12:50,433 UTC [1271001] DEBUG   esmvalcore.preprocessor._io:270 Saving cubes [<iris 'Cube' of air_temperature / (K) (time: 1461; latitude: 2; longitude: 3)>] to /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc
+2022-05-30 09:12:51,141 UTC [1271001] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step cleanup
+2022-05-30 09:12:51,141 UTC [1271001] DEBUG   esmvalcore.preprocessor:283 Running cleanup(['/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003.nc'], {'remove': ['/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/tas/OBS6_ERA5_reanaly_1_day_tas_2000-2003_fixed']})
+2022-05-30 09:12:51,149 UTC [1271001] INFO    esmvalcore._task:255 Successfully completed task diagnostic_daily/tas (priority 0) in 0:00:03.190831
+2022-05-30 09:12:51,260 UTC [1270994] INFO    esmvalcore._task:763 Progress: 1 tasks running, 1 tasks waiting for ancestors, 1/3 done
+2022-05-30 09:12:54,893 UTC [1271002] DEBUG   esmvalcore.preprocessor:293 Running preprocessor step cleanup
+2022-05-30 09:12:54,893 UTC [1271002] DEBUG   esmvalcore.preprocessor:283 Running cleanup(['/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003.nc'], {'remove': ['/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/preproc/diagnostic_daily/pr/OBS6_ERA5_reanaly_1_day_pr_2000-2003_fixed']})
+2022-05-30 09:12:54,900 UTC [1271002] INFO    esmvalcore._task:255 Successfully completed task diagnostic_daily/pr (priority 1) in 0:00:06.938377
+2022-05-30 09:12:54,965 UTC [1270994] INFO    esmvalcore._task:763 Progress: 0 tasks running, 1 tasks waiting for ancestors, 2/3 done
+2022-05-30 09:12:54,971 UTC [1271001] INFO    esmvalcore._task:250 Starting task diagnostic_daily/script in process [1271001]
+2022-05-30 09:12:54,973 UTC [1271001] INFO    esmvalcore._task:485 Running command ['/opt/conda/envs/ewatercycle/bin/python', '/home/vhoogeland/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py', '/home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/run/diagnostic_daily/script/settings.yml']
+2022-05-30 09:12:54,974 UTC [1271001] DEBUG   esmvalcore._task:486 in environment
+{'MPLBACKEND': 'Agg'}
+2022-05-30 09:12:54,974 UTC [1271001] DEBUG   esmvalcore._task:488 in current working directory: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/run/diagnostic_daily/script
+2022-05-30 09:12:54,974 UTC [1271001] INFO    esmvalcore._task:489 Writing output to /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/work/diagnostic_daily/script
+2022-05-30 09:12:54,974 UTC [1271001] INFO    esmvalcore._task:490 Writing plots to /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/plots/diagnostic_daily/script
+2022-05-30 09:12:54,975 UTC [1271001] INFO    esmvalcore._task:491 Writing log to /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/run/diagnostic_daily/script/log.txt
+2022-05-30 09:12:54,975 UTC [1271001] INFO    esmvalcore._task:501 To re-run this diagnostic script, run:
+cd /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/run/diagnostic_daily/script; MPLBACKEND="Agg" /opt/conda/envs/ewatercycle/bin/python /home/vhoogeland/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/run/diagnostic_daily/script/settings.yml
+2022-05-30 09:12:55,066 UTC [1270994] INFO    esmvalcore._task:763 Progress: 1 tasks running, 0 tasks waiting for ancestors, 2/3 done
+2022-05-30 09:12:57,996 UTC [1271001] INFO    esmvalcore._task:127 Maximum memory used (estimate): 0.3 GB
+2022-05-30 09:12:57,997 UTC [1271001] INFO    esmvalcore._task:129 Sampled every second. It may be inaccurate if short but high spikes in memory consumption occur.
+2022-05-30 09:12:57,997 UTC [1271001] DEBUG   esmvalcore._task:574 Script ~/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py completed successfully
+2022-05-30 09:12:57,997 UTC [1271001] WARNING esmvalcore._task:587 No provenance information was written to /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/run/diagnostic_daily/script/diagnostic_provenance.yml. Unable to record provenance for files created by diagnostic script ~/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py in task diagnostic_daily/script
+2022-05-30 09:12:57,997 UTC [1271001] INFO    esmvalcore._task:255 Successfully completed task diagnostic_daily/script (priority 2) in 0:00:03.025902
+2022-05-30 09:12:58,070 UTC [1270994] INFO    esmvalcore._task:763 Progress: 0 tasks running, 0 tasks waiting for ancestors, 3/3 done
+2022-05-30 09:12:58,071 UTC [1270994] INFO    esmvalcore._task:768 Successfully completed all tasks.
+2022-05-30 09:12:58,646 UTC [1270994] INFO    esmvalcore.experimental.recipe_output:212 Wrote recipe output to:
+file:///home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220530_091245/index.html
+2022-05-30 09:12:58,647 UTC [1270994] INFO    esmvalcore._main:130 Ending the Earth System Model Evaluation Tool at time: 2022-05-30 09:12:58 UTC
+2022-05-30 09:12:58,648 UTC [1270994] INFO    esmvalcore._main:133 Time for running the recipe was: 0:00:11.358703
+2022-05-30 09:12:59,407 UTC [1270994] INFO    esmvalcore._task:127 Maximum memory used (estimate): 1.1 GB
+2022-05-30 09:12:59,407 UTC [1270994] INFO    esmvalcore._task:129 Sampled every second. It may be inaccurate if short but high spikes in memory consumption occur.
+2022-05-30 09:12:59,408 UTC [1270994] INFO    esmvalcore._main:426 Run was successful

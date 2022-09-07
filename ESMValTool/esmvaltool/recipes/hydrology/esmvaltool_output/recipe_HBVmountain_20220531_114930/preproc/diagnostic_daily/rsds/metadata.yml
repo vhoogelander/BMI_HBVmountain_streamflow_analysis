@@ -1,0 +1,44 @@
+? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_114930/preproc/diagnostic_daily/rsds/OBS6_ERA-Interim_reanaly_1_day_rsds_2000-2003.nc
+: alias: ERA-Interim
+  dataset: ERA-Interim
+  diagnostic: diagnostic_daily
+  end_year: 2003
+  filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_114930/preproc/diagnostic_daily/rsds/OBS6_ERA-Interim_reanaly_1_day_rsds_2000-2003.nc
+  frequency: day
+  long_name: Surface Downwelling Shortwave Radiation
+  mip: day
+  modeling_realm:
+  - atmos
+  preprocessor: daily
+  project: OBS6
+  recipe_dataset_index: 0
+  short_name: rsds
+  standard_name: surface_downwelling_shortwave_flux_in_air
+  start_year: 2000
+  tier: 3
+  type: reanaly
+  units: W m-2
+  variable_group: rsds
+  version: 1
+? /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_114930/preproc/diagnostic_daily/rsds/OBS6_ERA5_reanaly_1_day_rsds_2000-2003.nc
+: alias: ERA5
+  dataset: ERA5
+  diagnostic: diagnostic_daily
+  end_year: 2003
+  filename: /home/vhoogeland/ESMValTool/esmvaltool/recipes/hydrology/esmvaltool_output/recipe_HBVmountain_20220531_114930/preproc/diagnostic_daily/rsds/OBS6_ERA5_reanaly_1_day_rsds_2000-2003.nc
+  frequency: day
+  long_name: Surface Downwelling Shortwave Radiation
+  mip: day
+  modeling_realm:
+  - atmos
+  preprocessor: daily
+  project: OBS6
+  recipe_dataset_index: 1
+  short_name: rsds
+  standard_name: surface_downwelling_shortwave_flux_in_air
+  start_year: 2000
+  tier: 3
+  type: reanaly
+  units: W m-2
+  variable_group: rsds
+  version: 1
