@@ -23,15 +23,15 @@ function parameter_selection()
         Interceptioncapacity_Forest = rand(1.0:precission:3.0)
         # parameter constraint Interception interceptioncapacity grass and rip lower than Interceptioncapacity_Forest
         if Interceptioncapacity_Forest < max_Interceptioncapacity_Grass
-                Interceptioncapacity_Grass = rand(0.0:precission:Interceptioncapacity_Forest - precission)
+                Interceptioncapacity_Grass = rand(0.1:precission:Interceptioncapacity_Forest - precission)
         else
-                Interceptioncapacity_Grass = rand(0.0:precission: max_Interceptioncapacity_Grass)
+                Interceptioncapacity_Grass = rand(0.1:precission: max_Interceptioncapacity_Grass)
         end
 
         if Interceptioncapacity_Forest < max_Interceptioncapacity_Rip
-                Interceptioncapacity_Rip = rand(0.0:precission:Interceptioncapacity_Forest - precission)
+                Interceptioncapacity_Rip = rand(0.1:precission:Interceptioncapacity_Forest - precission)
         else
-                Interceptioncapacity_Rip = rand(0.0:precission: max_Interceptioncapacity_Rip)
+                Interceptioncapacity_Rip = rand(0.1:precission: max_Interceptioncapacity_Rip)
         end
         # parameter constraints on fast reservoir coefficients
         Kf_Rip = rand(0.2:precission:3.0)

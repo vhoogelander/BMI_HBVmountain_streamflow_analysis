@@ -20,7 +20,7 @@ def NSE(Qmodelled, Qobserved):
 def logNSE(Qmodelled, Qobserved):    
     QobservedAverage = np.ones(len(Qobserved)) * np.mean(Qobserved) # average as array
     Nominator = np.sum((np.log(Qobserved)-np.log(Qmodelled))**2)
-    Denominator = np.sum((np.log(Qobserved) - np.log(QobservedAverage))**2)
+    Denominator = np.sum((np.log(Qobserved) - np.log(QobservedAverage))**2)vi 
     NashSutcliffelog = 1 - (Nominator / Denominator)
     return NashSutcliffelog
         
@@ -44,7 +44,7 @@ def yearlyrunoff(Precipitation, Discharge):
     annual_Discharge = Discharge.groupby(pd.PeriodIndex(Discharge.index, freq="y")).sum()
     mask = (annual_prec.index >= annual_Discharge.index[0]) & (annual_prec.index <= annual_Discharge.index[-1])
     annual_prec = annual_prec.loc[mask]
-    annual_runoff_coefficient = annual_prec[:-1] / annual_Discharge[:-1]
+    annual_runoff_coefficient = annual_prec / annual_Discharge
     return annual_runoff_coefficient
     
 def multi_objective(Qmodelled, Qobserved, Precipitation):
@@ -66,7 +66,7 @@ def multi_objective(Qmodelled, Qobserved, Precipitation):
     ED = (Sum / len(objfunctions))**0.5
     
     return ED, nse, lognse, nseFDC, nse_runoff
-      
+
 
 def HBVmountain_simulation(ntimes):
     ob_list = []
@@ -126,7 +126,7 @@ def HBVmountain_simulation(ntimes):
         combined_discharge = pd.merge(simulated_discharge_df, forcing['streamflow'], left_index=True, right_index=True)
         
         
-        objective_function = multi_objective(combined_discharge.simulation.loc[combined_discharge.index.year >= 1989], combined_discharge.streamflow.loc[combined_discharge.index.year >= 1989], forcing.prec_REGEN)
+        objective_function = multi_objective(combined_discharge.simulation.loc[combined_discharge.index.year >= 1989], combined_discharge.streamflow.loc[combined_discharge.index.year >= 1989], forcing.prec_era5)
         
         if objective_function[1] > 0 and objective_function[2] > 0 and objective_function[3] > 0 and objective_function[4] > 0: 
             ob_list.append(objective_function)

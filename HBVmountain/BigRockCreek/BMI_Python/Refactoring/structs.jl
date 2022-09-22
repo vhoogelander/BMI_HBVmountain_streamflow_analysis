@@ -105,6 +105,7 @@ end
 
 mutable struct HBVmountain_model_units
     Discharge::Union{Nothing, String}
+    Total_Evaporation::Union{Nothing, String}
     Snow_Extend::Union{Nothing, String}
     bare_storage::Union{Nothing, Array{String, 1}}
     forest_storage::Union{Nothing, Array{String, 1}}
@@ -145,6 +146,7 @@ end
 mutable struct HBVmountain_model
     #Storages and discharge
     Discharge::Union{Nothing, Float64}
+    Total_Evaporation::Union{Nothing, Float64}
     Snow_Extend::Union{Nothing, Array{Float64,1}}
     bare_storage::Union{Nothing, Storages}
     forest_storage::Union{Nothing, Storages}

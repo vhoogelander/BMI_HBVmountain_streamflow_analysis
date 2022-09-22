@@ -17,6 +17,7 @@ function build_HBVmountain_model()
     nothing,
     nothing,
     nothing,
+    nothing,
     #Model settings
     nothing,
     nothing,
@@ -44,17 +45,17 @@ function build_HBVmountain_model()
 end
 
 # Create configuration file which can be used for initialization of the model
-function setup(Discharge=0.0, Snow_Extend=zeros(1), bare_storage=Storages(0, zeros(1), zeros(1), zeros(1), 0), forest_storage=Storages(0, zeros(1), zeros(1), zeros(1), 0), 
-        grass_storage=Storages(0, zeros(1), zeros(1), zeros(1), 0), rip_storage=Storages(0, zeros(1), zeros(1), zeros(1), 0), Slowstorage=0.0, Waterbalance=0.0, Glacier=zeros(1), Area=0, 
+function setup(Discharge=0.0, Total_Evaporation=0.0, Snow_Extend=zeros(1), bare_storage=Storages(0, zeros(4), zeros(4), zeros(4), 0), forest_storage=Storages(0, zeros(4), zeros(4), zeros(4), 0), 
+        grass_storage=Storages(0, zeros(4), zeros(4), zeros(4), 0), rip_storage=Storages(0, zeros(4), zeros(4), zeros(4), 0), Slowstorage=0.0, Waterbalance=0.0, Glacier=zeros(4), Area=0, 
         bare_parameters=Parameters(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0), forest_parameters=Parameters(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0), 
         grass_parameters=Parameters(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0), rip_parameters=Parameters(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0), 
-        slow_parameters=Slow_Paramters(0.0, 0.0), Elevation=Elevations(0,0,0,0,0),Total_Elevationbands=0, Precipitation_gradient=0, Elevation_Percentage=0, bare_input=HRU_Input([1], 0.0, [0], [1], 1, Tuple(0), Tuple(0), 0, [0], 0.0, [0], 0, 0.0), 
-        forest_input=HRU_Input([1], 0.0, [0], [1], 1, Tuple(0), Tuple(0), 0, [0], 0.0, [0], 0, 0.0), 
-        grass_input=HRU_Input([1], 0.0, [0], [1], 1, Tuple(0), Tuple(0), 0, [0], 0.0, [0], 0, 0.0), 
-        rip_input=HRU_Input([1], 0.0, [0], [1], 1, Tuple(0), Tuple(0), 0, [0], 0.0, [0], 0, 0.0), 
-        Precipitation=zeros(0,0), Temperature=zeros(0,0), ETP=zeros(0), Date=Date[], Current_Date=DateTime(0), Sunhours = [0], Units=HBVmountain_units())
+        slow_parameters=Slow_Paramters(0.0, 0.0), Elevation=Elevations(0,500,100,250,250),Total_Elevationbands=4, Precipitation_gradient=0, Elevation_Percentage=[0.25,0.25,0.25,0.25],                               bare_input=HRU_Input([0,0,0,0], 0, np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0), 
+        forest_input=HRU_Input([0.3,0.3,0.3,0.1], 0.5,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0), 
+        grass_input=HRU_Input([0.1,0.3,0.3,0.3], 0.47,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0), 
+        rip_input=HRU_Input([0.0,0.0,0.3,0.7], 0.03,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0), 
+        Precipitation=zeros(0,0), Temperature=zeros(0,0), ETP=zeros(0), Date=Date[], Current_Date=DateTime(0), Sunhours = [8.87, 10.30, 11.88, 13.65, 15.13, 15.97, 15.58, 14.25, 12.62, 11.87, 9.28, 8.45],         Units=HBVmountain_units())
     
-    config_file = HBVmountain_model(Discharge, Snow_Extend, bare_storage,forest_storage, grass_storage, rip_storage,
+    config_file = HBVmountain_model(Discharge, Total_Evaporation, Snow_Extend, bare_storage,forest_storage, grass_storage, rip_storage,
         Slowstorage, Waterbalance, Glacier, Area, bare_parameters, forest_parameters, grass_parameters, rip_parameters, slow_parameters,
         Elevation, Total_Elevationbands, Precipitation_gradient, Elevation_Percentage, bare_input, forest_input, grass_input, rip_input, Precipitation, Temperature, ETP, Date, Current_Date, Sunhours, Units);
     return config_file
@@ -89,7 +90,7 @@ function update(model::HBVmountain_model)
     else
         Precipitation = getprecipitationatelevation(model.Elevation, model.Precipitation_gradient, model.Precipitation[t,:])[2][1,:]
         Temperature = gettemperatureatelevation(model.Elevation, model.Temperature[t,:])[2][1,:]
-        Discharge, Snow_Extend, Waterbalance, bare_storage, forest_storage, grass_storage, rip_storage, Slowstorage =  run_model_glacier(model.Area, model.ETP[t], model.Glacier, Precipitation, Temperature,
+        Discharge, Total_Evaporation, Snow_Extend, Waterbalance, bare_storage, forest_storage, grass_storage, rip_storage, Slowstorage =  run_model_glacier(model.Area, model.ETP[t], model.Glacier, Precipitation, Temperature,
                         model.bare_input, model.forest_input, model.grass_input, model.rip_input,
                         model.bare_storage, model.forest_storage, model.grass_storage, model.rip_storage, model.Slowstorage,
                         model.bare_parameters, model.forest_parameters, model.grass_parameters, model.rip_parameters, model.slow_parameters, model.Total_Elevationbands, model.Elevation_Percentage)
@@ -97,6 +98,7 @@ function update(model::HBVmountain_model)
     
     #Update model state
     model.Discharge = Discharge
+    model.Total_Evaporation = Total_Evaporation
     model.Snow_Extend = Snow_Extend
     model.Waterbalance = Waterbalance
     model.bare_storage = bare_storage::Storages

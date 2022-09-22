@@ -1,5 +1,6 @@
 function finalize_HBVmountainmodel(model::HBVmountain_model)
     model.Discharge = nothing
+    model.Total_Evaporation = nothing
     model.Snow_Extend = nothing
     model.bare_storage = nothing
     model.forest_storage = nothing

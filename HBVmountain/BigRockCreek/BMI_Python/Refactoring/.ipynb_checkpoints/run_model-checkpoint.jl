@@ -122,12 +122,12 @@ function run_model_glacier(Area, Evaporation_Mean::Float64, Glacier::Array{Float
     Snow_Extend = Snow_Extend ./ Elevation_Percentage
 
     WBtotal = WB
-    
+    Total_Evaporation = Total_Interception_Evaporation +  Total_Soil_Evaporation
 
     # Check Water Balance
     Waterbalance = WBtotal #sum(WBtotal)::Float64
     @assert Waterbalance <= 10^(-10)
-    return Discharge, Snow_Extend, Waterbalance, bare_storage, forest_storage, grass_storage, rip_storage, Slowstorage
+    return Discharge, Total_Evaporation, Snow_Extend, Waterbalance, bare_storage, forest_storage, grass_storage, rip_storage, Slowstorage
 end
 
 

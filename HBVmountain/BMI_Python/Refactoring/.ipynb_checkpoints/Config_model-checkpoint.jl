@@ -1,5 +1,6 @@
 function replace_HBVmountainmodel(model::HBVmountain_model, config_file::HBVmountain_model)
     model.Discharge = config_file.Discharge
+    model.Total_Evaporation = config_file.Total_Evaporation
     model.Snow_Extend = config_file.Snow_Extend
     model.bare_storage = config_file.bare_storage
     model.forest_storage = config_file.forest_storage

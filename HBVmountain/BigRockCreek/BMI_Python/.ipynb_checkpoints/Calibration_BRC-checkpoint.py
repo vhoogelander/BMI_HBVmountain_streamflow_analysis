@@ -1,23 +1,23 @@
 from BMI_HBVmountain_Python import *
 import os
 import sys
-
+import netCDF4 as nc
 ####### Forcing and observation data ##########################
 
-def NSE(Qmodelled, Qobserved):
+def NSE(Qmodelled, Qobserved):    
     QobservedAverage = np.ones(len(Qobserved)) * np.mean(Qobserved)
     Nominator = np.sum((Qmodelled - Qobserved)**2)
     Denominator = np.sum((Qobserved - QobservedAverage)**2)
     NashSutcliffe = 1 - (Nominator / Denominator)
     return NashSutcliffe
 
-def logNSE(Qmodelled, Qobserved):
+def logNSE(Qmodelled, Qobserved):    
     QobservedAverage = np.ones(len(Qobserved)) * np.mean(Qobserved) # average as array
     Nominator = np.sum((np.log(Qobserved)-np.log(Qmodelled))**2)
     Denominator = np.sum((np.log(Qobserved) - np.log(QobservedAverage))**2)
     NashSutcliffelog = 1 - (Nominator / Denominator)
     return NashSutcliffelog
-
+        
 def flowdurationcurve(Q):
     SortedQ = np.sort(Q)[::-1]
     rank = np.linspace(1, len(SortedQ), len(SortedQ))
@@ -34,34 +34,32 @@ def flowdurationcurve(Q):
 #     return AC::Float64
 
 def yearlyrunoff(Precipitation, Discharge):
-    annual_prec = Precipitation.groupby(pd.PeriodIndex(Precipitation.index, freq="y")).sum()
+    annual_prec = Precipitation.groupby(pd.PeriodIndex(Precipitation.index, freq="y")).sum()   
     annual_Discharge = Discharge.groupby(pd.PeriodIndex(Discharge.index, freq="y")).sum()
     mask = (annual_prec.index >= annual_Discharge.index[0]) & (annual_prec.index <= annual_Discharge.index[-1])
     annual_prec = annual_prec.loc[mask]
-    annual_runoff_coefficient = annual_prec[:-1] / annual_Discharge[:-1]
+    annual_runoff_coefficient = annual_prec / annual_Discharge
     return annual_runoff_coefficient
-
+    
 def multi_objective(Qmodelled, Qobserved, Precipitation):
     nse = NSE(Qmodelled.values, Qobserved.values)
     lognse = logNSE(Qmodelled.values, Qobserved.values)
-
+    
     FDCobserved = flowdurationcurve(np.log(Qobserved))
     FDCmodelled = flowdurationcurve(np.log(Qmodelled))
     nseFDC = NSE(FDCmodelled[0], FDCobserved[0])
-
+    
     runoff_observed = yearlyrunoff(Precipitation, Qobserved)
     runoff_modelled = yearlyrunoff(Precipitation, Qmodelled)
     nse_runoff = NSE(runoff_modelled.values, runoff_observed.values)
-
+    
     objfunctions = [nse, lognse, nseFDC, nse_runoff]
     Sum = 0
     for obj in objfunctions:
         Sum += (1 - obj)**2
     ED = (Sum / len(objfunctions))**0.5
-
+    
     return ED, nse, lognse, nseFDC, nse_runoff
-
-
 
 def parameter_conversion(directory, nsmallest=None):
     ## Returns a list with Julia parameter objects 
@@ -164,6 +162,32 @@ def climate_simulations(prec, temp, param_list):
         df = pd.merge(df, simulated_discharge_df, left_index=True, right_index=True)
         model.finalize()
     return df
+
+def create_forcing_csv(area_cathment, path_to_streamflow_timeseries, path_to_forcing_netCDF):
+    path = path_to_streamflow_timeseries
+    ds = nc.Dataset(path)
+
+    prec = (ds['pr'][:])*86400
+    temp = (ds['tas'][:]) -273
+
+    preclist = []
+    tlist = []
+
+    for i in range(len(temp)):
+        preclist.append(prec[i])
+        tlist.append(temp[i])
+    
+
+    forcing = pd.read_csv(path_to_streamflow_timeseries, index_col=0)
+    forcing['temp_era5'] = tlist
+    forcing['prec_era5'] = preclist
+    
+    
+    forcing.loc[forcing['prec_era5'] > 500, 'prec_era5'] = 0  #remove outliers 
+    forcing['streamflow'] = forcing['streamflow'] * 86400 / (area_cathment *1e6) * 1000 #area catchment in km^2, convert streamflow to mm/day
+    
+    forcing.to_csv('Data/ThunderCreek/forcing_thundercreek.csv')
+
 
 def HBVmountain_simulation(ntimes):
     ob_list = []
