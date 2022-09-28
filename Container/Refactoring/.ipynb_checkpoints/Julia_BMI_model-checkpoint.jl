@@ -45,15 +45,9 @@ function build_HBVmountain_model()
 end
 
 # Create configuration file which can be used for initialization of the model
-function setup(Discharge=0.0, Total_Evaporation=0.0, Snow_Extend=zeros(1), bare_storage=Storages(0, zeros(4), zeros(4), zeros(4), 0), forest_storage=Storages(0, zeros(4), zeros(4), zeros(4), 0), 
-        grass_storage=Storages(0, zeros(4), zeros(4), zeros(4), 0), rip_storage=Storages(0, zeros(4), zeros(4), zeros(4), 0), Slowstorage=0.0, Waterbalance=0.0, Glacier=zeros(4), Area=0, 
-        bare_parameters=Parameters(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0), forest_parameters=Parameters(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0), 
-        grass_parameters=Parameters(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0), rip_parameters=Parameters(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0), 
-        slow_parameters=Slow_Paramters(0.0, 0.0), Elevation=Elevations(0,500,100,250,250),Total_Elevationbands=4, Precipitation_gradient=0, Elevation_Percentage=[0.25,0.25,0.25,0.25],                               bare_input=HRU_Input([0,0,0,0], 0, np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0), 
-        forest_input=HRU_Input([0.3,0.3,0.3,0.1], 0.5,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0), 
-        grass_input=HRU_Input([0.1,0.3,0.3,0.3], 0.47,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0), 
-        rip_input=HRU_Input([0.0,0.0,0.3,0.7], 0.03,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0), 
-        Precipitation=zeros(0,0), Temperature=zeros(0,0), ETP=zeros(0), Date=Date[], Current_Date=DateTime(0), Sunhours = [8.87, 10.30, 11.88, 13.65, 15.13, 15.97, 15.58, 14.25, 12.62, 11.87, 9.28, 8.45],         Units=HBVmountain_units())
+function setup(Discharge, Total_Evaporation, Snow_Extend, bare_storage,forest_storage, grass_storage, rip_storage,
+        Slowstorage, Waterbalance, Glacier, Area, bare_parameters, forest_parameters, grass_parameters, rip_parameters, slow_parameters,
+        Elevation, Total_Elevationbands, Precipitation_gradient, Elevation_Percentage, bare_input, forest_input, grass_input, rip_input, Precipitation, Temperature, ETP, Date, Current_Date, Sunhours, Units)
     
     config_file = HBVmountain_model(Discharge, Total_Evaporation, Snow_Extend, bare_storage,forest_storage, grass_storage, rip_storage,
         Slowstorage, Waterbalance, Glacier, Area, bare_parameters, forest_parameters, grass_parameters, rip_parameters, slow_parameters,
@@ -175,11 +169,11 @@ function get_end_time(model)
 end
 
 function get_time_units(model)
-    return dump(model.Date[2] - model.Date[1], maxdepth=0)
+    return string(typeof((model.Date[2] - model.Date[1])))
 end
 
 function get_time_step(model)
-    return (model.Date[2] - model.Date[1])::Float64
+    return (model.Date[2] - model.Date[1]) / (model.Date[2] - model.Date[1])
 end
 
 function get_value(model, name, dest=nothing)
