@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-
 # In[14]:
 import julia
 from julia import Main
@@ -11,7 +10,10 @@ import pandas as pd
 get_ipython().run_line_magic('matplotlib', 'inline')
 import matplotlib.pyplot as plt
 import datetime
+from datetime import timedelta, date
+import netCDF4 as nc
 
+from utils import generate_forcing_from_NETCDF
 
 # In[22]:
 Main.include("Refactoring/structs.jl")
@@ -64,10 +66,11 @@ HBVmountain_units = Main.HBVmountain_units
 
 # In[22]:
 class BMI_HBVmountain(Bmi):
-    def __init__(self):
-        self.model = build_HBVmountain_model()    
+    def __init__(self, forcing_netcdf=None):
+        self.model = build_HBVmountain_model()
+        self.forcing_netcdf = forcing_netcdf
 
-    def setup(self, Discharge=0.0, Total_Evaporation=0.0, Snow_Extend=np.zeros(1),
+    def setup(self, forcing_netcdf=None, Discharge=0.0, Total_Evaporation=0.0, Snow_Extend=np.zeros(1),
               bare_storage=Storages(0, np.zeros(4), np.zeros(4), np.zeros(4), 0), forest_storage=Storages(0, np.zeros(4), np.zeros(4), np.zeros(4), 0), grass_storage=Storages(0, np.zeros(4), np.zeros(4), np.zeros(4), 0), rip_storage=Storages(0, np.zeros(4), np.zeros(4), np.zeros(4), 0), Slowstorage=0.0, 
               Waterbalance=0.0, Glacier=[0,0,0,0], Area=0,
               bare_parameters=None, forest_parameters=None, grass_parameters=None, rip_parameters=None, slow_parameters=None, 
@@ -87,6 +90,13 @@ class BMI_HBVmountain(Bmi):
         if slow_parameters == None:
             slow_parameters = Slow_Paramters(Ks, Ratio_Riparian)
         
+        if self.forcing_netcdf != None:
+            forcing = generate_forcing_from_NETCDF(self.forcing_netcdf)
+
+            Date = forcing.index.values
+            Current_Date = forcing.index.values[0]
+            Precipitation = forcing.prec.values.reshape(len(forcing),1)
+            Temperature = forcing.temp.values.reshape(len(forcing),1)
         
         return setup(Discharge, Total_Evaporation, Snow_Extend, bare_storage,forest_storage, grass_storage, rip_storage,
         Slowstorage, Waterbalance, Glacier, Area, bare_parameters, forest_parameters, grass_parameters, rip_parameters, slow_parameters,
