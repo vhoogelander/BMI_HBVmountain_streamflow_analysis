@@ -1,7 +1,9 @@
 FROM continuumio/anaconda3
 MAINTAINER Vincent Hoogelander <v.hoogelander@student.tudelft.nl>
 
-# Install here your BMI model:
+
+
+# Instal here your BMI model:
 RUN git clone https://github.com/vhoogelander/Thesis.git /opt/HBVmountain
 WORKDIR /opt/HBVmountain
 
