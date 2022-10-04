@@ -7,7 +7,13 @@ MAINTAINER Vincent Hoogelander <v.hoogelander@student.tudelft.nl>
 RUN git clone https://github.com/vhoogelander/Thesis.git /opt/HBVmountain
 WORKDIR /opt/HBVmountain
 
-RUN conda env create -f hbvmountain_environment.yml
+ARG julia_version=1.0
+RUN curl https://raw.githubusercontent.com/JuliaCI/install-julia/master/install-julia.sh | sed -E "s/\bsudo +//g" | bash -s $julia_version
 
-#ENTRYPOINT ["conda", "run", "-n", "HBVmountain", "python3", "-m", "Container.BMI_HBVmountain_Python"]
-#ENTRYPOINT ["python3", "-m", "Container.BMI_HBVmountain_Python"]
+RUN pip install julia
+RUN python -c 'from julia import install; install()'
+RUN pip install bmi-python
+
+WORKDIR /opt/HBVmountain/Container
+RUN python3 -m julia.sysimage sys.so
+
