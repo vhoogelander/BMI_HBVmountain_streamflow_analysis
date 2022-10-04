@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-# In[14]:
-
 from julia.api import LibJulia
 api = LibJulia.load()
 api.sysimage = "sys.so"

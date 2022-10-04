@@ -13,9 +13,15 @@ RUN curl https://raw.githubusercontent.com/JuliaCI/install-julia/master/install-
 
 RUN pip install julia
 RUN python -c 'from julia import install; install()'
+
 RUN pip install bmi-python
 RUN pip install bmipy
 RUN pip install netCDF4
+
+#install julia packages
+WORKDIR /opt/HBVmountain/Container/Refactoring
+RUN julia install.jl
+
 
 WORKDIR /opt/HBVmountain/Container
 

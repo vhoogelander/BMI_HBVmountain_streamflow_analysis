@@ -1,3 +1,13 @@
+using Pkg
+Pkg.add("DataFrames")
+Pkg.add("CSV")
+Pkg.add("Plots")
+Pkg.add("DocStringExtensions")
+Pkg.add("Dates")
+Pkg.add("NetCDF")
+Pkg.add("Statistics")
+
+
 using DataFrames
 using CSV
 using Plots
@@ -5,7 +15,8 @@ using DocStringExtensions
 using Dates
 using NetCDF
 using Statistics
-using Pkg
+
+
 
 function build_HBVmountain_model()
     return HBVmountain_model(nothing,
@@ -62,10 +73,10 @@ end
 
 # uses function in Config_model.jl file
 function initialize(model, config_file = nothing)
-    if config_file == nothing
-        error("must give config_file"::AbstractString) 
+    if config_file != nothing
+        replace_HBVmountainmodel(model, config_file) 
     else
-        replace_HBVmountainmodel(model, config_file)
+        error("must give config_file"::AbstractString)
     end
 end
 
