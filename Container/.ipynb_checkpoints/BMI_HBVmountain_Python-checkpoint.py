@@ -13,7 +13,6 @@ from bmipy import Bmi
 from pandas import read_csv
 import numpy as np
 import pandas as pd
-#get_ipython().run_line_magic('matplotlib', 'inline')
 import matplotlib.pyplot as plt
 import datetime
 from datetime import timedelta, date
