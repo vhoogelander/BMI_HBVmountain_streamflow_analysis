@@ -1,7 +1,8 @@
 FROM continuumio/anaconda3
 MAINTAINER Vincent Hoogelander <v.hoogelander@student.tudelft.nl>
 
-
+# Install grpc4bmi
+RUN pip install grpc4bmi
 
 # Instal here your BMI model:
 RUN git clone https://github.com/vhoogelander/Thesis.git /opt/HBVmountain
@@ -31,4 +32,12 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*dod
 #install custom system image
 RUN python3 -m julia.sysimage sys.so
+
+WORKDIR /opt/HBVmountain/Container
+
+# Run bmi server
+#ENTRYPOINT ["/opt/bin/run-bmi-server", "--name", "BMI_HBVmountain_Python.BMI_HBVmountain", "--path", /opt/HBVmountain/Container]
+
+# Expose the magic grpc4bmi port
+EXPOSE 55555
 

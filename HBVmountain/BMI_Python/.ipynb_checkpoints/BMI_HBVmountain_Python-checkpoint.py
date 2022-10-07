@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 import datetime
 from datetime import timedelta, date
 import netCDF4 as nc
+from utils import generate_forcing_from_NETCDF
 
 from utils import generate_forcing_from_NETCDF
 
