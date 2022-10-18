@@ -2,7 +2,7 @@ from julia.api import LibJulia
 api = LibJulia.load()
 api.sysimage = "sys.so"
 api.init_julia()
-
+import time
 from mpi4py import MPI
 from BMI_HBVmountain_Python import *
 import os
@@ -44,7 +44,7 @@ def yearlyrunoff(Precipitation, Discharge):
     annual_Discharge = Discharge.groupby(pd.PeriodIndex(Discharge.index, freq="y")).sum()
     mask = (annual_prec.index >= annual_Discharge.index[0]) & (annual_prec.index <= annual_Discharge.index[-1])
     annual_prec = annual_prec.loc[mask]
-    annual_runoff_coefficient = annual_prec[:-1] / annual_Discharge[:-1]
+    annual_runoff_coefficient = annual_prec / annual_Discharge
     return annual_runoff_coefficient
     
 def multi_objective(Qmodelled, Qobserved, Precipitation):
@@ -69,14 +69,16 @@ def multi_objective(Qmodelled, Qobserved, Precipitation):
       
 
 def HBVmountain_simulation(ntimes):
+    exec_start_time = time.time()
+
     ob_list = []
     params_list = []
-    forcing = pd.read_csv('Data/BigCreek/forcing_bigrockcreek.csv', index_col=[0], parse_dates=True)
-    pd.to_datetime(forcing.index);
+    forcing = pd.read_csv('Data/ThunderCreek/forcing_thundercreek.csv', index_col=[0], parse_dates=True)
+    pd.to_datetime(forcing.index)
     forcing = forcing.reset_index(level=0)
     for i in range(len(forcing)):
-        forcing['Date'][i] = forcing['Date'][i].date()
-    forcing.set_index('Date', inplace=True)
+        forcing['time'][i] = forcing['time'][i].date()
+    forcing.set_index('time', inplace=True)
     forcing.loc[forcing['prec_era5'] > 500, 'prec_era5'] = 0 
     for i in range(ntimes):
         model = BMI_HBVmountain()
@@ -98,15 +100,20 @@ def HBVmountain_simulation(ntimes):
         model.set_value('Date', list(forcing.index.values))
         model.set_value('Current_Date', forcing.index.values[0])
 
-        model.set_value('Elevation', Main.Elevations(270, 1250, 2600, 1250, 1250))
-        model.set_value('Glacier', [0.0, 0.0, 0.0, 0.0])
-        model.set_value('Sunhours', [10.18, 10.90, 12.0, 13.10, 14.0, 14.45, 14.08, 13.31, 12.24, 11.25, 10.31, 9.85])
-        model.set_value('bare_input', Main.HRU_Input([0,0,0,0], 0, np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.2, np.zeros(4), 0, 0.0))
-        model.set_value('forest_input', Main.HRU_Input([0.0,0.20,0.73,0.07], 0.64,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.2, np.zeros(4), 0, 0.0))
-        model.set_value('grass_input', Main.HRU_Input([0.1,0.8,0.1,0.0], 0.35,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.2, np.zeros(4), 0, 0.0))
-        model.set_value('rip_input', Main.HRU_Input([1.0,0,0,0], 0.01,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.2, np.zeros(4), 0, 0.0))
+        model.set_value('Elevation', Main.Elevations(500, 500, 2500, 1500, 1500))
+
+        model.set_value('Glacier', [0.0, 0.0, 0.0, 0.6])
+        model.set_value('Sunhours', [8.87, 10.30, 11.88, 13.65, 15.13, 15.97, 15.58, 14.25, 12.62, 11.87, 9.28, 8.45]) #Seattle
+        model.set_value('bare_input', Main.HRU_Input([0.0,0.0,0.3,0.7], 0.32, [0.0, 0.0, 0.0, 0.6], [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
+        model.set_value('forest_input', Main.HRU_Input([0.0,0.7,0.3,0.0], 0.45,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
+        model.set_value('grass_input', Main.HRU_Input([0.7,0.3,0.0,0.0], 0.21,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
+        model.set_value('rip_input', Main.HRU_Input([1.0,0.0,0.0,0.0], 0.02,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
         model.set_value('Total_Elevationbands', 4)
-        model.set_value('Elevation_Percentage', [0.16,0.46,0.33,0.05])
+        model.set_value('Elevation_Percentage', [0.15,0.26,0.36,0.23])
+        model.set_value('bare_storage', Main.Storages(0,np.zeros(4),np.zeros(4),np.zeros(4),0))
+        model.set_value('forest_storage', Main.Storages(0,np.zeros(4),np.zeros(4),np.zeros(4),0))
+        model.set_value('grass_storage', Main.Storages(0,np.zeros(4),np.zeros(4),np.zeros(4),0))
+        model.set_value('rip_storage', Main.Storages(0,np.zeros(4),np.zeros(4),np.zeros(4),0))
         model.set_value('bare_storage', Main.Storages(0,np.zeros(4),np.zeros(4),np.zeros(4),0))
         model.set_value('forest_storage', Main.Storages(0,np.zeros(4),np.zeros(4),np.zeros(4),0))
         model.set_value('grass_storage', Main.Storages(0,np.zeros(4),np.zeros(4),np.zeros(4),0))
@@ -157,9 +164,12 @@ def HBVmountain_simulation(ntimes):
                                     params_list[i][2].Temp_Thresh]
         rip_paramset.loc[i] = [ob_list[i][0], ob_list[i][1], ob_list[i][2], ob_list[i][3], ob_list[i][4], params_list[i][3].beta, params_list[i][3].Ce, params_list[i][3].Drainagecapacity, 
                                params_list[i][3].Interceptionstoragecapacity,
-        params_list[i][3].Kf, params_list[i][3].Meltfactor, params_list[i][3].Mm, 
+    params_list[i][3].Kf, params_list[i][3].Meltfactor, params_list[i][3].Mm, 
                                params_list[i][3].Ratio_Pref, params_list[i][3].Soilstoragecapacity, params_list[i][3].Temp_Thresh]
         slow_paramset.loc[i] = [ob_list[i][0], ob_list[i][1], ob_list[i][2], ob_list[i][3], ob_list[i][4], params_list[i][4].Ks, params_list[i][4].Ratio_Riparian]
+
+    print(f"Calibration is completed in {time.time() - exec_start_time} seconds")
+
     return bare_paramset, forest_paramset, grass_paramset, rip_paramset, slow_paramset
 
 def main():
@@ -175,6 +185,7 @@ def main():
     else:
         partitions = None
         counts = None
+
 
     partition_item = comm.scatter(partitions, root=0)
     bare_paramset_item, forest_paramset_item, grass_paramset_item, rip_paramset_item, slow_paramset_item, = HBVmountain_simulation(partition_item)
@@ -198,7 +209,7 @@ def main():
         rip_name = 'rip_paramsets.csv'
         slow_name = 'slow_paramsets.csv'
 
-        outdir = './output'
+        outdir = './output_tc'
         if not os.path.exists(outdir):
             os.mkdir(outdir)
 
@@ -216,5 +227,8 @@ def main():
         slow_paramset.to_csv(slow_fullname)
 
 
+
 if __name__ == '__main__':
     main()
+
+

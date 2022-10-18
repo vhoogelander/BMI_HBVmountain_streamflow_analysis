@@ -9,6 +9,40 @@ import os
 import sys
 
 ####### Forcing and observation data ##########################
+def parameter_conversion(directory, nsmallest=None):
+    ## Returns a list with Julia parameter objects 
+    bare_parametersets = pd.read_csv(os.path.join(directory, 'bare_paramsets.csv')).sort_values(by=['ED'])
+    if nsmallest != None:
+        bare_parametersets = bare_parametersets.loc[bare_parametersets['ED'].isin(bare_parametersets.ED.nsmallest(nsmallest))]
+    forest_parametersets = pd.read_csv(os.path.join(directory, 'forest_paramsets.csv')).loc[bare_parametersets.index].sort_values(by=['ED'])
+    grass_parametersets = pd.read_csv(os.path.join(directory, 'grass_paramsets.csv')).loc[bare_parametersets.index].sort_values(by=['ED'])
+    rip_parametersets = pd.read_csv(os.path.join(directory, 'rip_paramsets.csv')).loc[bare_parametersets.index].sort_values(by=['ED'])
+    slow_parametersets = pd.read_csv(os.path.join(directory, 'slow_paramsets.csv')).loc[bare_parametersets.index].sort_values(by=['ED'])
+    
+    params = [bare_parametersets, forest_parametersets, grass_parametersets, rip_parametersets]
+    param_list = []
+    for i in range(len(bare_parametersets)):
+        bare = Parameters(bare_parametersets.beta.iloc[i], bare_parametersets.Ce.iloc[i], bare_parametersets.Drainagecapacity.iloc[i], 
+                                             bare_parametersets.Interceptionstoragecapacity.iloc[i], bare_parametersets.Kf.iloc[i], 
+                                             bare_parametersets.Meltfactor.iloc[i], bare_parametersets.Mm.iloc[i], bare_parametersets.Ratio_Pref.iloc[i], 
+                                            bare_parametersets.Soilstoragecapacity.iloc[i], bare_parametersets.Temp_Thresh.iloc[i])
+        forest = Parameters(forest_parametersets.beta.iloc[i], forest_parametersets.Ce.iloc[i], forest_parametersets.Drainagecapacity.iloc[i], 
+                                            forest_parametersets.Interceptionstoragecapacity.iloc[i], forest_parametersets.Kf.iloc[i], 
+                                            forest_parametersets.Meltfactor.iloc[i], forest_parametersets.Mm.iloc[i], forest_parametersets.Ratio_Pref.iloc[i], 
+                                            forest_parametersets.Soilstoragecapacity.iloc[i], forest_parametersets.Temp_Thresh.iloc[i])
+        grass = Parameters(grass_parametersets.beta.iloc[i], grass_parametersets.Ce.iloc[i], grass_parametersets.Drainagecapacity.iloc[i], 
+                                             grass_parametersets.Interceptionstoragecapacity.iloc[i], grass_parametersets.Kf.iloc[i], 
+                                             grass_parametersets.Meltfactor.iloc[i], grass_parametersets.Mm.iloc[i], grass_parametersets.Ratio_Pref.iloc[i], 
+                                            grass_parametersets.Soilstoragecapacity.iloc[i], grass_parametersets.Temp_Thresh.iloc[i])
+        rip = Parameters(rip_parametersets.beta.iloc[i], rip_parametersets.Ce.iloc[i], rip_parametersets.Drainagecapacity.iloc[i], 
+                                             rip_parametersets.Interceptionstoragecapacity.iloc[i], rip_parametersets.Kf.iloc[i], 
+                                             rip_parametersets.Meltfactor.iloc[i], rip_parametersets.Mm.iloc[i], rip_parametersets.Ratio_Pref.iloc[i], 
+                                            rip_parametersets.Soilstoragecapacity.iloc[i], rip_parametersets.Temp_Thresh.iloc[i])
+        slow = Slow_Paramters(slow_parametersets.Ks.iloc[i], slow_parametersets.Ratio_Riparian.iloc[i])
+    
+        param_list.append([bare, forest, grass, rip, slow])
+    return param_list
+
 
 def NSE(Qmodelled, Qobserved):    
     QobservedAverage = np.ones(len(Qobserved)) * np.mean(Qobserved)
@@ -44,7 +78,7 @@ def yearlyrunoff(Precipitation, Discharge):
     annual_Discharge = Discharge.groupby(pd.PeriodIndex(Discharge.index, freq="y")).sum()
     mask = (annual_prec.index >= annual_Discharge.index[0]) & (annual_prec.index <= annual_Discharge.index[-1])
     annual_prec = annual_prec.loc[mask]
-    annual_runoff_coefficient = annual_prec[:-1] / annual_Discharge[:-1]
+    annual_runoff_coefficient = annual_prec[:-1] / annual_Discharge[:-1] #until 31th december
     return annual_runoff_coefficient
     
 def multi_objective(Qmodelled, Qobserved, Precipitation):
@@ -68,32 +102,31 @@ def multi_objective(Qmodelled, Qobserved, Precipitation):
     return ED, nse, lognse, nseFDC, nse_runoff
       
 
-def HBVmountain_simulation(ntimes):
+def HBVmountain_simulation(nsmallest):
     ob_list = []
-    params_list = []
+    params_list = parameter_conversion('output', nsmallest=nsmallest)
     forcing = pd.read_csv('Data/BigCreek/forcing_bigrockcreek.csv', index_col=[0], parse_dates=True)
     pd.to_datetime(forcing.index);
     forcing = forcing.reset_index(level=0)
     for i in range(len(forcing)):
         forcing['Date'][i] = forcing['Date'][i].date()
     forcing.set_index('Date', inplace=True)
-    forcing.loc[forcing['prec_era5'] > 500, 'prec_era5'] = 0 
-    for i in range(ntimes):
+    
+    for i in range(nsmallest):
         model = BMI_HBVmountain()
 
         config_file = model.setup()
 
         model.initialize(config_file)
 
-        bare_parameters, forest_parameters, grass_parameters, rip_parameters,  slow_parameters, parameters_array =  Main.parameter_selection()
-        model.set_value('bare_parameters', bare_parameters)
-        model.set_value('forest_parameters', forest_parameters)
-        model.set_value('grass_parameters', grass_parameters)
-        model.set_value('rip_parameters', rip_parameters)
-        model.set_value('slow_parameters', slow_parameters)
+        model.set_value('bare_parameters', params_list[i][0])
+        model.set_value('forest_parameters', params_list[i][1])
+        model.set_value('grass_parameters', params_list[i][2])
+        model.set_value('rip_parameters', params_list[i][3])
+        model.set_value('slow_parameters', params_list[i][4])
 
         model.set_value('Temperature', (forcing['temp_era5'].values).reshape(len(forcing),1))
-        model.set_value('Precipitation', (forcing['prec_era5'].values).reshape(len(forcing),1))
+        model.set_value('Precipitation', (forcing['prec_REGEN'].values).reshape(len(forcing),1))
 
         model.set_value('Date', list(forcing.index.values))
         model.set_value('Current_Date', forcing.index.values[0])
@@ -114,7 +147,7 @@ def HBVmountain_simulation(ntimes):
 
         Discharge = []
         timestamp = []
-        while (model.get_value_ptr('Current_Date') < (datetime.date(1999, 1, 1))):  
+        while (model.get_value_ptr('Current_Date') < (model.get_value_ptr('Date')[-1])):   
             model.update()
             timestamp.append(model.get_value_ptr('Current_Date'))
             Discharge.append(model.get_value_ptr('Discharge'))
@@ -126,12 +159,13 @@ def HBVmountain_simulation(ntimes):
         combined_discharge = pd.merge(simulated_discharge_df, forcing['streamflow'], left_index=True, right_index=True)
         
         
-        objective_function = multi_objective(combined_discharge.simulation.loc[combined_discharge.index.year >= 1989], combined_discharge.streamflow.loc[combined_discharge.index.year >= 1989], forcing.prec_era5)
+        objective_function = multi_objective(combined_discharge.simulation.loc[combined_discharge.index.year >= 1999], combined_discharge.streamflow.loc[combined_discharge.index.year >= 1999], forcing.prec_REGEN)
         
-        if objective_function[1] > 0 and objective_function[2] > 0 and objective_function[3] > 0 and objective_function[4] > 0: 
-            ob_list.append(objective_function)
-            params_list.append([bare_parameters, forest_parameters, grass_parameters, rip_parameters,  slow_parameters])
+        
+        ob_list.append(objective_function)
+       
         model.finalize()
+        
     bare_paramset = pd.DataFrame(columns=['ED', 'NSE', 'logNSE', 'NSEfdc', 'NSErunoff', 'beta', 'Ce', 'Drainagecapacity', 'Interceptionstoragecapacity',
                               'Kf', 'Meltfactor', 'Mm', 'Ratio_Pref', 'Soilstoragecapacity', 'Temp_Thresh'])
     forest_paramset = pd.DataFrame(columns=['ED', 'NSE', 'logNSE', 'NSEfdc', 'NSErunoff', 'beta', 'Ce', 'Drainagecapacity', 'Interceptionstoragecapacity',
@@ -140,8 +174,7 @@ def HBVmountain_simulation(ntimes):
                               'Kf', 'Meltfactor', 'Mm', 'Ratio_Pref', 'Soilstoragecapacity', 'Temp_Thresh'])
     rip_paramset = pd.DataFrame(columns=['ED', 'NSE', 'logNSE', 'NSEfdc', 'NSErunoff', 'beta', 'Ce', 'Drainagecapacity', 'Interceptionstoragecapacity',
                               'Kf', 'Meltfactor', 'Mm', 'Ratio_Pref', 'Soilstoragecapacity', 'Temp_Thresh'])
-    slow_paramset = pd.DataFrame(columns=['ED', 'NSE', 'logNSE', 'NSEfdc', 'NSErunoff', 'Ks', 'Ratio_Riparian'])        
-    
+    slow_paramset = pd.DataFrame(columns=['ED', 'NSE', 'logNSE', 'NSEfdc', 'NSErunoff', 'Ks', 'Ratio_Riparian'])
 
     for i in range(len(ob_list)):
         bare_paramset.loc[i] = [ob_list[i][0], ob_list[i][1], ob_list[i][2], ob_list[i][3], ob_list[i][4], params_list[i][0].beta, params_list[i][0].Ce, params_list[i][0].Drainagecapacity, 
@@ -198,7 +231,7 @@ def main():
         rip_name = 'rip_paramsets.csv'
         slow_name = 'slow_paramsets.csv'
 
-        outdir = './output'
+        outdir = './output_validation'
         if not os.path.exists(outdir):
             os.mkdir(outdir)
 

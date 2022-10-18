@@ -9,7 +9,7 @@ mutable struct HRU_Input
     Nr_Elevationbands:: Int64
     Catchment_Elevation::Tuple
     Snow_Redistribution::Tuple
-    #Potential_Evaporation::Array{Float64,1} #muss später auch Array werden!!! average Epot for soiL!!!
+    #Potential_Evaporation::Array{Float64,1} 
     Potential_Evaporation_Mean:: Float64
     Precipitation::Array{Float64,1}
     Riparian_Discharge:: Float64 #only necessary for riparian HRU
@@ -105,6 +105,7 @@ end
 
 mutable struct HBVmountain_model_units
     Discharge::Union{Nothing, String}
+    Total_Evaporation::Union{Nothing, String}
     Snow_Extend::Union{Nothing, String}
     bare_storage::Union{Nothing, Array{String, 1}}
     forest_storage::Union{Nothing, Array{String, 1}}
@@ -139,9 +140,13 @@ mutable struct HBVmountain_model_units
     
 end
 
-# module BasicModelInterface, integrate in structs.jl (?)
+# module BasicModelInterface
+
+
 mutable struct HBVmountain_model
+    #Storages and discharge
     Discharge::Union{Nothing, Float64}
+    Total_Evaporation::Union{Nothing, Float64}
     Snow_Extend::Union{Nothing, Array{Float64,1}}
     bare_storage::Union{Nothing, Storages}
     forest_storage::Union{Nothing, Storages}
@@ -170,8 +175,10 @@ mutable struct HBVmountain_model
     Precipitation::Union{Nothing, Array{Float64,2}}
     Temperature::Union{Nothing, Array{Float64,2}}
     ETP::Union{Nothing, Array{Float64,1}}
+    #Other
     Date::Union{Nothing, Array{Date,1}}
     Current_Date::Union{Nothing, Date}
     Sunhours::Union{Nothing, Array{Float64, 1}}
     Units::Union{Nothing, HBVmountain_model_units}
 end
+

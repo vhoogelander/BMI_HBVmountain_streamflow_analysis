@@ -1,5 +1,6 @@
 function replace_HBVmountainmodel(model::HBVmountain_model, config_file::HBVmountain_model)
     model.Discharge = config_file.Discharge
+    model.Total_Evaporation = config_file.Total_Evaporation
     model.Snow_Extend = config_file.Snow_Extend
     model.bare_storage = config_file.bare_storage
     model.forest_storage = config_file.forest_storage
@@ -30,5 +31,6 @@ function replace_HBVmountainmodel(model::HBVmountain_model, config_file::HBVmoun
     model.ETP = config_file.ETP
     model.Date = config_file.Date
     model.Current_Date = config_file.Current_Date
+    model.Sunhours = config_file.Sunhours
     model.Units = config_file.Units
 end 

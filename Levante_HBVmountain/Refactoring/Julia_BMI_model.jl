@@ -7,9 +7,9 @@ using NetCDF
 using Statistics
 using Pkg
 
-
 function build_HBVmountain_model()
     return HBVmountain_model(nothing,
+    nothing,
     nothing,
     nothing,
     nothing,
@@ -45,17 +45,11 @@ function build_HBVmountain_model()
 end
 
 # Create configuration file which can be used for initialization of the model
-function setup(Discharge=0.0, Snow_Extend=zeros(1), bare_storage=Storages(0, zeros(1), zeros(1), zeros(1), 0), forest_storage=Storages(0, zeros(1), zeros(1), zeros(1), 0), 
-        grass_storage=Storages(0, zeros(1), zeros(1), zeros(1), 0), rip_storage=Storages(0, zeros(1), zeros(1), zeros(1), 0), Slowstorage=0.0, Waterbalance=0.0, Glacier=zeros(1), Area=0, 
-        bare_parameters=Parameters(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0), forest_parameters=Parameters(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0), 
-        grass_parameters=Parameters(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0), rip_parameters=Parameters(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0), 
-        slow_parameters=Slow_Paramters(0.0, 0.0), Elevation=Elevations(0,0,0,0,0),Total_Elevationbands=0, Precipitation_gradient=0, Elevation_Percentage=0, bare_input=HRU_Input([1], 0.0, [0], [1], 1, Tuple(0), Tuple(0), 0, [0], 0.0, [0], 0, 0.0), 
-        forest_input=HRU_Input([1], 0.0, [0], [1], 1, Tuple(0), Tuple(0), 0, [0], 0.0, [0], 0, 0.0), 
-        grass_input=HRU_Input([1], 0.0, [0], [1], 1, Tuple(0), Tuple(0), 0, [0], 0.0, [0], 0, 0.0), 
-        rip_input=HRU_Input([1], 0.0, [0], [1], 1, Tuple(0), Tuple(0), 0, [0], 0.0, [0], 0, 0.0), 
-        Precipitation=zeros(0,0), Temperature=zeros(0,0), ETP=zeros(0), Date=Date[], Current_Date=DateTime(0), Sunhours = [0], Units=HBVmountain_units())
+function setup(Discharge, Total_Evaporation, Snow_Extend, bare_storage,forest_storage, grass_storage, rip_storage,
+        Slowstorage, Waterbalance, Glacier, Area, bare_parameters, forest_parameters, grass_parameters, rip_parameters, slow_parameters,
+        Elevation, Total_Elevationbands, Precipitation_gradient, Elevation_Percentage, bare_input, forest_input, grass_input, rip_input, Precipitation, Temperature, ETP, Date, Current_Date, Sunhours, Units)
     
-    config_file = HBVmountain_model(Discharge, Snow_Extend, bare_storage,forest_storage, grass_storage, rip_storage,
+    config_file = HBVmountain_model(Discharge, Total_Evaporation, Snow_Extend, bare_storage,forest_storage, grass_storage, rip_storage,
         Slowstorage, Waterbalance, Glacier, Area, bare_parameters, forest_parameters, grass_parameters, rip_parameters, slow_parameters,
         Elevation, Total_Elevationbands, Precipitation_gradient, Elevation_Percentage, bare_input, forest_input, grass_input, rip_input, Precipitation, Temperature, ETP, Date, Current_Date, Sunhours, Units);
     return config_file
@@ -90,7 +84,7 @@ function update(model::HBVmountain_model)
     else
         Precipitation = getprecipitationatelevation(model.Elevation, model.Precipitation_gradient, model.Precipitation[t,:])[2][1,:]
         Temperature = gettemperatureatelevation(model.Elevation, model.Temperature[t,:])[2][1,:]
-        Discharge, Snow_Extend, Waterbalance, bare_storage, forest_storage, grass_storage, rip_storage, Slowstorage =  run_model_glacier(model.Area, model.ETP[t], model.Glacier, Precipitation, Temperature,
+        Discharge, Total_Evaporation, Snow_Extend, Waterbalance, bare_storage, forest_storage, grass_storage, rip_storage, Slowstorage =  run_model_glacier(model.Area, model.ETP[t], model.Glacier, Precipitation, Temperature,
                         model.bare_input, model.forest_input, model.grass_input, model.rip_input,
                         model.bare_storage, model.forest_storage, model.grass_storage, model.rip_storage, model.Slowstorage,
                         model.bare_parameters, model.forest_parameters, model.grass_parameters, model.rip_parameters, model.slow_parameters, model.Total_Elevationbands, model.Elevation_Percentage)
@@ -98,6 +92,7 @@ function update(model::HBVmountain_model)
     
     #Update model state
     model.Discharge = Discharge
+    model.Total_Evaporation = Total_Evaporation
     model.Snow_Extend = Snow_Extend
     model.Waterbalance = Waterbalance
     model.bare_storage = bare_storage::Storages
@@ -174,11 +169,11 @@ function get_end_time(model)
 end
 
 function get_time_units(model)
-    return dump(model.Date[2] - model.Date[1], maxdepth=0)
+    return string(typeof((model.Date[2] - model.Date[1])))
 end
 
 function get_time_step(model)
-    return (model.Date[2] - model.Date[1])::Float64
+    return (model.Date[2] - model.Date[1]) / (model.Date[2] - model.Date[1])
 end
 
 function get_value(model, name, dest=nothing)

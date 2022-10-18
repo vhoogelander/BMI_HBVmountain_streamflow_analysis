@@ -1,0 +1,30 @@
+aims3.llnl.gov:
+  duration (s): 9
+  error: false
+  size (bytes): 64993772
+  speed (MB/s): 7.2
+cmip.bcc.cma.cn:
+  duration (s): 0
+  error: true
+  size (bytes): 0
+  speed (MB/s): 0
+esgf-data3.diasjp.net:
+  duration (s): 302
+  error: false
+  size (bytes): 3949833960
+  speed (MB/s): 13.1
+esgf.ceda.ac.uk:
+  duration (s): 2
+  error: false
+  size (bytes): 61401248
+  speed (MB/s): 40.3
+esgf.nci.org.au:
+  duration (s): 0
+  error: true
+  size (bytes): 0
+  speed (MB/s): 0
+esgf3.dkrz.de:
+  duration (s): 58
+  error: false
+  size (bytes): 10652593596
+  speed (MB/s): 183.8
