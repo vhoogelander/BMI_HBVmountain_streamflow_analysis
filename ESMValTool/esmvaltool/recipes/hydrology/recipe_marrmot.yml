@@ -35,19 +35,20 @@ diagnostics:
     additional_datasets:
       - {dataset: ERA-Interim, project: OBS6, tier: 3, type: reanaly, version: 1}
       - {dataset: ERA5, project: OBS6, tier: 3, type: reanaly, version: 1}
+      - {dataset: BCC-ESM1, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn}
     variables:
       tas: &var_daily
         mip: day
         start_year: 2000
-        end_year: 2002
+        end_year: 2001
         preprocessor: daily
       pr: *var_daily
       # MARRMoT requires PET. Thus, we need psl, rsds, rsdt
       psl: *var_daily
       rsds: *var_daily
-      rsdt:
-        <<: *var_daily
-        mip: CFday
+     rsdt:
+       <<: *var_daily
+       mip: CFday
     scripts:
       script:
         script: ~/ESMValTool/esmvaltool/diag_scripts/hydrology/marrmot.py 

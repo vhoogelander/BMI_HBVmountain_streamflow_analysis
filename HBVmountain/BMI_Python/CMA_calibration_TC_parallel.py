@@ -20,14 +20,8 @@ def run_model_cma(parameters):
     ob_list = []
     params_list = []
     
-#     forcing = pd.read_csv('Data/ThunderCreek/forcing_thundercreek.csv', index_col=[0], parse_dates=True)
-#     pd.to_datetime(forcing.index)
-#     forcing = forcing.reset_index(level=0)
-#     for i in range(len(forcing)):
-#         forcing['time'][i] = forcing['time'][i].date()
-#     forcing.set_index('time', inplace=True)
-#     forcing.loc[forcing['prec_era5'] > 500, 'prec_era5'] = 0 
-    forcing = nc.Dataset('Data/ThunderCreek/HBVmountain_ERA5_ThunderCreek_1986_2005.nc')
+
+    forcing = nc.Dataset('Data/ThunderCreek/HBVmountain_ERA5_ThunderCreek_1986_2005.nc') #Catchment dependent
     model = BMI_HBVmountain(forcing_netcdf=forcing)
     config_file = model.setup(forcing_netcdf=forcing, bare_parameters=  Parameters(parameters[8], parameters[6], 0, parameters[0], parameters[4],
                                                                      parameters[1], parameters[2], parameters[3], parameters[7], parameters[0]),
@@ -42,7 +36,7 @@ def run_model_cma(parameters):
 
 
 
-
+########### Catchment dependent settings ######################
 
     model.set_value('Elevation', Main.Elevations(500, 500, 2500, 1500, 1500))
     model.set_value('Glacier', [0.0, 0.0, 0.0, 0.6])
@@ -54,6 +48,7 @@ def run_model_cma(parameters):
     model.set_value('Total_Elevationbands', 4)
     model.set_value('Elevation_Percentage', [0.15,0.26,0.36,0.23])
  
+
 
     Discharge = []
     timestamp = []
@@ -199,7 +194,8 @@ def full_calibration(ntimes):
                      [0.1, 2.0],
                      [0.1, 3.0],
                      [0.05, 0.5]]
-    observation = pd.read_csv('Data/ThunderCreek/Discharge_ThunderCreek.csv', index_col=0).streamflow / 271900000 * 1000 *86400
+    area = 271.9 #km2
+    observation = pd.read_csv('Data/ThunderCreek/Discharge_ThunderCreek.csv', index_col=0).streamflow / area * 1e6 * 1000 *86400
     ob_list = []
     params_list = []
     results_doc_list = []

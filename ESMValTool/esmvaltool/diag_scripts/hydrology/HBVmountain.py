@@ -17,7 +17,7 @@ logger = logging.getLogger(Path(__file__).name)
 def create_provenance_record():
     """Create a provenance record."""
     record = {
-        'caption': "Forcings for the Marrmot hydrological model.",
+        'caption': "Forcings for the HBVmountain hydrological model.",
         'domains': ['global'],
         'authors': [
             'kalverla_peter',
@@ -121,9 +121,7 @@ def main(cfg):
     These variables are needed in all_vars:
     tas (air_temperature)
     pr (precipitation_flux)
-    psl (air_pressure_at_mean_sea_level)
-    rsds (surface_downwelling_shortwave_flux_in_air)
-    rsdt (toa_incoming_shortwave_flux)
+    
     """
     input_metadata = cfg['input_data'].values()
     for dataset, metadata in group_metadata(input_metadata, 'dataset').items():
@@ -131,19 +129,19 @@ def main(cfg):
 
         # Fix time coordinate of ERA5 instantaneous variables
         if dataset == 'ERA5':
-            _shift_era5_time_coordinate(all_vars['psl'])
+#            _shift_era5_time_coordinate(all_vars['psl'])
             _shift_era5_time_coordinate(all_vars['tas'])
 
         # Processing variables and unit conversion
         # Unit of the fluxes in marrmot should be in kg m-2 day-1 (or mm/day)
-        logger.info("Processing variable PET")
-        pet = debruin_pet(
-            psl=all_vars['psl'],
-            rsds=all_vars['rsds'],
-            rsdt=all_vars['rsdt'],
-            tas=all_vars['tas'],
-        )
-        pet = preproc.area_statistics(pet, operator='mean')
+#        logger.info("Processing variable PET")
+#        pet = debruin_pet(
+#            psl=all_vars['psl'],
+#            rsds=all_vars['rsds'],
+#            rsdt=all_vars['rsdt'],
+#            tas=all_vars['tas'],
+#        )
+#        pet = preproc.area_statistics(pet, operator='mean')
         # pet.convert_units('kg m-2 day-1')  # equivalent to mm/day
 
         logger.info("Processing variable tas")
@@ -158,7 +156,7 @@ def main(cfg):
         time_start_end, lat_lon = _get_extra_info(temp)
 
         # Get the start and end times and latitude longitude
-        time_start_end, lat_lon = _get_extra_info(temp)
+        time_start_end, lat_lon = _get_extra_info(temp) 
 
         # make data structure
         # delta_t_days could also be extracted from the cube
@@ -166,16 +164,16 @@ def main(cfg):
             'forcing': {
                 'precip': precip.data,
                 'temp': temp.data,
-                'pet': pet.data,
+#                'pet': pet.data,
                 'delta_t_days': float(1),
-                'time_unit': 'day',
+                'time_unit': 'month',
             },
             'time_start': time_start_end[0],
             'time_end': time_start_end[1],
             'data_origin': lat_lon,
         }
 
-        # Save to matlab structure
+       # Save to netcdf structure
         basename = '_'.join([
             'HBVmountain',
             dataset,
@@ -184,7 +182,7 @@ def main(cfg):
             str(int(output_data['time_end'][0])),
         ])
         output_name = get_diagnostic_filename(basename, cfg, extension='nc')
-        cubes = iris.cube.CubeList([temp, precip, all_vars['psl'], all_vars['rsds'], all_vars['rsdt'], pet])
+        cubes = iris.cube.CubeList([temp, precip])#precip
         save(cubes, dataset, provenance, cfg)
  #       sio.savemat(output_name, output_data)
 
