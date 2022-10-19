@@ -23,7 +23,7 @@ def run_model_cma(parameters):
 
     forcing = nc.Dataset('Data/BigCreek/HBVmountain_ERA5_BigRockCreek_1986_2015.nc') #Catchment dependent
     model = BMI_HBVmountain(forcing_netcdf=forcing)
-    config_file = model.setup(forcing_netcdf=forcing, bare_parameters=  Parameters(parameters[8], parameters[6], 0, parameters[0], parameters[4],
+    config_file = model.setup(forcing_netcdf=forcing, bare_parameters=  Parameters(parameters[8], parameters[6], 0, 0, parameters[4],
                                                                      parameters[1], parameters[2], parameters[3], parameters[7], parameters[0]),
                                         forest_parameters=Parameters(parameters[11], parameters[6], 0, parameters[9], parameters[4],
                                                                      parameters[1], parameters[2], parameters[3], parameters[10], parameters[0]),
@@ -52,7 +52,7 @@ def run_model_cma(parameters):
 
     Discharge = []
     timestamp = []
-    while (model.get_value_ptr('Current_Date') < (datetime.date(1999, 1, 1))):  
+    while (model.get_value_ptr('Current_Date') < (datetime.date(1998, 12, 31))):  
         model.update()
         timestamp.append(model.get_value_ptr('Current_Date'))
         Discharge.append(model.get_value_ptr('Discharge'))
@@ -79,7 +79,7 @@ def transform(scaled_parameters):
     please see
     http://cma.gforge.inria.fr/cmaes_sourcecode_page.html#practical
     """
-    PARAMETERS_BOUNDS = [[0, 2.0],
+    PARAMETERS_BOUNDS = [[-2.0, 2.0],
                  [1.0, 5.0],
                  [0.001, 1.0],
                  [0.1, 0.9],

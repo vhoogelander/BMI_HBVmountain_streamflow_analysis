@@ -17,13 +17,9 @@ MAXITER = 50
 ####### Forcing and observation data ##########################
 def run_model_cma(parameters):
 
-    ob_list = []
-    params_list = []
-    
-
     forcing = nc.Dataset('Data/Conasauga/HBVmountain_ERA5_Conasauga_1986_2005.nc') #Catchment dependent
     model = BMI_HBVmountain(forcing_netcdf=forcing)
-    config_file = model.setup(forcing_netcdf=forcing, bare_parameters=  Parameters(parameters[8], parameters[6], 0, parameters[0], parameters[4],
+    config_file = model.setup(forcing_netcdf=forcing, bare_parameters=  Parameters(parameters[8], parameters[6], 0, 0, parameters[4],
                                                                      parameters[1], parameters[2], parameters[3], parameters[7], parameters[0]),
                                         forest_parameters=Parameters(parameters[11], parameters[6], 0, parameters[9], parameters[4],
                                                                      parameters[1], parameters[2], parameters[3], parameters[10], parameters[0]),
@@ -40,7 +36,7 @@ def run_model_cma(parameters):
 
     model.set_value('Elevation', Main.Elevations(274.25, 187.0, 1284.0, 421.17, 421.17))
     model.set_value('Glacier', [0.0, 0.0, 0.0, 0.0])
-    model.set_value('Sunhours', [8.83, 10.26, 11.95, 13.75, 15.28, 16.11, 15.75, 14.36, 12.63, 10.9, 9.28, 8.43])
+    model.set_value('Sunhours', [10.15, 11.0, 11.93, 13.00, 13.9, 14.38, 14.18, 13.42, 12.38, 11.35, 10.42, 9.92])
     model.set_value('bare_input', Main.HRU_Input([1.0,0.0,0.0,0.0], 0.055, np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
     model.set_value('forest_input', Main.HRU_Input([0.58,0.22,0.16,0.04], 0.7,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
     model.set_value('grass_input', Main.HRU_Input([0.97, 0.02, 0.01, 0.0], 0.214,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
@@ -52,7 +48,7 @@ def run_model_cma(parameters):
 
     Discharge = []
     timestamp = []
-    while (model.get_value_ptr('Current_Date') < (datetime.date(1999, 1, 1))):  
+    while (model.get_value_ptr('Current_Date') < (datetime.date(1998, 12, 31))):  
         model.update()
         timestamp.append(model.get_value_ptr('Current_Date'))
         Discharge.append(model.get_value_ptr('Discharge'))
@@ -81,7 +77,7 @@ def transform(scaled_parameters):
     please see
     http://cma.gforge.inria.fr/cmaes_sourcecode_page.html#practical
     """
-    PARAMETERS_BOUNDS = [[0, 2.0],
+    PARAMETERS_BOUNDS = [[-2.0, 2.0],
                  [1.0, 5.0],
                  [0.001, 1.0],
                  [0.1, 0.9],

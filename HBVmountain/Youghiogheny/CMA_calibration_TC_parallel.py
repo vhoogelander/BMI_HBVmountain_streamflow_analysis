@@ -23,7 +23,7 @@ def run_model_cma(parameters):
 
     forcing = nc.Dataset('Data/ThunderCreek/HBVmountain_ERA5_ThunderCreek_1986_2005.nc') #Catchment dependent
     model = BMI_HBVmountain(forcing_netcdf=forcing)
-    config_file = model.setup(forcing_netcdf=forcing, bare_parameters=  Parameters(parameters[8], parameters[6], 0, parameters[0], parameters[4],
+    config_file = model.setup(forcing_netcdf=forcing, bare_parameters=  Parameters(parameters[8], parameters[6], 0, 0, parameters[4],
                                                                      parameters[1], parameters[2], parameters[3], parameters[7], parameters[0]),
                                         forest_parameters=Parameters(parameters[11], parameters[6], 0, parameters[9], parameters[4],
                                                                      parameters[1], parameters[2], parameters[3], parameters[10], parameters[0]),
@@ -38,21 +38,21 @@ def run_model_cma(parameters):
 
 ########### Catchment dependent settings ######################
 
-    model.set_value('Elevation', Main.Elevations(500, 500, 2500, 1500, 1500))
-    model.set_value('Glacier', [0.0, 0.0, 0.0, 0.6])
+    model.set_value('Elevation', Main.Elevations(587.5, 396.0, 2746.0, 1572.36, 1572.36))
+    model.set_value('Glacier', [0.0, 0.066, 0.7, 0.234])
     model.set_value('Sunhours', [8.87, 10.30, 11.88, 13.65, 15.13, 15.97, 15.58, 14.25, 12.62, 11.87, 9.28, 8.45]) #Seattle
-    model.set_value('bare_input', Main.HRU_Input([0.0,0.0,0.3,0.7], 0.32, [0.0, 0.0, 0.0, 0.6], [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
-    model.set_value('forest_input', Main.HRU_Input([0.0,0.7,0.3,0.0], 0.45,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
-    model.set_value('grass_input', Main.HRU_Input([0.7,0.3,0.0,0.0], 0.21,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
-    model.set_value('rip_input', Main.HRU_Input([1.0,0.0,0.0,0.0], 0.02,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
+    model.set_value('bare_input', Main.HRU_Input([0.001, 0.083, 0.636, 0.28], 0.32, [0.0, 0.021, 0.222, 0.074], [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
+    model.set_value('forest_input', Main.HRU_Input([0.216, 0.396, 0.368, 0.02], 0.46,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
+    model.set_value('grass_input', Main.HRU_Input([0.077, 0.263, 0.546, 0.114], 0.21,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
+    model.set_value('rip_input', Main.HRU_Input([0.65, 0.096, 0.232, 0.022], 0.01,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
     model.set_value('Total_Elevationbands', 4)
-    model.set_value('Elevation_Percentage', [0.15,0.26,0.36,0.23])
+    model.set_value('Elevation_Percentage', [0.15, 0.312, 0.416, 0.122])
  
 
 
     Discharge = []
     timestamp = []
-    while (model.get_value_ptr('Current_Date') < (datetime.date(1999, 1, 1))):  
+    while (model.get_value_ptr('Current_Date') < (datetime.date(1998, 12, 31))):  
         model.update()
         timestamp.append(model.get_value_ptr('Current_Date'))
         Discharge.append(model.get_value_ptr('Discharge'))
@@ -79,7 +79,7 @@ def transform(scaled_parameters):
     please see
     http://cma.gforge.inria.fr/cmaes_sourcecode_page.html#practical
     """
-    PARAMETERS_BOUNDS = [[0, 2.0],
+    PARAMETERS_BOUNDS = [[-2.0, 2.0],
                  [1.0, 5.0],
                  [0.001, 1.0],
                  [0.1, 0.9],
@@ -195,7 +195,7 @@ def full_calibration(ntimes):
                      [0.1, 3.0],
                      [0.05, 0.5]]
     area = 271.9 #km2
-    observation = pd.read_csv('Data/ThunderCreek/Discharge_ThunderCreek.csv', index_col=0).streamflow / area * 1e6 * 1000 *86400
+    observation = pd.read_csv('Data/ThunderCreek/Discharge_ThunderCreek.csv', index_col=0).streamflow / (area * 1e6) * 1000 *86400
     ob_list = []
     params_list = []
     results_doc_list = []
@@ -260,7 +260,7 @@ def main():
 
     if rank == 0:
         paramset = pd.concat(paramset)
-        name = 'paramsets.csv'
+        name = 'paramsets_thundercreek.csv'
         outdir = './output_tc'
         if not os.path.exists(outdir):
             os.mkdir(outdir)
