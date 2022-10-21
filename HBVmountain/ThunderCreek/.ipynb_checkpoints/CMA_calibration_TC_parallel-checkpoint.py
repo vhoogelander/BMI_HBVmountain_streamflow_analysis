@@ -118,7 +118,7 @@ def wrapped_objective_function(scaled_parameters, observation):
     mask = (observation.index >= Qmodelled.index[0]) & (observation.index <= Qmodelled.index[-1])
     observation = observation.loc[mask]
 
-    ED = multi_objective(Qmodelled.loc[Qmodelled.index.year >= 1989], observation.loc[observation.index.year >= 1989], precipitation)[0] 
+    ED = multi_objective(Qmodelled.loc[Qmodelled.index.year >= 1989], observation.loc[observation.index.year >= 1989], precipitation)[1] 
     return ED
 
 def cma_calibration(parameter_bounds, observation):

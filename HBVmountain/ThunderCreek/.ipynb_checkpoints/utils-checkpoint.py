@@ -38,9 +38,16 @@ def generate_forcing_from_NETCDF(forcing_netcdf):
     forcing = pd.DataFrame(index=date_list)
     forcing['temp'] = tlist
     forcing['prec'] = preclist
+    forcing.index = pd.to_datetime(forcing.index)
     
-    
-    forcing.loc[forcing['prec'] > 500, 'prec'] = 0  #remove outliers     
+    forcing.loc[forcing['prec'] > 500, 'prec'] = 0  #remove outliers 
+    freq = pd.offsets.Hour(5)
+    if freq.is_year_start((forcing.index[0])) == False:
+        start = forcing.index[0] + pd.offsets.YearBegin()
+        forcing = forcing.loc[start:]
+    if freq.is_year_end((forcing.index[-1])) == False:
+        end = forcing.index[-1] - pd.offsets.YearBegin()
+        forcing = forcing.loc[:end]
     return forcing
 
 def generate_array_from_raster(str_path_to_rasterfile):
@@ -74,6 +81,7 @@ def get_landuse_from_raster(raster_array_flattened):
     forest = np.sum(n[40:46]) / tot_pixels 
     grass = (np.sum(n[50:83])+ n[21]) /tot_pixels 
     rip = np.sum(n[[11, 90, 94]]) /tot_pixels  
+    
     
 
     landuse_list = [round(bare,3), round(forest,3), round(grass,3), round(rip,3)] 

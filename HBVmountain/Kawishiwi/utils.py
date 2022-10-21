@@ -38,9 +38,16 @@ def generate_forcing_from_NETCDF(forcing_netcdf):
     forcing = pd.DataFrame(index=date_list)
     forcing['temp'] = tlist
     forcing['prec'] = preclist
+    forcing.index = pd.to_datetime(forcing.index)
     
-    
-    forcing.loc[forcing['prec'] > 500, 'prec'] = 0  #remove outliers     
+    forcing.loc[forcing['prec'] > 500, 'prec'] = 0  #remove outliers 
+    freq = pd.offsets.Hour(5)
+    if freq.is_year_start((forcing.index[0])) == False:
+        start = forcing.index[0] + pd.offsets.YearBegin()
+        forcing = forcing.loc[start:]
+    if freq.is_year_end((forcing.index[-1])) == False:
+        end = forcing.index[-1] - pd.offsets.YearBegin()
+        forcing = forcing.loc[:end]
     return forcing
 
 def generate_array_from_raster(str_path_to_rasterfile):
@@ -50,11 +57,12 @@ def generate_array_from_raster(str_path_to_rasterfile):
     
     return arr
 
-def get_elevations_from_raster(raster_array_flattened, nbands=4):
+def get_elevations_from_raster(raster_array_flattened, nbands):
    
     n, bins, patches = plt.hist(raster_array_flattened, bins=nbands)
     plt.close()
     tot_pixels = n.sum()
+    av_elevation = round(raster_array_flattened.mean(),3)
     
     elevation_list = []
     for i in range(nbands):
@@ -62,27 +70,30 @@ def get_elevations_from_raster(raster_array_flattened, nbands=4):
         elevation_list.append(round(elevation_percentage, 3))
     min_elevation = np.min(bins)
     max_elevation = np.max(bins)
-    return elevation_list, bins, min_elevation, max_elevation
-
+    return elevation_list, bins, min_elevation, max_elevation, av_elevation
 def get_landuse_from_raster(raster_array_flattened):
     n, bins, patches = plt.hist(raster_array_flattened, bins=np.arange(96))
     plt.close()
     
     tot_pixels = n.sum()
     
-    bare = np.sum(n[[11, 21, 22, 23, 30]]) / tot_pixels 
-    forest = np.sum(n[40:44]) / tot_pixels 
-    grass = (np.sum(n[50:82])+ n[20]) /tot_pixels 
-    rip = np.sum(n[[10, 89, 94]]) /tot_pixels  
+    bare = np.sum(n[[12, 22, 22, 24, 31]]) / tot_pixels 
+    forest = np.sum(n[40:46]) / tot_pixels 
+    grass = (np.sum(n[50:83])+ n[21]) /tot_pixels 
+    rip = np.sum(n[[11, 90, 94]]) /tot_pixels  
     
-    landuse_list = [bare, forest, grass, rip] 
+    
+
+    landuse_list = [round(bare,3), round(forest,3), round(grass,3), round(rip,3)] 
     return landuse_list
 
 def generate_shapefiles_per_landuse(landuse, str_path_to_nlcd):
     with rasterio.Env():
         with rasterio.open(str_path_to_nlcd) as src:
             image = src.read(masked=True) # first band
-                    
+            
+            if landuse == 'glacier':
+                image[(image == 12)] = -9999
             if landuse == 'bare':
                 image[(image == 12) | (image == 22) | (image == 23)  | (image == 24) | (image == 31)] = -9999
             if landuse == 'forest':
@@ -117,19 +128,26 @@ def clip_elevation_per_landuse(gpd_polygonized_raster, str_path_to_elevation, ex
     
     return out_img 
 
-def generate_landuse_per_elevation(str_path_to_elevation, str_path_to_landuse):
+def generate_landuse_per_elevation(str_path_to_elevation, str_path_to_landuse, nbands=4):
     elevation_array = generate_array_from_raster(str_path_to_elevation)
     landuse_array = generate_array_from_raster(str_path_to_landuse)
     
-    elevation_list, bins, min_elevation, max_elevation = get_elevations_from_raster(elevation_array, nbands=4)
+    elevation_list, bins, min_elevation, max_elevation, av_elevation = get_elevations_from_raster(elevation_array, nbands=nbands)
     landuse_catchment = get_landuse_from_raster(landuse_array)
     
-    tot_elevations = [elevation_list]
-    landuse = ['bare', 'forest', 'grass', 'rip']
+    tot_elevations = [[elevation_list, landuse_catchment, (max_elevation-min_elevation)/nbands, min_elevation, max_elevation, av_elevation]]
+    landuse = ['glacier','bare', 'forest', 'grass', 'rip']
     for x in landuse:
         gpd_polygonized_raster = generate_shapefiles_per_landuse(x, str_path_to_landuse)
-        arr = clip_elevation_per_landuse(gpd_polygonized_raster, str_path_to_elevation)
-        raster_array_flattened = np.expand_dims(arr.flatten(), 0).T
-        elevation_list, bins, min_elevation, max_elevation = get_elevations_from_raster(raster_array_flattened, nbands=4)
-        tot_elevations.append([elevation_list, min_elevation])
+        if not gpd_polygonized_raster.empty:
+            arr = clip_elevation_per_landuse(gpd_polygonized_raster, str_path_to_elevation)
+            raster_array_flattened = np.expand_dims(arr.flatten(), 0).T
+            elevation_list, bins, min_elevation, max_elevation, av_elevation = get_elevations_from_raster(raster_array_flattened, nbands=nbands)
+
+            if x == 'glacier':
+                tot_elevations.append([elevation_list, list(np.around(np.array(elevation_list)*landuse_catchment[0], 3))]) 
+            else:
+                tot_elevations.append([elevation_list])
+
+#         tot_elevations.append([elevation_list])
     return tot_elevations

@@ -28,7 +28,7 @@ def run_model_cma(parameters):
                                         forest_parameters=Parameters(parameters[11], parameters[6], 0, parameters[9], parameters[4],
                                                                      parameters[1], parameters[2], parameters[3], parameters[10], parameters[0]),
                                         grass_parameters= Parameters(parameters[14], parameters[6], 0, parameters[12], parameters[4],
-                                                                     parameters[1], parameters[2], parameters[3], parameters[13], parameters[0]),
+                                                                     parameters[1], pavirameters[2], parameters[3], parameters[13], parameters[0]),
                                         rip_parameters=   Parameters(parameters[17], parameters[6], 0, parameters[15], parameters[18],
                                                                      parameters[1], parameters[2], parameters[3], parameters[16], parameters[0]),
                                         slow_parameters=  Slow_Paramters(parameters[5], parameters[19]))

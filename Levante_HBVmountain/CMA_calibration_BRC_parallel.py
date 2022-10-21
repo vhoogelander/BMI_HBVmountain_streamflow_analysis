@@ -23,7 +23,7 @@ def run_model_cma(parameters):
 
     forcing = nc.Dataset('Data/BigCreek/HBVmountain_ERA5_BigRockCreek_1986_2015.nc') #Catchment dependent
     model = BMI_HBVmountain(forcing_netcdf=forcing)
-    config_file = model.setup(forcing_netcdf=forcing, bare_parameters=  Parameters(parameters[8], parameters[6], 0, parameters[0], parameters[4],
+    config_file = model.setup(forcing_netcdf=forcing, bare_parameters=  Parameters(parameters[8], parameters[6], 0, 0, parameters[4],
                                                                      parameters[1], parameters[2], parameters[3], parameters[7], parameters[0]),
                                         forest_parameters=Parameters(parameters[11], parameters[6], 0, parameters[9], parameters[4],
                                                                      parameters[1], parameters[2], parameters[3], parameters[10], parameters[0]),
