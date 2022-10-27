@@ -149,6 +149,7 @@ function getEpot_Daily_thornthwaite(Temp::Array{Float64, 1}, Timeseries::Array{D
     first_year = Dates.yearmonthday(Timeseries[1])
     year_count = 1
     for (i, current_date) in enumerate(Timeseries)
+        println(i, current_date)
         #current_date = Date(current_date, dateformat"y,m,d")
         #get the number of days of the current month
         daysinmonth = Dates.daysinmonth(current_date)

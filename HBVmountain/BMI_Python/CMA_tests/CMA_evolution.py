@@ -3,7 +3,18 @@
 
 # In[1]:
 
-
+from julia.api import LibJulia
+api = LibJulia.load()
+api.sysimage = "sys.so"
+api.init_julia()
+import time
+from mpi4py import MPI
+from BMI_HBVmountain_Python import *
+from Calibration import *
+import os
+import sys
+import cma
+from ruamel.yaml import YAML
 from BMI_HBVmountain_Python import *
 from Calibration_BRC import *
 import os
@@ -59,58 +70,32 @@ forcing.set_index('time', inplace=True)
 
 def run_model_cma(parameters):
     """Setup and run model."""
-    model = BMI_HBVmountain()
-    
-
-    # Generate a random tag for work_dir name
-    # Each work_dir is used by one worker in multiprocessing
-#    tag = hashlib.md5(str(parameters).encode('utf-8')).hexdigest()
-#    work_dir = CFG['output_dir'] / f"marrmot-m14_{tag}"
-    
-    
-    if len(parameters) ==5:
-        cfg_file = model.setup(bare_parameters=  Parameters(parameters[0][0], parameters[0][1], parameters[0][2], parameters[0][3], parameters[0][4],
-                                                                     parameters[0][5], parameters[0][6], parameters[0][7], parameters[0][8], parameters[0][9]),
-                                        forest_parameters=Parameters(parameters[1][0], parameters[1][1], parameters[1][2], parameters[1][3], parameters[1][4],
-                                                                     parameters[1][5], parameters[1][6], parameters[1][7], parameters[1][8], parameters[1][9]), 
-                                        grass_parameters= Parameters(parameters[2][0], parameters[2][1], parameters[2][2], parameters[2][3], parameters[2][4],
-                                                                     parameters[2][5], parameters[2][6], parameters[2][7], parameters[2][8], parameters[2][9]),
-                                        rip_parameters=   Parameters(parameters[3][0], parameters[3][1], parameters[3][2], parameters[3][3], parameters[3][4],
-                                                                     parameters[3][5], parameters[3][6], parameters[3][7], parameters[3][8], parameters[3][9]), 
-                                        slow_parameters=  Slow_Paramters(parameters[4][0], parameters[4][1])
-        )
-    else:
-        cfg_file = model.setup(bare_parameters=  Parameters(parameters[8], parameters[6], 0, parameters[0], parameters[4],
+    forcing = nc.Dataset('Data/ThunderCreek/HBVmountain_ERA5_ThunderCreek_1986_2005.nc') #Catchment dependent
+    model = BMI_HBVmountain(forcing_netcdf=forcing)
+    config_file = model.setup(forcing_netcdf=forcing, bare_parameters=  Parameters(parameters[8], parameters[6], 0, 0, parameters[4],
                                                                      parameters[1], parameters[2], parameters[3], parameters[7], parameters[0]),
                                         forest_parameters=Parameters(parameters[11], parameters[6], 0, parameters[9], parameters[4],
                                                                      parameters[1], parameters[2], parameters[3], parameters[10], parameters[0]),
                                         grass_parameters= Parameters(parameters[14], parameters[6], 0, parameters[12], parameters[4],
-                                                                     parameters[1], parameters[2], parameters[3], parameters[13], parameters[0]),
+                                                                     parameters[1], pavirameters[2], parameters[3], parameters[13], parameters[0]),
                                         rip_parameters=   Parameters(parameters[17], parameters[6], 0, parameters[15], parameters[18],
                                                                      parameters[1], parameters[2], parameters[3], parameters[16], parameters[0]),
-                                        slow_parameters=  Slow_Paramters(parameters[5], parameters[19]))        
-    
-    # Initialize the model inside the docker container through GRPC4bmi
-    model.initialize(cfg_file)
-    
-    model.set_value('Temperature', (forcing['temp_era5'].values).reshape(len(forcing),1))
-    model.set_value('Precipitation', (forcing['prec_era5'].values).reshape(len(forcing),1))
-    model.set_value('Date', list(forcing.index.values))
-    model.set_value('Current_Date', forcing.index.values[0])  
-    
-    model.set_value('Elevation', Elevations(500, 500, 2500, 1500, 1500)) # 4 Elevation bands
-    model.set_value('Glacier', [0.0, 0.0, 0.0, 0.6]) # 60% of the area glacier at highest elevation band
+                                        slow_parameters=  Slow_Paramters(parameters[5], parameters[19]))
+    model.initialize(config_file)
+
+
+
+########### Catchment dependent settings ######################
+
+    model.set_value('Elevation', Main.Elevations(587.5, 396.0, 2746.0, 1572.36, 1572.36))
+    model.set_value('Glacier', [0.0, 0.066, 0.7, 0.234])
     model.set_value('Sunhours', [8.87, 10.30, 11.88, 13.65, 15.13, 15.97, 15.58, 14.25, 12.62, 11.87, 9.28, 8.45]) #Seattle
-    model.set_value('bare_input', HRU_Input([0.0,0.0,0.3,0.7], 0.32, [0.0, 0.0, 0.0, 0.6], [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
-    model.set_value('forest_input', HRU_Input([0.0,0.7,0.3,0.0], 0.45,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
-    model.set_value('grass_input', HRU_Input([0.7,0.3,0.0,0.0], 0.21,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
-    model.set_value('rip_input', HRU_Input([1.0,0.0,0.0,0.0], 0.02,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
+    model.set_value('bare_input', Main.HRU_Input([0.001, 0.083, 0.636, 0.28], 0.32, [0.0, 0.021, 0.222, 0.074], [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
+    model.set_value('forest_input', Main.HRU_Input([0.216, 0.396, 0.368, 0.02], 0.46,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
+    model.set_value('grass_input', Main.HRU_Input([0.077, 0.263, 0.546, 0.114], 0.21,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
+    model.set_value('rip_input', Main.HRU_Input([0.65, 0.096, 0.232, 0.022], 0.01,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
     model.set_value('Total_Elevationbands', 4)
-    model.set_value('Elevation_Percentage', [0.15,0.26,0.36,0.23])
-    model.set_value('bare_storage', Storages(0,np.zeros(4),np.zeros(4),np.zeros(4),0))
-    model.set_value('forest_storage', Storages(0,np.zeros(4),np.zeros(4),np.zeros(4),0))
-    model.set_value('grass_storage', Storages(0,np.zeros(4),np.zeros(4),np.zeros(4),0))
-    model.set_value('rip_storage', Storages(0,np.zeros(4),np.zeros(4),np.zeros(4),0))
+    model.set_value('Elevation_Percentage', [0.15, 0.312, 0.416, 0.122])
   
     # Convert start to date number to be used in if statement
 #     start_time = date2num(
@@ -125,6 +110,7 @@ def run_model_cma(parameters):
         simulated_discharge.append(model.get_value_ptr('Discharge'))
     model.finalize()
     return np.array(simulated_discharge)
+
 
 
 
@@ -230,7 +216,7 @@ def run_calibration(parameter_bounds, observation, area):
 # In[5]:
 
 
-parameter_bounds = [[-2.0, 2.0],
+PARAMETERS_BOUNDS = [[-2.0, 2.0],
                      [1.0, 5.0],
                      [0.001, 1.0],
                      [0.1, 0.9],

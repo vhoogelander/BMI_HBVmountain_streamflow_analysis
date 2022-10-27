@@ -35,6 +35,7 @@ def run_climate_simulations(calval_results, str_path_forcing):
         model.set_value('rip_input', Main.HRU_Input([0.65, 0.096, 0.232, 0.022], 0.01,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
         model.set_value('Total_Elevationbands', 4)
         model.set_value('Elevation_Percentage', [0.15, 0.312, 0.416, 0.122])
+ 
 
 
 

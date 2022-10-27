@@ -38,15 +38,15 @@ def run_model_cma(parameters):
 
 ########### Catchment dependent settings ######################
 
-    model.set_value('Elevation', Main.Elevations(50, 200, 450, 280, 280))
+    model.set_value('Elevation', Main.Elevations(386.75, 1245.0, 2792.0, 1902.188, 1902.188))
     model.set_value('Glacier', [0.0, 0.0, 0.0, 0.0])
-    model.set_value('Sunhours', [8.83, 10.26, 11.95, 13.75, 15.28, 16.11, 15.75, 14.36, 12.63, 10.9, 9.28, 8.43])
-    model.set_value('bare_input', Main.HRU_Input([0,0,0,0], 0, np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
-    model.set_value('forest_input', Main.HRU_Input([0.8,0.1,0.1,0.0], 0.4,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
-    model.set_value('grass_input', Main.HRU_Input([0.3,0.3,0.2,0.2], 0.3,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
-    model.set_value('rip_input', Main.HRU_Input([0.0,0.1,0.3,0.6], 0.3,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
+    model.set_value('Sunhours', [10.2 ,11.0 ,12.0 ,13.1 ,14.0 ,14.4, 14.1 ,13.3, 12.3 ,11.3, 10.4, 9.9])
+    model.set_value('bare_input', Main.HRU_Input([0.277, 0.161, 0.127, 0.435], 0.023, np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
+    model.set_value('forest_input', Main.HRU_Input([0.113, 0.466, 0.304, 0.117], 0.623,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
+    model.set_value('grass_input', Main.HRU_Input([0.491, 0.261, 0.192, 0.056], 0.354,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
+    model.set_value('rip_input', Main.HRU_Input([0.584, 0.37, 0.033, 0.013], 0.01,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0))
     model.set_value('Total_Elevationbands', 4)
-    model.set_value('Elevation_Percentage', [0.2,0.2,0.3,0.3])
+    model.set_value('Elevation_Percentage', [0.254, 0.385, 0.269, 0.092])
  
 
 
@@ -261,7 +261,7 @@ def main():
     if rank == 0:
         paramset = pd.concat(paramset)
         name = 'paramsets_bigrockcreek.csv' #Catchment dependent
-        outdir = './output_tc' #Catchment dependent
+        outdir = './output_bc' #Catchment dependent
         if not os.path.exists(outdir):
             os.mkdir(outdir)
         fullname = os.path.join(outdir, name)

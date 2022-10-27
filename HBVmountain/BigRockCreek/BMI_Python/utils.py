@@ -47,7 +47,8 @@ def generate_forcing_from_NETCDF(forcing_netcdf):
         forcing = forcing.loc[start:]
     if freq.is_year_end((forcing.index[-1])) == False:
         end = forcing.index[-1] - pd.offsets.YearBegin()
-        forcing = forcing.loc[:end]
+        forcing = forcing.loc[:end][0:-1]
+    forcing.index = pd.to_datetime(forcing.index).date
     return forcing
 
 def generate_array_from_raster(str_path_to_rasterfile):

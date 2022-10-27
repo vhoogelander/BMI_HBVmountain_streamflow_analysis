@@ -23,7 +23,6 @@ def run_validation(calibration_results):
                                             rip_parameters=   Parameters(parameters.beta_Rip, parameters.Ce, 0, parameters.Interceptioncapacity_Rip, parameters.Kf_Rip,
                                                                          parameters.Meltfactor, parameters.Mm, parameters.Ratio_Pref, parameters.Soilstoragecapacity_Rip, parameters.Temp_Thresh),
                                             slow_parameters=  Slow_Paramters(parameters.Ks, parameters.Ratio_Riparian))
-
         model.initialize(config_file)
 
 
@@ -49,7 +48,7 @@ def run_validation(calibration_results):
             timestamp.append(model.get_value_ptr('Current_Date'))
             Discharge.append(model.get_value_ptr('Discharge'))
 
-        simulated_discharge =  pd.DataFrame(
+        simulated_discharge = simulated_discharge_df =  pd.DataFrame(
                 {'streamflow': Discharge},
                 index=pd.to_datetime(timestamp)
             )
@@ -63,16 +62,15 @@ def run_validation(calibration_results):
         
         # Validation 
         precipitation = generate_forcing_from_NETCDF(forcing).prec
-        area = 652.68 #km2 #
+        area = 652.68 #km2 #Catchment dependent
         observation = pd.read_csv('Data/Conasauga/Discharge_Conasauga.csv', index_col=0).streamflow / (area * 1e6) * 1000 *86400 #Catchment dependent
-        precipitation.index, simulated_discharge.index, observation.index = pd.to_datetime(precipitation.index), pd.to_datetime(simulated_discharge.index), pd.to_datetime(observation.index)
-        mask = (observation.index >= simulated_discharge.index[0]) & (observation.index <= simulated_discharge.index[-1])
+
+        mask = (observation.index >= str(simulated_discharge.index[0])) & (observation.index <= str(simulated_discharge.index[-1]))
         observation = observation.loc[mask]
-        
-        
-        objective_function = multi_objective(simulated_discharge.loc[simulated_discharge.index.year >= 1999].streamflow, observation.loc[observation.index.year >= 1999], precipitation)
-        
-        
+        observation.index = pd.to_datetime(observation.index)
+        precipitation.index = pd.to_datetime(precipitation.index)
+        objective_function = multi_objective(simulated_discharge.loc[simulated_discharge.index.year >= 1999].streamflow, 
+                                             observation.loc[observation.index.year >= 1999], precipitation)
         ob_list.append(objective_function)
         params_list.append(parameters)    
 
@@ -81,7 +79,6 @@ def run_validation(calibration_results):
         
     for i in range(len(ob_list)):
         paramset.loc[i] = [ob_list[i][0], ob_list[i][1], ob_list[i][2], ob_list[i][3], ob_list[i][4], params_list[i][0], params_list[i][1], params_list[i][2], params_list[i][3], params_list[i][4], params_list[i][5], params_list[i][6], params_list[i][7], params_list[i][8], params_list[i][9], params_list[i][10], params_list[i][11], params_list[i][12], params_list[i][13], params_list[i][14], params_list[i][15], params_list[i][16], params_list[i][17], params_list[i][18], params_list[i][19]]    
-        
 
     return paramset, df
 
@@ -95,59 +92,59 @@ def run_validation(calibration_results):
 
 
 
-def main():
-    comm = MPI.COMM_WORLD
-    cpus = comm.Get_size()
-    rank = comm.Get_rank()
-    n_samples = int(sys.argv[1])
+# def main():
+#     comm = MPI.COMM_WORLD
+#     cpus = comm.Get_size()
+#     rank = comm.Get_rank()
+#     n_samples = int(sys.argv[1])
 
-    if rank == 0:
-        start_time = datetime.datetime.now()
-        partitions = [ int(n_samples / cpus) ] * cpus
-        counts = [ int(0) ] * cpus
-    else:
-        partitions = None
-        counts = None
+#     if rank == 0:
+#         start_time = datetime.datetime.now()
+#         partitions = [ int(n_samples / cpus) ] * cpus
+#         counts = [ int(0) ] * cpus
+#     else:
+#         partitions = None
+#         counts = None
 
-    partition_item = comm.scatter(partitions, root=0)
-    bare_paramset_item, forest_paramset_item, grass_paramset_item, rip_paramset_item, slow_paramset_item, = HBVmountain_simulation(partition_item)
-    bare_paramset = comm.gather(bare_paramset_item, root=0)
-    forest_paramset = comm.gather(forest_paramset_item, root=0)
-    grass_paramset = comm.gather(grass_paramset_item, root=0)
-    rip_paramset = comm.gather(rip_paramset_item, root=0)
-    slow_paramset = comm.gather(slow_paramset_item, root=0)
-    #bare_paramset, forest_paramset, grass_paramset, rip_paramset, slow_paramset = HBVmountain_simulation(n_samples)
-    if rank == 0:
-        bare_paramset = pd.concat(bare_paramset)
-        forest_paramset = pd.concat(forest_paramset)
-        grass_paramset = pd.concat(grass_paramset)
-        rip_paramset = pd.concat(rip_paramset)
-        slow_paramset = pd.concat(slow_paramset)
-
-
-        bare_name = 'bare_paramsets.csv'
-        forest_name = 'forest_paramsets.csv'
-        grass_name = 'grass_paramsets.csv'
-        rip_name = 'rip_paramsets.csv'
-        slow_name = 'slow_paramsets.csv'
-
-        outdir = './output_validation'
-        if not os.path.exists(outdir):
-            os.mkdir(outdir)
-
-        bare_fullname = os.path.join(outdir, bare_name)
-        forest_fullname = os.path.join(outdir, forest_name)
-        grass_fullname = os.path.join(outdir, grass_name)
-        rip_fullname = os.path.join(outdir, rip_name)
-        slow_fullname = os.path.join(outdir, slow_name)
+#     partition_item = comm.scatter(partitions, root=0)
+#     bare_paramset_item, forest_paramset_item, grass_paramset_item, rip_paramset_item, slow_paramset_item, = HBVmountain_simulation(partition_item)
+#     bare_paramset = comm.gather(bare_paramset_item, root=0)
+#     forest_paramset = comm.gather(forest_paramset_item, root=0)
+#     grass_paramset = comm.gather(grass_paramset_item, root=0)
+#     rip_paramset = comm.gather(rip_paramset_item, root=0)
+#     slow_paramset = comm.gather(slow_paramset_item, root=0)
+#     #bare_paramset, forest_paramset, grass_paramset, rip_paramset, slow_paramset = HBVmountain_simulation(n_samples)
+#     if rank == 0:
+#         bare_paramset = pd.concat(bare_paramset)
+#         forest_paramset = pd.concat(forest_paramset)
+#         grass_paramset = pd.concat(grass_paramset)
+#         rip_paramset = pd.concat(rip_paramset)
+#         slow_paramset = pd.concat(slow_paramset)
 
 
-        bare_paramset.to_csv(bare_fullname)
-        forest_paramset.to_csv(forest_fullname)
-        grass_paramset.to_csv(grass_fullname)
-        rip_paramset.to_csv(rip_fullname)
-        slow_paramset.to_csv(slow_fullname)
+#         bare_name = 'bare_paramsets.csv'
+#         forest_name = 'forest_paramsets.csv'
+#         grass_name = 'grass_paramsets.csv'
+#         rip_name = 'rip_paramsets.csv'
+#         slow_name = 'slow_paramsets.csv'
+
+#         outdir = './output_validation'
+#         if not os.path.exists(outdir):
+#             os.mkdir(outdir)
+
+#         bare_fullname = os.path.join(outdir, bare_name)
+#         forest_fullname = os.path.join(outdir, forest_name)
+#         grass_fullname = os.path.join(outdir, grass_name)
+#         rip_fullname = os.path.join(outdir, rip_name)
+#         slow_fullname = os.path.join(outdir, slow_name)
 
 
-if __name__ == '__main__':
-    main()
+#         bare_paramset.to_csv(bare_fullname)
+#         forest_paramset.to_csv(forest_fullname)
+#         grass_paramset.to_csv(grass_fullname)
+#         rip_paramset.to_csv(rip_fullname)
+#         slow_paramset.to_csv(slow_fullname)
+
+
+# if __name__ == '__main__':
+#     main()
