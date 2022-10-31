@@ -9,7 +9,7 @@ def run_validation(calibration_results):
     ob_list = []
     params_list = []
     sim_list = []
-    
+    df_evap = pd.DataFrame(index=generate_forcing_from_NETCDF(forcing).prec.index)
     df = pd.DataFrame(index=generate_forcing_from_NETCDF(forcing).prec.index)
     for i in range(len(calibration_results)):
         parameters = calibration_results.iloc[i, -20:]
@@ -41,14 +41,15 @@ def run_validation(calibration_results):
         model.set_value('Elevation_Percentage', [0.254, 0.385, 0.269, 0.092])
 
 
-
+        Evaporation = []
         Discharge = []
         timestamp = []
         while (model.get_value_ptr('Current_Date') < (datetime.date(2005, 12, 31))):  
             model.update()
             timestamp.append(model.get_value_ptr('Current_Date'))
             Discharge.append(model.get_value_ptr('Discharge'))
-
+            Evaporation.append(model.get_value_ptr('Total_Evaporation'))
+            
         simulated_discharge =  pd.DataFrame(
                 {'streamflow': Discharge},
                 index=pd.to_datetime(timestamp)
@@ -57,8 +58,13 @@ def run_validation(calibration_results):
             {f'simulation_{i+1}': Discharge},
             index=pd.to_datetime(timestamp)
         )
+        simulated_evaporation_df = pd.DataFrame(
+            {f'simulation_{i+1}': Evaporation},
+            index=pd.to_datetime(timestamp)
+        )
         df = pd.merge(df, simulated_discharge_df, left_index=True, right_index=True)
-        
+        df_evap = pd.merge(df_evap, simulated_evaporation_df, left_index=True, right_index=True)
+
         model.finalize()
         
         # Validation 
@@ -83,7 +89,7 @@ def run_validation(calibration_results):
         paramset.loc[i] = [ob_list[i][0], ob_list[i][1], ob_list[i][2], ob_list[i][3], ob_list[i][4], params_list[i][0], params_list[i][1], params_list[i][2], params_list[i][3], params_list[i][4], params_list[i][5], params_list[i][6], params_list[i][7], params_list[i][8], params_list[i][9], params_list[i][10], params_list[i][11], params_list[i][12], params_list[i][13], params_list[i][14], params_list[i][15], params_list[i][16], params_list[i][17], params_list[i][18], params_list[i][19]]    
         
 
-    return paramset, df
+    return paramset, df, df_evap
 
 
 
