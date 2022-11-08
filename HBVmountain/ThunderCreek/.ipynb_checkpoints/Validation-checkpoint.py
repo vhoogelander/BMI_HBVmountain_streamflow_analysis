@@ -13,6 +13,7 @@ def run_validation(calibration_results):
     params_list = []
     sim_list = []
     df_evap = pd.DataFrame(index=generate_forcing_from_NETCDF(forcing).prec.index)
+    glacier = []
     df = pd.DataFrame(index=generate_forcing_from_NETCDF(forcing).prec.index)
     for i in range(len(calibration_results)):
         parameters = calibration_results.iloc[i, -20:]
@@ -51,6 +52,7 @@ def run_validation(calibration_results):
             timestamp.append(model.get_value_ptr('Current_Date'))
             Discharge.append(model.get_value_ptr('Discharge'))
             Evaporation.append(model.get_value_ptr('Total_Evaporation'))
+            glacier.append(model.get_value_ptr('Glacier'))
 
         simulated_discharge = simulated_discharge_df =  pd.DataFrame(
                 {'streamflow': Discharge},
@@ -91,7 +93,7 @@ def run_validation(calibration_results):
         paramset.loc[i] = [ob_list[i][0], ob_list[i][1], ob_list[i][2], ob_list[i][3], ob_list[i][4], params_list[i][0], params_list[i][1], params_list[i][2], params_list[i][3], params_list[i][4], params_list[i][5], params_list[i][6], params_list[i][7], params_list[i][8], params_list[i][9], params_list[i][10], params_list[i][11], params_list[i][12], params_list[i][13], params_list[i][14], params_list[i][15], params_list[i][16], params_list[i][17], params_list[i][18], params_list[i][19]]    
         
 
-    return paramset, df, df_evap
+    return paramset, df, df_evap, glacier
 
 
 

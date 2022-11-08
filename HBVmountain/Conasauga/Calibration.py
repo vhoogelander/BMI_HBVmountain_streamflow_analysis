@@ -38,7 +38,7 @@ def yearlyrunoff(Precipitation, Discharge):
     annual_Discharge = Discharge.groupby(pd.PeriodIndex(Discharge.index, freq="y")).sum()
     mask = (annual_prec.index >= annual_Discharge.index[0]) & (annual_prec.index <= annual_Discharge.index[-1])
     annual_prec = annual_prec.loc[mask]
-    annual_runoff_coefficient = annual_prec / annual_Discharge
+    annual_runoff_coefficient = annual_Discharge / annual_prec
     return annual_runoff_coefficient
 
 def multi_objective(Qmodelled, Qobserved, Precipitation):
