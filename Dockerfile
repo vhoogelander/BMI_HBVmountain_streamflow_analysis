@@ -1,11 +1,10 @@
-FROM continuumio/anaconda3
+#FROM continuumio/anaconda3
+FROM ewatercycle/wflow-grpc4bmi
+
 MAINTAINER Vincent Hoogelander <v.hoogelander@student.tudelft.nl>
 
 # Install grpc4bmi
-RUN pip install grpc4bmi
-
-# Instal here your BMI model:
-RUN git clone https://github.com/vhoogelander/Thesis.git /opt/HBVmountain
+#RUN pip install grpc4bmi
 WORKDIR /opt/HBVmountain
 
 #install julia

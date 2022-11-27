@@ -31,5 +31,6 @@ function replace_HBVmountainmodel(model::HBVmountain_model, config_file::HBVmoun
     model.ETP = config_file.ETP
     model.Date = config_file.Date
     model.Current_Date = config_file.Current_Date
+    model.Sunhours = config_file.Sunhours
     model.Units = config_file.Units
 end 
