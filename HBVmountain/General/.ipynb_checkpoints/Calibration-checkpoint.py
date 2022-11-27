@@ -195,7 +195,7 @@ def cma_calibration(parameter_bounds, observation, MAXITER, forcing, path_to_sha
     return full_output
 
 
-def full_calibration(ntimes, observation, MAXITER, forcing, path_to_shapefile, path_to_dem, path_to_nlcd, start_year, years_warming_up, end_year):
+def full_calibration(ntimes, path_to_observation, MAXITER, forcing, path_to_shapefile, path_to_dem, path_to_nlcd, start_year, years_warming_up, end_year):
     exec_start_time = time.time()
     PARAMETERS_BOUNDS = [[-2.0, 2.0],
                      [1.0, 5.0],
@@ -218,7 +218,7 @@ def full_calibration(ntimes, observation, MAXITER, forcing, path_to_shapefile, p
                      [0.1, 3.0],
                      [0.05, 0.5]]
     area = gpd.read_file(path_to_shapefile).area_hys.values[0] #km2
-    observation = pd.read_csv(observation, index_col=0).streamflow / (area * 1e6) * 1000 *86400
+    observation = pd.read_csv(path_to_observation, index_col=0).streamflow / (area * 1e6) * 1000 *86400
     ob_list = []
     params_list = []
     results_doc_list = []
@@ -280,7 +280,7 @@ def main():
 
 
     partition_item = comm.scatter(partitions, root=0)
-    paramset_item = full_calibration(partition_item,  observation, MAXITER, forcing, path_to_shapefile, path_to_dem, path_to_nlcd, start_year, years_warming_up, end_year)
+    paramset_item = full_calibration(partition_item,  path_to_observation, MAXITER, forcing, path_to_shapefile, path_to_dem, path_to_nlcd, start_year, years_warming_up, end_year)
     paramset = comm.gather(paramset_item, root=0)
 
     if rank == 0:

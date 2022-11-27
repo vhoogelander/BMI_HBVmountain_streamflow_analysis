@@ -21,6 +21,10 @@ import geopandas as gpd
 import fiona
 import time
 from bmipy import Bmi
+from warnings import filterwarnings
+import os
+from scipy import stats
+filterwarnings(action='ignore', category=DeprecationWarning, message='`np.bool` is a deprecated alias')
 
 from ruamel.yaml import YAML
 def generate_forcing_from_NETCDF(forcing_netcdf):
@@ -212,7 +216,7 @@ def linear_scaling_correction(str_path_calibration_forcing, str_path_input_hist_
 
     calibration_forcing  = generate_forcing_from_NETCDF(calibration_forcing)
     calibration_forcing.index = pd.to_datetime(calibration_forcing.index)
-    calibration_forcing = calibration_forcing.loc[calibration_forcing.index.year <= 2005]
+    calibration_forcing = calibration_forcing.loc[calibration_forcing.index.year <= calibration_forcing.index.year[-1]]
 
     input_hist_forcing = generate_forcing_from_NETCDF(input_hist_forcing)
     input_hist_forcing.index = pd.to_datetime(input_hist_forcing.index)

@@ -21,6 +21,10 @@ import geopandas as gpd
 import fiona
 import time
 from bmipy import Bmi
+from warnings import filterwarnings
+import os
+from scipy import stats
+filterwarnings(action='ignore', category=DeprecationWarning, message='`np.bool` is a deprecated alias')
 
 from ruamel.yaml import YAML
 def generate_forcing_from_NETCDF(forcing_netcdf):
