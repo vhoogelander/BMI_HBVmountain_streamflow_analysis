@@ -98,3 +98,25 @@ def run_climate_simulations_biascorrected(calval_results, str_path_input_forcing
         model.finalize()
     
     return df
+
+def create_monthly_boxplots(simulations_hist, simulations_ssp245, simulations_ssp585):
+    fig, axarr = plt.subplots(figsize=(12,4))
+
+    hist = simulations_hist.groupby(simulations_hist.index.strftime("%y-%m")).sum()
+    hist['mean'] = hist.mean(axis=1)
+    hist['month'] = hist.index.str[3:]
+    hist.boxplot(by='month', column='mean', ax=axarr, positions=np.array(range(12))*3.0-0.8, sym='', widths=0.6, color='k')
+
+    ssp245 = simulations_ssp245.groupby(simulations_ssp245.index.strftime("%y-%m")).sum()
+    ssp245['mean'] = ssp245.mean(axis=1)
+    ssp245['month'] = ssp245.index.str[3:]
+    ssp245.boxplot(by='month', column='mean', ax=axarr, sym='', positions=np.array(range(12))*3.0, widths=0.6, color='b')
+
+    ssp585 = simulations_ssp585.groupby(simulations_ssp585.index.strftime("%y-%m")).sum()
+    ssp585['mean'] = ssp585.mean(axis=1)
+    ssp585['month'] = ssp585.index.str[3:]
+    ssp585.boxplot(by='month', column='mean', ax=axarr, positions=np.array(range(12))*3.0+0.8, sym='', widths=0.6, color='r')
+    
+    ticks = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    fig.suptitle('')
+    plt.xticks(range(0, 12 * 3, 3), ticks)

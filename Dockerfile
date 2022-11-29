@@ -1,10 +1,13 @@
-#FROM continuumio/anaconda3
-FROM ewatercycle/wflow-grpc4bmi
+FROM continuumio/anaconda3
+#FROM ewatercycle/wflow-grpc4bmi
 
 MAINTAINER Vincent Hoogelander <v.hoogelander@student.tudelft.nl>
 
 # Install grpc4bmi
-#RUN pip install grpc4bmi
+#RUN pip install git+https://github.com/eWaterCycle/grpc4bmi.git#egg=grpc4bmi
+
+# Instal here your BMI model:
+RUN git clone https://github.com/vhoogelander/Thesis.git /opt/HBVmountain
 WORKDIR /opt/HBVmountain
 
 #install julia
@@ -32,11 +35,11 @@ RUN apt-get update && \
 #install custom system image
 RUN python3 -m julia.sysimage sys.so
 
-WORKDIR /opt/HBVmountain/Container
+
 
 # Run bmi server
 #ENTRYPOINT ["/opt/bin/run-bmi-server", "--name", "BMI_HBVmountain_Python.BMI_HBVmountain", "--path", /opt/HBVmountain/Container]
-
+WORKDIR /opt/HBVmountain/Container
 # Expose the magic grpc4bmi port
-EXPOSE 55555
+#EXPOSE 55555
 

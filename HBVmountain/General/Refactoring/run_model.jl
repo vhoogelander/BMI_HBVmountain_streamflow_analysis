@@ -3,7 +3,7 @@ Runs the semi-distributed bucket model for a given area with one precipitation a
 
 $(SIGNATURES)
 
-The function returns the modeled discharge for each timestep, the modelled snow extend for each elevation and timestep and the Waterbalance.
+The function returns the modeled discharge for one timestep, the modelled snow extend for each elevation and timestep and the Waterbalance.
 """
 function run_model(Area, Evaporation_Mean::Float64, Precipitation::Array{Float64,1}, Temp::Array{Float64,1},
                 bare_input::HRU_Input, forest_input::HRU_Input, grass_input::HRU_Input, rip_input::HRU_Input,
@@ -68,7 +68,7 @@ Runs the semi-distributed bucket model for a given area with one precipitation a
 
 $(SIGNATURES)
 
-The function returns the modeled discharge for each timestep, the modelled snow extend for each elevation and timestep and the Waterbalance.
+The function returns the modeled discharge for one timestep, the modelled snow extend for each elevation and timestep and the Waterbalance.
 """
 function run_model_glacier(Area, Evaporation_Mean::Float64, Glacier::Array{Float64,1}, Precipitation::Array{Float64,1}, Temp::Array{Float64,1},
                 bare_input::HRU_Input, forest_input::HRU_Input, grass_input::HRU_Input, rip_input::HRU_Input,
