@@ -20,6 +20,13 @@ RUN python -c 'from julia import install; install()'
 RUN pip install bmi-python
 RUN pip install bmipy
 RUN pip install netCDF4
+RUN pip install rasterio
+RUN pip install shapely
+RUN pip install geopandas
+RUN pip install suntime
+RUN pip install cma
+RUN pip install ruamel.yaml
+
 
 #install julia packages
 WORKDIR /opt/HBVmountain/Container/Refactoring
@@ -40,7 +47,7 @@ RUN apt-get update && \
 
 ##install custom system image
 RUN python3 -m julia.sysimage sys.so
-#RUN julia-py --sysimage sys.so
+RUN julia-py --sysimage sys.so
 
 
 # Run bmi server

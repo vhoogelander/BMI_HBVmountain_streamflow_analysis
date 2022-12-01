@@ -54,7 +54,11 @@ HBVmountain_units = Main.HBVmountain_units
 
 # In[22]:
 class BMI_HBVmountain(Bmi):
+    """
+    Creates BMI HBV-mountain model object
+    """
     def __init__(self, forcing_netcdf=None, path_to_shapefile=None, path_to_dem=None, path_to_nlcd=None):
+
         self.model = build_HBVmountain_model() #Julia function: create model object
         self.forcing_netcdf = forcing_netcdf
         self.path_to_shapefile = path_to_shapefile
@@ -76,6 +80,10 @@ class BMI_HBVmountain(Bmi):
               rip_input=HRU_Input([0.0,0.0,0.3,0.7], 0.03,np.zeros(4), [1,2,3,4], 4, (0,), (0,), 0, np.zeros(4), 0.01, np.zeros(4), 0, 0.0), 
               Precipitation=np.zeros((0,0)), Temperature=np.zeros((0,0)), ETP=np.zeros(0), Date=None, Current_Date=None, 
               Sunhours = [8.87, 10.30, 11.88, 13.65, 15.13, 15.97, 15.58, 14.25, 12.62, 11.87, 9.28, 8.45],  Units=HBVmountain_units()):
+        """
+        Returns a configuration file for the setup of BMI HBV-mountain model. Preprocessing of model settings is done using the catchment's shapefile, DEM raster file and NLCD landuse (Must be in WGS84)
+        """
+        
         
         if bare_parameters == None:
             bare_parameters = Parameters(beta_Bare, Ce, 0, 0, Kf, Meltfactor, Mm, Ratio_Pref, Soilstoragecapacity_Bare, Temp_Thresh)
@@ -120,6 +128,9 @@ class BMI_HBVmountain(Bmi):
         Elevation, Total_Elevationbands, Precipitation_gradient, Elevation_Percentage, bare_input, forest_input, grass_input, rip_input, Precipitation, Temperature, ETP, Date, Current_Date, Sunhours, Units)
  
     def initialize(self, config_file):
+        """
+        Initializes BMI HBV-mountain model using a configuration file
+        """
         initialize(self.model, config_file);
 
     def update(self):
