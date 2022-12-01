@@ -28,18 +28,24 @@ RUN julia install.jl
 
 WORKDIR /opt/HBVmountain/Container
 
-#install gcc compiler
-RUN apt-get update && \    
-    apt-get -y install gcc mono-mcs && \
-    rm -rf /var/lib/apt/lists/*dod
-#install custom system image
-RUN python3 -m julia.sysimage sys.so
+##install gcc compiler
 
+
+#RUN apt-get update && \    
+#    apt-get -y install gcc mono-mcs && \
+ #   rm -rf /var/lib/apt/lists/*dod
+RUN apt-get update && \
+    apt-get -y install gcc mono-mcs && \
+    rm -rf /var/lib/apt/lists/*
+
+##install custom system image
+RUN python3 -m julia.sysimage sys.so
+#RUN julia-py --sysimage sys.so
 
 
 # Run bmi server
-#ENTRYPOINT ["/opt/bin/run-bmi-server", "--name", "BMI_HBVmountain_Python.BMI_HBVmountain", "--path", /opt/HBVmountain/Container]
+#ENTRYPOINT ["run-bmi-server", "--name", "BMI_HBVmountain_Python.BMI_HBVmountain", "--path", /opt/HBVmountain/Container]
 WORKDIR /opt/HBVmountain/Container
 # Expose the magic grpc4bmi port
-#EXPOSE 55555
+EXPOSE 55555
 

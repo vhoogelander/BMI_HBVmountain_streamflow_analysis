@@ -92,10 +92,10 @@ def _shift_era5_time_coordinate(cube):
     time.guess_bounds()
     return cube
 
-def save(cubes, dataset, provenance, cfg):
+def save(cubes, dataset, exp, provenance, cfg):
     """Save cubes to file.
 
-    Output format: "HBVmountain_local_forcing_ERA5_Meuse_1990_2018.nc"
+    Output format: "HBVmountain_local_forcing_ERA5_Meuse_1990_2018_scenario.nc"
     """
     time_coord = cubes[0].coord('time')
     start_year = time_coord.cell(0).point.year
@@ -106,6 +106,7 @@ def save(cubes, dataset, provenance, cfg):
         cfg['basin'],
         str(start_year),
         str(end_year),
+        exp,
     ])
     output_file = get_diagnostic_filename(basename, cfg)
     logger.info("Saving cubes to file %s", output_file)
@@ -126,7 +127,7 @@ def main(cfg):
     input_metadata = cfg['input_data'].values()
     for dataset, metadata in group_metadata(input_metadata, 'dataset').items():
         all_vars, provenance = get_input_cubes(metadata)
-
+        exp = metadata[0]['exp']
         # Fix time coordinate of ERA5 instantaneous variables
         if dataset == 'ERA5':
 #            _shift_era5_time_coordinate(all_vars['psl'])
@@ -180,10 +181,11 @@ def main(cfg):
             cfg['basin'],
             str(int(output_data['time_start'][0])),
             str(int(output_data['time_end'][0])),
+            exp,
         ])
         output_name = get_diagnostic_filename(basename, cfg, extension='nc')
         cubes = iris.cube.CubeList([temp, precip])#precip
-        save(cubes, dataset, provenance, cfg)
+        save(cubes, dataset, exp, provenance, cfg)
  #       sio.savemat(output_name, output_data)
 
  #       # Store provenance

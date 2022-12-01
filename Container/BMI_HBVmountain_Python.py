@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 # In[14]:
+from julia.api import LibJulia
+api = LibJulia.load()
+api.sysimage = "sys.so"
+api.init_julia()
 from utils import *
 
 # In[22]:

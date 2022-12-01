@@ -23,6 +23,7 @@ import time
 from bmipy import Bmi
 from warnings import filterwarnings
 import os
+import sys
 from scipy import stats
 filterwarnings(action='ignore', category=DeprecationWarning, message='`np.bool` is a deprecated alias')
 
