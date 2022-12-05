@@ -22,7 +22,7 @@ def create_provenance_record():
         'authors': [
             'kalverla_peter',
             'camphuijsen_jaro',
-            'alidoost_sarah',
+            'alidoost_sarah',   #hoogelander_vincent
         ],
         'projects': [
             'ewatercycle',
@@ -100,14 +100,23 @@ def save(cubes, dataset, exp, provenance, cfg):
     time_coord = cubes[0].coord('time')
     start_year = time_coord.cell(0).point.year
     end_year = time_coord.cell(-1).point.year
-    basename = '_'.join([
-        'HBVmountain',
-        dataset,
-        cfg['basin'],
-        str(start_year),
-        str(end_year),
-        exp,
-    ])
+    if dataset == "ERA5":
+        basename = '_'.join([
+            'HBVmountain',
+            dataset,
+            cfg['basin'],
+            str(start_year),
+            str(end_year),
+        ])
+    else:
+        basename = '_'.join([
+            'HBVmountain',
+            dataset,
+            cfg['basin'],
+            str(start_year),
+            str(end_year),
+            exp,
+        ])        
     output_file = get_diagnostic_filename(basename, cfg)
     logger.info("Saving cubes to file %s", output_file)
     iris.save(cubes, output_file, fill_value=-9999)
@@ -127,31 +136,23 @@ def main(cfg):
     input_metadata = cfg['input_data'].values()
     for dataset, metadata in group_metadata(input_metadata, 'dataset').items():
         all_vars, provenance = get_input_cubes(metadata)
-        exp = metadata[0]['exp']
+        if dataset != 'ERA5':
+            exp = metadata[0]['exp']
+        else:
+            exp = ''
         # Fix time coordinate of ERA5 instantaneous variables
         if dataset == 'ERA5':
-#            _shift_era5_time_coordinate(all_vars['psl'])
+
             _shift_era5_time_coordinate(all_vars['tas'])
 
-        # Processing variables and unit conversion
-        # Unit of the fluxes in marrmot should be in kg m-2 day-1 (or mm/day)
-#        logger.info("Processing variable PET")
-#        pet = debruin_pet(
-#            psl=all_vars['psl'],
-#            rsds=all_vars['rsds'],
-#            rsdt=all_vars['rsdt'],
-#            tas=all_vars['tas'],
-#        )
-#        pet = preproc.area_statistics(pet, operator='mean')
-        # pet.convert_units('kg m-2 day-1')  # equivalent to mm/day
 
         logger.info("Processing variable tas")
         temp = preproc.area_statistics(all_vars['tas'], operator='mean')
-        # temp.convert_units('celsius')
+
 
         logger.info("Processing variable pr")
         precip = preproc.area_statistics(all_vars['pr'], operator='mean')
-        # precip.convert_units('kg m-2 day-1')  # equivalent to mm/day
+
 
         # Get the start and end times and latitude longitude
         time_start_end, lat_lon = _get_extra_info(temp)
@@ -175,23 +176,26 @@ def main(cfg):
         }
 
        # Save to netcdf structure
-        basename = '_'.join([
-            'HBVmountain',
-            dataset,
-            cfg['basin'],
-            str(int(output_data['time_start'][0])),
-            str(int(output_data['time_end'][0])),
-            exp,
-        ])
+        if dataset != 'ERA5':
+            basename = '_'.join([
+                'HBVmountain',
+                dataset,
+                cfg['basin'],
+                str(int(output_data['time_start'][0])),
+                str(int(output_data['time_end'][0])),
+            ])
+        else:
+            basename = '_'.join([
+                'HBVmountain',
+                dataset,
+                cfg['basin'],
+                str(int(output_data['time_start'][0])),
+                str(int(output_data['time_end'][0])),
+                exp,
+            ])            
         output_name = get_diagnostic_filename(basename, cfg, extension='nc')
-        cubes = iris.cube.CubeList([temp, precip])#precip
+        cubes = iris.cube.CubeList([temp, precip])
         save(cubes, dataset, exp, provenance, cfg)
- #       sio.savemat(output_name, output_data)
-
- #       # Store provenance
-        # with ProvenanceLogger(cfg) as provenance_logger:
-        #     provenance_logger.log(output_name, provenance)
-
 
 if __name__ == '__main__':
 

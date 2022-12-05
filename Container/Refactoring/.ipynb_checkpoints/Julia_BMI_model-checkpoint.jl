@@ -1,9 +1,7 @@
 using DataFrames
 using CSV
-using Plots
 using DocStringExtensions
 using Dates
-using NetCDF
 using Statistics
 using Pkg
 
@@ -48,15 +46,20 @@ end
 function setup(Discharge, Total_Evaporation, Snow_Extend, bare_storage,forest_storage, grass_storage, rip_storage,
         Slowstorage, Waterbalance, Glacier, Area, bare_parameters, forest_parameters, grass_parameters, rip_parameters, slow_parameters,
         Elevation, Total_Elevationbands, Precipitation_gradient, Elevation_Percentage, bare_input, forest_input, grass_input, rip_input, Precipitation, Temperature, ETP, Date, Current_Date, Sunhours, Units)
-    
+        """
+        Returns a configuration file for the setup of BMI HBV-mountain model.
+        """
     config_file = HBVmountain_model(Discharge, Total_Evaporation, Snow_Extend, bare_storage,forest_storage, grass_storage, rip_storage,
         Slowstorage, Waterbalance, Glacier, Area, bare_parameters, forest_parameters, grass_parameters, rip_parameters, slow_parameters,
         Elevation, Total_Elevationbands, Precipitation_gradient, Elevation_Percentage, bare_input, forest_input, grass_input, rip_input, Precipitation, Temperature, ETP, Date, Current_Date, Sunhours, Units);
     return config_file
 end
 
-# uses function in Config_model.jl file
+
 function initialize(model, config_file = nothing)
+    """
+    Initializes BMI HBV-mountain model using a configuration file
+    """
     if config_file != nothing
         replace_HBVmountainmodel(model, config_file) 
     else
@@ -66,6 +69,12 @@ end
 
 # Updates model for one time step, uses the function in Refactoring/run_model 
 function update(model::HBVmountain_model)
+    """
+    Updates the BMI HBV-mountain model for one timestep
+    """    
+    
+    
+    
     #Update model for next timestep
     t = findall(x -> x == model.Current_Date, model.Date)[1]
     
@@ -108,6 +117,9 @@ end
 
 # Updates model until indicated time step
 function update_until(model::HBVmountain_model, time::String)
+    """
+    Updates the BMI HBV-mountain model for until given time. Time must be a string.
+    """
     update_time = length(model.Date[model.Date .<= DateTime(time)])
     tmax::Int128 = length(model.Precipitation[1:update_time])
     for t in 1:tmax
@@ -117,66 +129,194 @@ end
 
 # Returns empty model
 function finalize(model) 
+    """
+    Perform tear-down tasks for the model.
+    """
     finalize_HBVmountainmodel(model)
 end
 
 function get_component_name(model)
+    """
+    Get name of the component
+    """
     return string(typeof(model))
 end
 
 function get_input_item_count(model)
+    """
+    Count of a model's input variables.
+    
+    Returns
+    -------
+    int
+    """
     return length(fieldnames(typeof(model)))
 end
 
 function get_output_item_count(model)
+    """
+    Count of a model's output variables.
+    
+    Returns
+    -------
+    int
+    """
     return length(fieldnames(typeof(model)))
 end
 
 function get_input_var_names(model)
+    """
+    List of a model's input variables.
+    
+    Returns
+    -------
+    list of str
+    """
+
     return string(fieldnames(typeof(model)))
 end
 
 function get_output_var_names(model)
+    """
+    List of a model's output variables.
+    
+    Returns
+    -------
+    list of str
+    """
     return string(fieldnames(typeof(model)))
 end
 
 function get_var_type(model, name::String)
+    """
+    Get data type of the given variable.
+    Parameters
+    ----------
+    name : str
+        An input or output variable name
+    Returns
+    -------
+    str
+    """
     return String(typeof(getfield(model, Symbol(name))))
 end
 
 function get_var_units(model, name::String)
+    """
+    Get units of the given variable
+    Parameters
+    ----------
+    name : str
+        An input or output variable name
+    Returns
+    -------
+    str
+    """
     return getfield(model.Units, Symbol(name))
 end
 
 function get_var_itemsize(model, name::String)
+    """
+    Get memory use for each array element in bytes.
+    Parameters
+    ----------
+    name : str
+        An input or output variable name
+    Returns
+    -------
+    int
+    """
     return Int(sizeof(getfield(model, Symbol(name)))/ length(getfield(model, Symbol(name))))
 end
 
 function get_var_nbytes(model, name::String)
+    """
+    Get size, in bytes, of the given variable.
+    Parameters
+    ----------
+    name : str
+        An input or output variable name
+    Returns
+    -------
+    int
+    """
     return sizeof(getfield(model, Symbol(name)))
 end
 
 function get_current_time(model)
+    """
+    Current time of the model.
+
+    Returns
+    -------
+    datetime
+    """
     return model.Current_Date
 end
 
 function get_start_time(model)
+    """
+    Start time of the model.
+
+    Returns
+    -------
+    datetime
+    """
     return model.Date[1]
 end
 
 function get_end_time(model)
+    """
+    End time of the model.
+
+    Returns
+    -------
+    datetime
+    """
     return last(model.Date)
 end
 
 function get_time_units(model)
+    """
+    Time units of the model.
+
+    Returns
+    -------
+    String
+    """
     return string(typeof((model.Date[2] - model.Date[1])))
 end
 
 function get_time_step(model)
+    """
+    Current time step of the model.
+
+    Returns
+    -------
+    float
+    """
     return (model.Date[2] - model.Date[1]) / (model.Date[2] - model.Date[1])
 end
 
 function get_value(model, name, dest=nothing)
+    """
+    Get a copy of values of the given variable.
+
+    This is a getter for the model, used to access the model's
+    current state. It returns a *copy* of a model variable, with
+    the return type, size and rank dependent on the variable.
+
+    Parameters
+    ----------
+    name : str
+        An input or output variable name
+    dest : ndarray
+        An array into which to place the values.
+
+    Returns
+    -------
+    array
+    """
     if dest != nothing 
         empty!(dest)
         push!(dest, getfield(model, Symbol(name)))
@@ -185,20 +325,85 @@ function get_value(model, name, dest=nothing)
     end 
 end
 
-# Not sure if this is correct
+
 function get_value_ptr(model, name)
+    """
+    Get a reference to values of the given variable.
+
+    This is a getter for the model, used to access the model's
+    current state. It returns a reference to a model variable,
+    with the return type, size and rank dependent on the variable.
+
+    Parameters
+    ----------
+    name : str
+        An input or output variable name
+
+    Returns
+    -------
+    array_like
+    """
     return getfield(model, Symbol(name))
 end
 
 function get_value_at_indices(model, name, dest, inds)
+    """
+    Get values at particular indices.
+
+    Parameters
+    ----------
+    name : str
+        An input or output variable name
+    dest : ndarray
+        An array into which to place the values.
+    indices : array_like
+        The indices into the variable array.
+
+    Returns
+    -------
+    array_like
+        Value of the model variable at the given location.
+    """
     getfield(model, Symbol(name))[inds]
 end
 
 function set_value(model, name::String, value)
+    """
+    Specify a new value for a model variable.
+
+    This is the setter for the model, used to change the model's
+    current state. It accepts, through *src*, a new value for a
+    model variable, with the type, size and rank of *src*
+    dependent on the variable.
+
+    Parameters
+    ----------
+    name : str
+        An input or output variable name
+    value : array_like
+        The new value for the specified variable.
+    """
     setfield!(model, Symbol(name), value)
 end
 
 function set_value_at_indices(model, name, inds, value)
+    """
+    Specify a new value for a model variable at particular indices.
+
+    This is the setter for the model, used to change the model's
+    current state. It accepts, through *src*, a new value for a
+    model variable, with the type, size and rank of *src*
+    dependent on the variable.
+
+    Parameters
+    ----------
+    name : str
+        An input or output variable name
+    indices : array_like
+        The indices into the variable array.
+    value : array_like
+        The new value for the specified variable.
+    """
     model.name[inds] = value
 end
 

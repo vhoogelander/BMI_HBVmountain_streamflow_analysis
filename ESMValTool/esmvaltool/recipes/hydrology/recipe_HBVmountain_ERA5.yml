@@ -1,0 +1,48 @@
+# ESMValTool
+# recipe_marrmot.yml
+---
+documentation:
+  title: Generate ERA5 forcing for the HBVmountain hydrological model
+  description: |
+    Recipe pre-processes  Climate forcing data
+    for use in the HBVmountain hydrological model.
+
+
+  authors:  #same authors as marrmot, because author names should be included in file esmvaltool/config-references.yml
+    - kalverla_peter
+    - camphuijsen_jaro
+    - alidoost_sarah
+      #hoogelander_vincent
+  projects:
+    - ewatercycle
+
+  references:
+    - acknow_project
+
+preprocessors:
+  daily: &daily
+    extract_shape:
+      # Lumped model: needs catchment-aggregated input data
+      shapefile: Youghiogheny/Youghiogheny.shp  # In aux (config-user.yml)
+      method: contains
+      crop: true
+
+diagnostics:
+  diagnostic_daily:
+    description: HBVmountain input preprocessor for daily data
+    additional_datasets:
+      - {dataset: ERA5, project: OBS6, tier: 3, type: reanaly, version: 1}
+    variables:
+      tas: &var_daily
+        mip: day
+        start_year: 1986
+        end_year: 2005
+        preprocessor: daily
+      pr: *var_daily
+    scripts:
+      script:
+        script: ~/ESMValTool/esmvaltool/diag_scripts/hydrology/HBVmountain.py 
+        basin: Youghiogheny
+
+
+

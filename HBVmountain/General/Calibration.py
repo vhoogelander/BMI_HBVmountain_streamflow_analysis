@@ -2,6 +2,14 @@ from BMI_HBVmountain_Python import *
 ####### Forcing and observation data ##########################
 
 def NSE(Qmodelled, Qobserved):
+    """
+    Calculates Nash Sutcliffe Efficiency
+    
+    Qmodelled: numpy array
+    Qobserved: numpy array
+    
+    Returns NSE (Float)
+    """
     QobservedAverage = np.ones(len(Qobserved)) * np.mean(Qobserved)
     Nominator = np.sum((Qmodelled - Qobserved)**2)
     Denominator = np.sum((Qobserved - QobservedAverage)**2)
@@ -52,6 +60,21 @@ def multi_objective(Qmodelled, Qobserved, Precipitation):
 
 
 def run_model_cma(parameters, forcing, path_to_shapefile, path_to_dem, path_to_nlcd, end_year):
+    """
+    Runs the HBV-mountain model
+    
+    Parameters
+    ----------------
+    parameters: list containing parameters for use in HBV-mountain model
+    forcing: netCDF4.Dataset
+    path_to_shapefile: str. path to catchment shapefile (WGS84)
+    path_to_dem: str. path to DEM map (WGS84)
+    path_to_nlcd: str. path to NLCD map (WGS84)
+    end_year: Int. Last year of calibration period
+    
+    Returns simulated discharge and precipitation data
+    
+    """
 
  
    
@@ -232,6 +255,27 @@ def cma_calibration(parameter_bounds, observation, MAXITER, forcing, path_to_sha
 
 
 def full_calibration(ntimes, path_to_observation, MAXITER, forcing, path_to_shapefile, path_to_dem, path_to_nlcd, start_year, years_warming_up, end_year):
+    """
+    Function for calibration of the HBV-mountain model using the CMA-ES. 
+    
+    Parameters
+    ------------
+    ntimes: Int. number of calibration processes to be performed (number of parameter sets to be generated)
+    path_to_observation: str. Path to GRDC streamflow observation data. This must be a CSV file containing column called 'streamflow' containing the streamflow data.
+    MAXITER: Int. number of iterations per CMA-ES calibration process.
+    forcing: netCDF4.Dataset containing precipitation and temperature data
+    path_to_shapefile: str. Path to catchment shapefile (must be WGS84)
+    path_to_dem: str. Path to DEM raster file (must be WGS84)
+    path_to_nlcd: str. Path to NLCD raster file (must be WGS84)
+    start_year: Int. start year of calibration process. Must be the first year of the forcing calibration data.
+    years_warming_up: Int. number of year used as warming up. 
+    end_year: Int. Last year of calibration period
+    
+    
+    Returns Dataframe with parameter set(s) and corresponding objective scores as columns, and the results of the different calibration runs as rows. 
+    """
+    
+    
     exec_start_time = time.time()
     PARAMETERS_BOUNDS = [[-2.0, 2.0],
                      [1.0, 5.0],

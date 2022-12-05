@@ -2,7 +2,7 @@
 # recipe_HBVmountain.yml
 ---
 documentation:
-  title: Generate forcing for the HBVmountain hydrological model
+  title: Generate CMIP6 forcing for the HBVmountain hydrological model
   description: |
     Recipe pre-processes  Climate forcing data
     for use in the HBVmountain hydrological model.
