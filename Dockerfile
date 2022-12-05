@@ -2,7 +2,8 @@ FROM continuumio/anaconda3
 
 MAINTAINER Vincent Hoogelander <v.hoogelander@student.tudelft.nl>
 
-
+# Install grpc4bmi
+RUN pip install grpc4bmi==0.2.3
 
 # Install BMI model:
 RUN git clone https://github.com/vhoogelander/Thesis.git /opt/HBVmountain
@@ -14,10 +15,6 @@ RUN curl https://raw.githubusercontent.com/JuliaCI/install-julia/master/install-
 
 RUN pip install julia
 RUN python -c 'from julia import install; install()'
-RUN python3 -m pip install julia
-
-# Install grpc4bmi
-RUN pip install grpc4bmi==0.2.3
 
 RUN pip install bmi-python
 RUN pip install bmipy
@@ -35,7 +32,7 @@ WORKDIR /opt/HBVmountain/Container/Refactoring
 RUN julia install.jl
 
 
-#WORKDIR /opt/HBVmountain/General
+WORKDIR /opt/HBVmountain/Container
 
 ##install gcc compiler
 
@@ -54,6 +51,7 @@ RUN julia install.jl
 
 # Run bmi server
 #ENTRYPOINT ["run-bmi-server", "--name", "BMI_HBVmountain_Python.BMI_HBVmountain", "--path", /opt/HBVmountain/Container]
+WORKDIR /opt/HBVmountain/Container
 # Expose the magic grpc4bmi port
 EXPOSE 55555
 

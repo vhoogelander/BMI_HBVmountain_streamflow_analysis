@@ -1,4 +1,7 @@
-import julia
+from julia.api import LibJulia
+api = LibJulia.load()
+api.sysimage = "sys.so"
+api.init_julia()
 from julia import Main
 from pandas import read_csv
 import numpy as np
