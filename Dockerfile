@@ -47,12 +47,12 @@ RUN apt-get update && \
 ##install custom system image
 RUN python3 -m julia.sysimage sys.so
 RUN julia-py --sysimage sys.so
-
+RUN pip install protobuf==3.20.*
 
 # Run bmi server
 
 #ENTRYPOINT ["run-bmi-server", "--name", "BMI_HBVmountain_Python", "--path", /opt/HBVmountain/Container]
-ENTRYPOINT ["run-bmi-server", "--path", "/opt/HBVmountain/Container/BMI"]
+ENTRYPOINT ["run-bmi-server", "--path", "/opt/HBVmountain/Container/BMI_HBVmountain_Python"]
 WORKDIR /opt/HBVmountain/Container
 # Expose the magic grpc4bmi port
 EXPOSE 55555

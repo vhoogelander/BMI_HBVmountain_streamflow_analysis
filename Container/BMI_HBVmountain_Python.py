@@ -55,7 +55,7 @@ Elevations = Main.Elevations
 HBVmountain_units = Main.HBVmountain_units
 
 
-class BMI_HBVmountain(Bmi):
+class BMI_HBVmountain(BMI):
     """
     Creates BMI HBV-mountain model object
     """

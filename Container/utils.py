@@ -24,6 +24,7 @@ import geopandas as gpd
 import fiona
 import time
 from bmipy import Bmi
+from BMI import BMI
 from warnings import filterwarnings
 import os
 import sys
