@@ -2,6 +2,14 @@ from BMI_HBVmountain_Python import *
 ####### Forcing and observation data ##########################
 
 def NSE(Qmodelled, Qobserved):
+    """
+    Calculates Nash Sutcliffe Efficiency
+    
+    Qmodelled: numpy array
+    Qobserved: numpy array
+    
+    Returns NSE (Float)
+    """
     QobservedAverage = np.ones(len(Qobserved)) * np.mean(Qobserved)
     Nominator = np.sum((Qmodelled - Qobserved)**2)
     Denominator = np.sum((Qobserved - QobservedAverage)**2)
@@ -49,12 +57,26 @@ def multi_objective(Qmodelled, Qobserved, Precipitation):
 
     return ED, nse, lognse, nseFDC, nse_runoff
 
+
+
 def run_model_cma(parameters, forcing, path_to_shapefile, path_to_dem, path_to_nlcd, end_year):
-
-    ob_list = []
-    params_list = []
+    """
+    Runs the HBV-mountain model
     
+    Parameters
+    ----------------
+    parameters: list containing parameters for use in HBV-mountain model
+    forcing: netCDF4.Dataset
+    path_to_shapefile: str. path to catchment shapefile (WGS84)
+    path_to_dem: str. path to DEM map (WGS84)
+    path_to_nlcd: str. path to NLCD map (WGS84)
+    end_year: Int. Last year of calibration period
+    
+    Returns simulated discharge and precipitation data
+    
+    """
 
+ 
    
     model = BMI_HBVmountain(forcing, path_to_shapefile, path_to_dem, path_to_nlcd)
     config_file = model.setup(forcing_netcdf=forcing, bare_parameters=  Parameters(parameters[8], parameters[6], 0, 0, parameters[4],
@@ -134,6 +156,19 @@ def wrapped_objective_function(scaled_parameters, observation, forcing, path_to_
     the actual function call.
     """
     parameters = transform(scaled_parameters)
+    if parameters[9] < parameters[12]: #if Imax,forest < Imax,grass
+        parameters[12] = parameters[9] - 0.001
+    if parameters[9] < parameters[15]: #if Imax,forest < Imax,rip
+        parameters[15] = parameters[9] - 0.001         
+    if parameters[10] < parameters[13]: #if Su,max,forest < if Su,max,grass
+        parameters[13] = parameters[10] - 0.001
+    if parameters[13] < parameters[16]: #if Su,max,grass < Su,max,rip
+        parameters[16] = parameters[13] - 0.001  
+    if parameters[13] < parameters[7]: #if Su,max,grass < Su,max,bare
+        parameters[7] = parameters[13] - 0.001  
+    if parameters[18] < parameters[4]: #if Kf,rip < Kf
+        parameters[4] = parameters[18] - 0.001  
+    # print(parameters)
     Qmodelled, precipitation = run_model_cma(parameters, forcing, path_to_shapefile, path_to_dem, path_to_nlcd, end_year)
     precipitation.index, Qmodelled.index, observation.index = pd.to_datetime(precipitation.index), pd.to_datetime(Qmodelled.index), pd.to_datetime(observation.index)
     mask = (observation.index >= Qmodelled.index[0]) & (observation.index <= Qmodelled.index[-1])
@@ -146,7 +181,7 @@ def cma_calibration(parameter_bounds, observation, MAXITER, forcing, path_to_sha
     """Return the optimum parameters found by CMA-ES method."""
     # Set some options for optimization needed when multiprocessing
     options = cma.CMAOptions()
-    POPSIZE = 9
+    POPSIZE =8
     options.set({
         'bounds': [0, 10],  # for scaled parameters
 #         'seed': 1234,  # set a seed to reproduce results
@@ -179,16 +214,40 @@ def cma_calibration(parameter_bounds, observation, MAXITER, forcing, path_to_sha
             solutions,
 
             [wrapped_objective_function(x, observation, forcing, path_to_shapefile, path_to_dem, path_to_nlcd, start_year, years_warming_up, end_year) for x in solutions]
-                #function_values=wrapped_objective_function(solutions, observation, area)
-            )#,
-
+                
+            )
+        parameters = transform(cma_es.best.last.x)
+        if parameters[9] < parameters[12]: #if Imax,forest < Imax,grass
+            parameters[12] = parameters[9] - 0.001
+        if parameters[9] < parameters[15]: #if Imax,forest < Imax,rip
+            parameters[15] = parameters[9] - 0.001         
+        if parameters[10] < parameters[13]: #if Su,max,forest < if Su,max,grass
+            parameters[13] = parameters[10] - 0.001
+        if parameters[13] < parameters[16]: #if Su,max,grass < Su,max,rip
+            parameters[16] = parameters[13] - 0.001  
+        if parameters[13] < parameters[7]: #if Su,max,grass < Su,max,bare
+            parameters[7] = parameters[13] - 0.001  
+        if parameters[18] < parameters[4]: #if Kf,rip < Kf
+            parameters[4] = parameters[18] - 0.001  
         # Use transform to return parameters and not scaled ones
-        all_parameters.append(transform(cma_es.best.last.x))
+        all_parameters.append(parameters)
         all_scores.append(cma_es.best.last.f)
 #     print(f"---- CMA-ES stopped due to: {cma_es.stop()} ----")
-
+    best_parameter = transform(cma_es.result.xbest)
+    if best_parameter[9] < best_parameter[12]: #if Imax,forest < Imax,grass
+        best_parameter[12] = best_parameter[9] - 0.001
+    if best_parameter[9] < best_parameter[15]: #if Imax,forest < Imax,rip
+        best_parameter[15] = best_parameter[9] - 0.001         
+    if best_parameter[10] < best_parameter[13]: #if Su,max,forest < if Su,max,grass
+        best_parameter[13] = best_parameter[10] - 0.001
+    if best_parameter[13] < best_parameter[16]: #if Su,max,grass < Su,max,rip
+        best_parameter[16] = best_parameter[13] - 0.001  
+    if best_parameter[13] < best_parameter[7]: #if Su,max,grass < Su,max,bare
+        best_parameter[7] = best_parameter[13] - 0.001  
+    if best_parameter[18] < best_parameter[4]: #if Kf,rip < Kf
+        best_parameter[4] = best_parameter[18] - 0.001 
     # Make full output
-    full_output = (transform(cma_es.result.xbest),
+    full_output = (best_parameter,
                    cma_es.result.fbest,
                    all_parameters,
                    all_scores)
@@ -196,6 +255,27 @@ def cma_calibration(parameter_bounds, observation, MAXITER, forcing, path_to_sha
 
 
 def full_calibration(ntimes, path_to_observation, MAXITER, forcing, path_to_shapefile, path_to_dem, path_to_nlcd, start_year, years_warming_up, end_year):
+    """
+    Function for calibration of the HBV-mountain model using the CMA-ES. 
+    
+    Parameters
+    ------------
+    ntimes: Int. number of calibration processes to be performed (number of parameter sets to be generated)
+    path_to_observation: str. Path to GRDC streamflow observation data. This must be a CSV file containing column called 'streamflow' containing the streamflow data.
+    MAXITER: Int. number of iterations per CMA-ES calibration process.
+    forcing: netCDF4.Dataset containing precipitation and temperature data
+    path_to_shapefile: str. Path to catchment shapefile (must be WGS84)
+    path_to_dem: str. Path to DEM raster file (must be WGS84)
+    path_to_nlcd: str. Path to NLCD raster file (must be WGS84)
+    start_year: Int. start year of calibration process. Must be the first year of the forcing calibration data.
+    years_warming_up: Int. number of year used as warming up. 
+    end_year: Int. Last year of calibration period
+    
+    
+    Returns Dataframe with parameter set(s) and corresponding objective scores as columns, and the results of the different calibration runs as rows. 
+    """
+    
+    
     exec_start_time = time.time()
     PARAMETERS_BOUNDS = [[-2.0, 2.0],
                      [1.0, 5.0],
@@ -252,7 +332,10 @@ def full_calibration(ntimes, path_to_observation, MAXITER, forcing, path_to_shap
     for i in range(len(ob_list)):
         paramset.loc[i] = [ob_list[i][0], ob_list[i][1], ob_list[i][2], ob_list[i][3], ob_list[i][4], params_list[i][0], params_list[i][1], params_list[i][2], params_list[i][3], params_list[i][4], params_list[i][5], params_list[i][6], params_list[i][7], params_list[i][8], params_list[i][9], params_list[i][10], params_list[i][11], params_list[i][12], params_list[i][13], params_list[i][14], params_list[i][15], params_list[i][16], params_list[i][17], params_list[i][18], params_list[i][19]]
     paramset.ED = 1 - paramset.ED
-    filename = 'cma_calibration_thundercreek.yml'
+    
+    grdc_no = str(int(gpd.read_file(path_to_shapefile).grdc_no[0]))
+    name = '_cma_calibration.yml'
+    filename = grdc_no + name
     yaml = YAML()
     yaml.default_flow_style = False
     with open(filename, 'w+') as f:
@@ -260,42 +343,3 @@ def full_calibration(ntimes, path_to_observation, MAXITER, forcing, path_to_shap
     print(f'Calibration results saved in {filename}')
     print(f"Calibration is completed in {time.time() - exec_start_time} seconds")
     return paramset
-
-
-
-
-def main():
-    comm = MPI.COMM_WORLD
-    cpus = comm.Get_size()
-    rank = comm.Get_rank()
-    n_samples = int(sys.argv[1])
-
-    if rank == 0:
-        start_time = datetime.datetime.now()
-        partitions = [ int(n_samples / cpus) ] * cpus
-        counts = [ int(0) ] * cpus
-    else:
-        partitions = None
-        counts = None
-
-
-    partition_item = comm.scatter(partitions, root=0)
-    paramset_item = full_calibration(partition_item,  path_to_observation, MAXITER, forcing, path_to_shapefile, path_to_dem, path_to_nlcd, start_year, years_warming_up, end_year)
-    paramset = comm.gather(paramset_item, root=0)
-
-    if rank == 0:
-        paramset = pd.concat(paramset)
-        name = 'paramsets_thundercreek.csv'
-        outdir = './output'
-        if not os.path.exists(outdir):
-            os.mkdir(outdir)
-        fullname = os.path.join(outdir, name)
-        paramset.to_csv(fullname)
-   
-
-
-if __name__ == '__main__':
-    exec_start_time = time.time()
-    main()
-    print(f"Calibration is completed in {time.time() - exec_start_time} seconds")
-

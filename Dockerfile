@@ -1,12 +1,10 @@
 FROM continuumio/anaconda3
-#FROM ewatercycle/wflow-grpc4bmi
 
 MAINTAINER Vincent Hoogelander <v.hoogelander@student.tudelft.nl>
 
-# Install grpc4bmi
-#RUN pip install git+https://github.com/eWaterCycle/grpc4bmi.git#egg=grpc4bmi
 
-# Instal here your BMI model:
+
+# Install BMI model:
 RUN git clone https://github.com/vhoogelander/Thesis.git /opt/HBVmountain
 WORKDIR /opt/HBVmountain
 
@@ -16,6 +14,10 @@ RUN curl https://raw.githubusercontent.com/JuliaCI/install-julia/master/install-
 
 RUN pip install julia
 RUN python -c 'from julia import install; install()'
+RUN python3 -m pip install julia
+
+# Install grpc4bmi
+RUN pip install grpc4bmi==0.2.3
 
 RUN pip install bmi-python
 RUN pip install bmipy
@@ -33,7 +35,7 @@ WORKDIR /opt/HBVmountain/Container/Refactoring
 RUN julia install.jl
 
 
-WORKDIR /opt/HBVmountain/Container
+#WORKDIR /opt/HBVmountain/General
 
 ##install gcc compiler
 
@@ -41,18 +43,17 @@ WORKDIR /opt/HBVmountain/Container
 #RUN apt-get update && \    
 #    apt-get -y install gcc mono-mcs && \
  #   rm -rf /var/lib/apt/lists/*dod
-RUN apt-get update && \
-    apt-get -y install gcc mono-mcs && \
-    rm -rf /var/lib/apt/lists/*
+#RUN apt-get update && \
+#    apt-get -y install gcc mono-mcs && \
+#    rm -rf /var/lib/apt/lists/*
 
 ##install custom system image
-RUN python3 -m julia.sysimage sys.so
-RUN julia-py --sysimage sys.so
+#RUN python3 -m julia.sysimage sys.so
+#RUN julia-py --sysimage sys.so
 
 
 # Run bmi server
 #ENTRYPOINT ["run-bmi-server", "--name", "BMI_HBVmountain_Python.BMI_HBVmountain", "--path", /opt/HBVmountain/Container]
-WORKDIR /opt/HBVmountain/Container
 # Expose the magic grpc4bmi port
 EXPOSE 55555
 

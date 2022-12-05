@@ -23,11 +23,19 @@ import time
 from bmipy import Bmi
 from warnings import filterwarnings
 import os
+import sys
+from matplotlib.ticker import MaxNLocator
 from scipy import stats
 filterwarnings(action='ignore', category=DeprecationWarning, message='`np.bool` is a deprecated alias')
-
 from ruamel.yaml import YAML
+
+
 def generate_forcing_from_NETCDF(forcing_netcdf):
+    """
+    Convert NetCDF forcing file to a DataFrame for use in HBV-mountain. Returns dataset in whole years.
+    
+    forcing_netcdf: netCDF4.Dataset
+    """
 
 
     prec = (forcing_netcdf['pr'][:])*86400
@@ -65,6 +73,12 @@ def generate_forcing_from_NETCDF(forcing_netcdf):
 
 
 def generate_array_from_raster(str_path_to_rasterfile, str_path_to_shapefile=None):
+    """
+    Clips raster file using bounds of shapefile. Returns a flattened array. All files must be in WGS84 projection
+    
+    str_path_to_rasterfile: Str
+    str_path_to_shapefile: Str
+    """
     if str_path_to_shapefile != None:
         with fiona.open(str_path_to_shapefile, "r") as shapefile:
             shapefile = [feature["geometry"] for feature in shapefile]
@@ -83,6 +97,12 @@ def generate_array_from_raster(str_path_to_rasterfile, str_path_to_shapefile=Non
     return arr
 
 def get_elevations_from_raster(raster_array_flattened, nbands):
+    """
+    Calculates elevation percentages from DEM map. Returns elevation percentages list, raster count per elevation band, min, max and average elevation
+    
+    raster_array_flattened: flattened array
+    nbands: Int
+    """
    
     n, bins, patches = plt.hist(raster_array_flattened, bins=nbands)
     plt.close()
@@ -99,6 +119,12 @@ def get_elevations_from_raster(raster_array_flattened, nbands):
     return elevation_list, bins, min_elevation, max_elevation, av_elevation
 
 def get_landuse_from_raster(raster_array_flattened):
+    """
+    Calculates land percentages from NLCD land use map. Returns elevation land use list    
+    
+    raster_array_flattened: flattened array
+    
+    """
     n, bins, patches = plt.hist(raster_array_flattened, bins=np.arange(96))
     plt.close()
     
@@ -115,6 +141,14 @@ def get_landuse_from_raster(raster_array_flattened):
     return landuse_list
 
 def generate_shapefiles_per_landuse(landuse, str_path_to_rasterfile, str_path_to_shapefile=None):  
+    """
+    Generates polygonized raster per land use. All data must be in WGS84 projection. Returns GeoDataFrame
+    
+    
+    landuse: Str of landuse type ('glacier', 'bare', 'forest', 'grass' or 'rip')
+    str_path_to_rasterfile: Str
+    str_path_to_shapefile: Str
+    """
         
     with rasterio.Env():
         if str_path_to_shapefile != None:
@@ -158,6 +192,13 @@ def generate_shapefiles_per_landuse(landuse, str_path_to_rasterfile, str_path_to
     return gpd_polygonized_raster
 
 def clip_elevation_per_landuse(gpd_polygonized_raster, str_path_to_elevation, str_path_to_shapefile=None, export_tif=False):
+    """
+    Clips the elevation raster file using bounds of polygonized raster. Returns raster image. If export_tif = True, image will be exported as rasterfile, called "elevationlanduse.tif".
+    
+    gpd_polygonized_raster: GeoDataFrame
+    str_path_to_elevation: Str
+    str_path_to_shapefile: Str
+    """
     gdf = gpd_polygonized_raster.dissolve()
     coords = [json.loads(gdf.to_json())['features'][0]['geometry']] 
     if str_path_to_shapefile != None:
@@ -185,6 +226,19 @@ def clip_elevation_per_landuse(gpd_polygonized_raster, str_path_to_elevation, st
     return out_img 
 
 def generate_landuse_per_elevation(str_path_to_elevation, str_path_to_landuse, str_path_to_shapefile=None, nbands=4):
+    """
+    Generate elevation and landuse settings for use in the HBV-mountain model. Returns list containing all elevation settings.
+    
+    ---- Input
+    str_path_to_elevation: Str
+    str_path_to_landuse: Str
+    str_path_to_shapefile: Str
+    nbands: Int (default 4)
+    
+    ---- Output
+    [[total elevation list: list, total land use: list, Thickness_Band: Float, Min_elevation: Float, Max_elevation: Float, Average elevation: Float], [Elevations glacier zone: list, Elevation glacier in bare zone: list], Elevations bare HRU: list, Elevations forest HRU: list, Elevations grass HRU: list, Elevations rip HRU: list]
+    
+    """
     elevation_array = generate_array_from_raster(str_path_to_elevation, str_path_to_shapefile)
     landuse_array = generate_array_from_raster(str_path_to_landuse, str_path_to_shapefile)
     
@@ -210,6 +264,17 @@ def generate_landuse_per_elevation(str_path_to_elevation, str_path_to_landuse, s
     return tot_elevations
 
 def linear_scaling_correction(str_path_calibration_forcing, str_path_input_hist_forcing, str_path_input_forcing):
+    """
+    Applies a linear scaling correction to temperature and precipitation data using the dataset used for calibration
+    
+    str_path_calibration_forcing: Str. Data used for model calibration
+    str_path_input_hist_forcing: Str. Historical data of climate model
+    str_path_input_forcing: Str. Climate data used for streamflow simulations
+    
+    Returns Dataframe containing bias corrected precipitation and temperature for use in the HBV-mountain model.
+    
+    """
+    
     calibration_forcing = nc.Dataset(str_path_calibration_forcing)
     input_hist_forcing = nc.Dataset(str_path_input_hist_forcing)
     input_forcing = nc.Dataset(str_path_input_forcing)
@@ -245,29 +310,17 @@ def linear_scaling_correction(str_path_calibration_forcing, str_path_input_hist_
     
     return input_forcing
 
-def create_monthly_boxplots(simulations_hist, simulations_ssp245, simulations_ssp585):
-    fig, axarr = plt.subplots(figsize=(12,4))
-
-    hist = simulations_hist.groupby(simulations_hist.index.strftime("%y-%m")).sum()
-    hist['mean'] = hist.mean(axis=1)
-    hist['month'] = hist.index.str[3:]
-    hist.boxplot(by='month', column='mean', ax=axarr, positions=np.array(range(12))*3.0-0.8, sym='', widths=0.6, color='k')
-
-    ssp245 = simulations_ssp245.groupby(simulations_ssp245.index.strftime("%y-%m")).sum()
-    ssp245['mean'] = ssp245.mean(axis=1)
-    ssp245['month'] = ssp245.index.str[3:]
-    ssp245.boxplot(by='month', column='mean', ax=axarr, sym='', positions=np.array(range(12))*3.0, widths=0.6, color='b')
-
-    ssp585 = simulations_ssp585.groupby(simulations_ssp585.index.strftime("%y-%m")).sum()
-    ssp585['mean'] = ssp585.mean(axis=1)
-    ssp585['month'] = ssp585.index.str[3:]
-    ssp585.boxplot(by='month', column='mean', ax=axarr, positions=np.array(range(12))*3.0+0.8, sym='', widths=0.6, color='r')
-    
-    ticks = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    fig.suptitle('')
-    plt.xticks(range(0, 12 * 3, 3), ticks)
     
 def get_monthly_sunhours(lat, lon):
+    """
+    Get average daily hours sunlight per month.
+    
+    Lat: Float
+    Lon: Float
+    
+    Returns list containing daily average sunlight hours per month
+        
+    """
     sunhours = []
     sun = Sun(lat, lon)
     for i in range(1,13):
@@ -292,7 +345,54 @@ def select_cmip6_models(str_path_to_models, model_list=None, ignore_models=None,
         selected_CMIP6_models = tuple(selected_CMIP6_models.values())
     return selected_CMIP6_models
 
+def select_cmip6_models(str_path_to_models, model_list=None, ignore_models=None, select_all=False):
+    """
+    Select CMIP6 models from the YAML file containing different available CMIP6 models for climate change impact analysis with the HBV-mountain model.
+    
+    Parameters
+    --------------
+    str_path_to_models: str. Path to the YAML file
+    model_list: list containing names of desired CMIP6 models (str). Default: None
+    ignore_models: list containing names of to be ignored CMIP6 models (str). If this is given, all CMIP6 models from the list will be selected, excluding the models given in the ignore_models list.
+    select_all: Default: False. If True, all models from the YAML list will be selected
+    
+    
+    Returns tuple containing dict with selected CMIP6_models.
+    
+    """
+    
+    model_file = yaml.safe_load(open(str_path_to_models))
+            
+    if ignore_models != None:
+        selected_CMIP6_models = dict((k, model_file[k]) for k in model_file
+           if k not in ignore_models)
+        selected_CMIP6_models = tuple(selected_CMIP6_models.values()) 
+    if select_all == True and model_list == None:
+        selected_CMIP6_models = dict((k, model_file[k]) for k in model_file.keys()
+               if k in model_file)
+        selected_CMIP6_models = tuple(selected_CMIP6_models.values()) 
+    if model_list != None:
+        selected_CMIP6_models = dict((k, model_file[k]) for k in model_list
+               if k in model_file)
+        selected_CMIP6_models = tuple(selected_CMIP6_models.values())
+    return selected_CMIP6_models
+
 def run_recipe_HBVmountain(recipe, catchment_name, scenario, CMIP6_models, start_year, end_year, catchment_id=None):
+    """
+    Runs ESMValTool recipe for generating precipitation and temperature data. This function is designed for the ESMValTool recipe corrsponding to the HBV-mountain hydrological model
+    
+    Parameters
+    --------------
+    recipe: Instance of :obj:`Recipe` which can be used to inspect and run the recipe.
+    catchment_name: Str. Must correspond to the folder and shapefile name of the catchment
+    scenario: Str (for example: 'historical' or 'ssp245' or 'ssp585')
+    CMIP6_models: tuple containing dict with selected CMIP6_models. 
+    start_year: Int
+    end_year: Int
+    
+    Returns the ESMValTool recipe output
+    """
+    
     recipe.data["preprocessors"]["daily"]["extract_shape"]["shapefile"] = os.path.join(catchment_name, catchment_name + '.' + 'shp') #shape
     recipe.data["diagnostics"]["diagnostic_daily"]["scripts"]["script"][
         "basin"

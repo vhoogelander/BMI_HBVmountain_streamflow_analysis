@@ -3,6 +3,25 @@ from Calibration import *
 
 ####### Forcing and observation data ##########################
 def run_validation(calibration_results, path_to_observation, forcing, path_to_shapefile, path_to_dem, path_to_nlcd, end_year_calibration, end_year_validation):
+    """
+    Function for validation of the HBV-mountain model. This function also returns the streamflow simulations of the total calibration and validation period, together with the simulated evaporation.
+    
+    Parameters
+    ------------
+    calibration_results: Dataframe generated using the calibration function. Contains the parameter set and corresponding objective scores.
+    path_to_observation: str. Path to GRDC streamflow observation data. This must be a CSV file containing column called 'streamflow' containing the streamflow data.
+    forcing: netCDF4.Dataset containing precipitation and temperature data
+    path_to_shapefile: str. Path to catchment shapefile (must be WGS84)
+    path_to_dem: str. Path to DEM raster file (must be WGS84)
+    path_to_nlcd: str. Path to NLCD raster file (must be WGS84)
+    end_year_calibration: Int. Last year of the calibration period
+    end_year_validation: Int. Last year of validation period
+    
+    
+    Returns Dataframe with parameter set(s) and corresponding objective scores in the validation period as columns, and the results of the different validation runs as rows. Also returns the streamflow simulations of the total calibration and validation period, together with the simulated evaporation.
+    """
+    
+    
     ob_list = []
     params_list = []
     sim_list = []
@@ -76,69 +95,3 @@ def run_validation(calibration_results, path_to_observation, forcing, path_to_sh
     paramset.ED_val = 1 - paramset.ED_val
 
     return paramset, df, df_evap
-
-
-
-
-
-
-
-
-
-
-def main():
-    comm = MPI.COMM_WORLD
-    cpus = comm.Get_size()
-    rank = comm.Get_rank()
-    n_samples = int(sys.argv[1])
-
-    if rank == 0:
-        start_time = datetime.datetime.now()
-        partitions = [ int(n_samples / cpus) ] * cpus
-        counts = [ int(0) ] * cpus
-    else:
-        partitions = None
-        counts = None
-
-    partition_item = comm.scatter(partitions, root=0)
-    bare_paramset_item, forest_paramset_item, grass_paramset_item, rip_paramset_item, slow_paramset_item, = HBVmountain_simulation(partition_item)
-    bare_paramset = comm.gather(bare_paramset_item, root=0)
-    forest_paramset = comm.gather(forest_paramset_item, root=0)
-    grass_paramset = comm.gather(grass_paramset_item, root=0)
-    rip_paramset = comm.gather(rip_paramset_item, root=0)
-    slow_paramset = comm.gather(slow_paramset_item, root=0)
-    #bare_paramset, forest_paramset, grass_paramset, rip_paramset, slow_paramset = HBVmountain_simulation(n_samples)
-    if rank == 0:
-        bare_paramset = pd.concat(bare_paramset)
-        forest_paramset = pd.concat(forest_paramset)
-        grass_paramset = pd.concat(grass_paramset)
-        rip_paramset = pd.concat(rip_paramset)
-        slow_paramset = pd.concat(slow_paramset)
-
-
-        bare_name = 'bare_paramsets.csv'
-        forest_name = 'forest_paramsets.csv'
-        grass_name = 'grass_paramsets.csv'
-        rip_name = 'rip_paramsets.csv'
-        slow_name = 'slow_paramsets.csv'
-
-        outdir = './output_validation'
-        if not os.path.exists(outdir):
-            os.mkdir(outdir)
-
-        bare_fullname = os.path.join(outdir, bare_name)
-        forest_fullname = os.path.join(outdir, forest_name)
-        grass_fullname = os.path.join(outdir, grass_name)
-        rip_fullname = os.path.join(outdir, rip_name)
-        slow_fullname = os.path.join(outdir, slow_name)
-
-
-        bare_paramset.to_csv(bare_fullname)
-        forest_paramset.to_csv(forest_fullname)
-        grass_paramset.to_csv(grass_fullname)
-        rip_paramset.to_csv(rip_fullname)
-        slow_paramset.to_csv(slow_fullname)
-
-
-if __name__ == '__main__':
-    main()
