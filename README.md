@@ -8,7 +8,7 @@ The project follows the (FAIR) modeling approaches used in the [eWaterCycle proj
 All notebooks can be found in HBVmountain/General. The Example notebook contains an example of how the model can be used for one simulation. The Generate_Forcing notebook is used to generate forcing from the ERA5 or CMIP6 datasets specific for the HBV-mountain model using the ESMValTool version of this repository. The Calibration notebook is used for model calibration and validation, and the Climate_Simulations_Analysis notebook is used for running streamflow simulations and analysis. 
 
 #### Forcing and streamflow observation data
-The Data folder contains example data from five different catchments, which is ready for use in the calibration and analysis notebooks. Generating CMIP6 forcings data was done on the HPC cluster Levante from DKRZ, and ERA5 forcings were generated on the eWaterCycle platform (hosted on SURF). For generating forcing data, a catchment shapefile is required (located in the auxiliary_data folder). The model was calibrated using GRDC streamflow data. 
+The Data folder contains example data from five different catchments, which is ready for use in the calibration and analysis notebooks. Generating CMIP6 forcings data was done on the HPC cluster Levante from DKRZ, and ERA5 forcings were generated on the eWaterCycle platform (hosted on SURF). For generating forcing data, a catchment shapefile is required (located in the auxiliary_data folder). The model was calibrated using [GRDC](https://www.bafg.de/GRDC/EN/02_srvcs/21_tmsrs/210_prtl/prtl_node.html) streamflow data. 
 
 #### Model set up
 
