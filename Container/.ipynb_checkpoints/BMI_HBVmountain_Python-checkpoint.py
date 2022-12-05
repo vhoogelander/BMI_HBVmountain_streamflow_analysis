@@ -3,59 +3,8 @@
 # In[14]:
 from utils import *
 
-### Import all Julia functions ###
-Main.include("Refactoring/structs.jl")
-Main.include('Refactoring/Julia_BMI_model.jl')
-Main.include("Refactoring/parameterselection.jl")
-Main.include("Refactoring/processes_buckets.jl")
-Main.include("Refactoring/elevations.jl")
-Main.include("Refactoring/allHRU.jl")
-Main.include("Refactoring/run_model.jl");
-Main.include("Refactoring/Config_model.jl")
-Main.include("Refactoring/Finalize_Model.jl")
-Main.include("Refactoring/Potential_Evaporation.jl")
-Main.include("Refactoring/Preprocessing.jl")
-Main.include("Refactoring/Units.jl")
-######
 
-
-build_HBVmountain_model = Main.build_HBVmountain_model
-setup = Main.setup
-initialize = Main.initialize
-update = Main.update
-update_until = Main.update_until
-get_component_name = Main.get_component_name
-get_input_var_names = Main.get_input_var_names
-get_output_var_names = Main.get_output_var_names
-get_start_time = Main.get_start_time
-get_current_time = Main.get_current_time
-get_end_time = Main.get_end_time
-get_time_step = Main.get_time_step
-get_time_units = Main.get_time_units
-get_var_type = Main.get_var_type
-get_var_units = Main.get_var_units
-get_var_itemsize = Main.get_var_itemsize
-get_var_nbytes = Main.get_var_nbytes
-get_value = Main.get_value
-get_value_at_indices = Main.get_value_at_indices
-get_value_ptr = Main.get_value_ptr
-get_var_location = Main.get_var_location
-get_input_item_count = Main.get_input_item_count
-get_output_item_count = Main.get_output_item_count
-set_value = Main.set_value
-set_value_at_indices = Main.set_value_at_indices
-
-Parameters = Main.Parameters
-Slow_Paramters = Main.Slow_Paramters
-Date = Main.Date
-DateTime = Main.DateTime
-HRU_Input = Main.HRU_Input
-Storages = Main.Storages
-Elevations = Main.Elevations
-HBVmountain_units = Main.HBVmountain_units
-
-
-class BMI_HBVmountain(BMI):
+class BMI_HBVmountain(Bmi):
     """
     Creates BMI HBV-mountain model object
     """

@@ -49,11 +49,16 @@ RUN python3 -m julia.sysimage sys.so
 RUN julia-py --sysimage sys.so
 RUN pip install protobuf==3.20.*
 
-# Run bmi server
-
-#ENTRYPOINT ["run-bmi-server", "--name", "BMI_HBVmountain_Python", "--path", /opt/HBVmountain/Container]
-ENTRYPOINT ["run-bmi-server", "--path", "/opt/HBVmountain/Container/BMI_HBVmountain_Python"]
 WORKDIR /opt/HBVmountain/Container
+# Run bmi server
+ENV BMI_MODULE=BMI_HBVmountain_Python
+ENV BMI_CLASS=BMI_HBVmountain
+ENV BMI_PORT=55555
+#ENTRYPOINT ["run-bmi-server", "--name", "BMI_HBVmountain.BMI_HBVmountain_Python", "--path", /opt/HBVmountain/Container]
+
+ENTRYPOINT ["run-bmi-server", "--path", "/opt/HBVmountain/Container/"]
+
+
 # Expose the magic grpc4bmi port
 EXPOSE 55555
 
