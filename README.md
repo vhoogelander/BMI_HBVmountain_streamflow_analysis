@@ -18,6 +18,7 @@ To set up the model in a (new) catchment, the following data are needed:
 * Catchment shapefile, provided by GRDC together with streamflow data download. 
 * [NLCD](https://www.usgs.gov/centers/eros/science/national-land-cover-database) Land cover map (.tiff)
 * DEM map (.tiff)
+
 All data must be in WGS84.
 
 
