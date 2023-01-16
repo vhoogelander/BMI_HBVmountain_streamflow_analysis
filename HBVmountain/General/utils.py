@@ -87,6 +87,8 @@ def generate_array_from_raster(str_path_to_rasterfile, str_path_to_shapefile=Non
             out_image, out_transform = rasterio.mask.mask(src, shapefile, crop=True)
 #             out_image = out_image[out_image <97]
             out_image = ma.masked_values(out_image, 0)
+            if src.nodata != None:
+                out_image = ma.masked_values(out_image, src.nodata)
             out_image = out_image.astype(np.float32)
             out_image = out_image.filled(np.nan)
             arr = np.expand_dims(out_image.flatten(), 0).T    
@@ -156,6 +158,8 @@ def generate_shapefiles_per_landuse(landuse, str_path_to_rasterfile, str_path_to
                 shapefile = [feature["geometry"] for feature in shapefile]
             with rasterio.open(str_path_to_rasterfile) as src:
                 image, out_transform = rasterio.mask.mask(src, shapefile, crop=True)
+                if src.nodata != None:
+                    image = ma.masked_values(image, src.nodata)
                 image = ma.masked_values(image, 0)
                 image = image.astype(np.float32)
                 image = image.filled(np.nan)
@@ -188,7 +192,7 @@ def generate_shapefiles_per_landuse(landuse, str_path_to_rasterfile, str_path_to
             in enumerate(
                 shapes(image, mask=(image ==-9999), transform= src.transform)))            
     geoms = list(results)
-    gpd_polygonized_raster  = gp.GeoDataFrame.from_features(geoms, crs='epsg:4326')
+    gpd_polygonized_raster  = gp.GeoDataFrame.from_features(geoms)
     return gpd_polygonized_raster
 
 def clip_elevation_per_landuse(gpd_polygonized_raster, str_path_to_elevation, str_path_to_shapefile=None, export_tif=False):
@@ -206,8 +210,9 @@ def clip_elevation_per_landuse(gpd_polygonized_raster, str_path_to_elevation, st
         with fiona.open(str_path_to_shapefile) as shapefile:
             shapefile = [feature["geometry"] for feature in shapefile]
         with rasterio.open(str_path_to_elevation) as src:
-#             out_img, out_transform = rasterio.mask.mask(src, shapefile, crop=True)
             out_img, out_transform = rasterio.mask.mask(src, coords, crop=True)
+            if src.nodata != None:
+                out_img = ma.masked_values(out_img, src.nodata)
             out_img = ma.masked_values(out_img, 0)
             out_img = out_img.astype(np.float32)
             out_img = out_img.filled(np.nan) 
